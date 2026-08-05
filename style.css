@@ -1,0 +1,496 @@
+/*
+  Wedding Invitation — Minimal
+  Palette: warm off-white, charcoal, muted gold accent
+  Typography: Cormorant Garamond (display) + Noto Serif/Sans Thai
+*/
+
+/* ── Tokens ─────────────────────────────── */
+:root {
+    --bg:       #f7f4f0;
+    --bg-warm:  #f0ebe4;
+    --ink:      #2c2826;
+    --ink-soft: #6b6360;
+    --ink-mute: #a09890;
+    --accent:   #b5a07a;
+    --accent-l: #d4c9b0;
+    --border:   #e0dbd4;
+    --white:    #ffffff;
+
+    --font-display: 'Cormorant Garamond', serif;
+    --font-thai:    'Noto Serif Thai', serif;
+    --font-body:    'Noto Sans Thai', sans-serif;
+
+    --ease: cubic-bezier(.4, 0, .2, 1);
+    --max-w: 560px;
+}
+
+/* ── Reset ──────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* ── Cover ──────────────────────────────── */
+.cover {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity .6s var(--ease), visibility .6s;
+}
+
+.cover.open {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.cover-inner { text-align: center; }
+
+.cover-label {
+    font-family: var(--font-display);
+    font-size: .85rem;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.cover-line {
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    margin: 2rem auto;
+}
+
+.cover-tap {
+    font-family: var(--font-thai);
+    font-size: .75rem;
+    color: var(--ink-mute);
+    font-weight: 300;
+    animation: pulse 2.5s var(--ease) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: .4; }
+    50%      { opacity: 1; }
+}
+
+/* ── Card ───────────────────────────────── */
+.card {
+    opacity: 0;
+    transition: opacity .8s var(--ease);
+}
+
+.card.show { opacity: 1; }
+
+/* ── Sections ───────────────────────────── */
+.section {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+    text-align: center;
+}
+
+.section-label {
+    font-family: var(--font-display);
+    font-size: .8rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2.5rem;
+}
+
+/* ── Hero ────────────────────────────────── */
+.hero {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+
+.hero-kicker {
+    font-family: var(--font-thai);
+    font-size: .85rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    letter-spacing: .05em;
+    margin-bottom: 2.5rem;
+}
+
+.hero-names {
+    font-family: var(--font-display);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+}
+
+.hero-names .name {
+    display: block;
+    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    color: var(--ink);
+}
+
+.hero-names .amp {
+    display: block;
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin: .6rem 0;
+    font-style: italic;
+}
+
+.hero-branch {
+    display: block;
+    width: 120px;
+    height: auto;
+    margin: 0 auto 2.5rem;
+    opacity: .35;
+    mix-blend-mode: multiply;
+}
+
+.hero-date {
+    font-family: var(--font-thai);
+    font-size: .95rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    letter-spacing: .08em;
+}
+
+/* ── Countdown ──────────────────────────── */
+.countdown-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.countdown {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: .6rem;
+}
+
+.cd-unit { text-align: center; min-width: 56px; }
+
+.cd-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.cd-label {
+    display: block;
+    font-size: .65rem;
+    color: var(--ink-mute);
+    letter-spacing: .1em;
+    margin-top: .3rem;
+    text-transform: uppercase;
+}
+
+.cd-sep {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--accent-l);
+    font-weight: 300;
+    position: relative;
+    top: -2px;
+}
+
+/* ── Details ─────────────────────────────── */
+.details { text-align: left; }
+
+.detail-block {
+    margin-bottom: 2.5rem;
+}
+
+.detail-title {
+    font-family: var(--font-thai);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: .25rem;
+}
+
+.detail-time {
+    font-family: var(--font-body);
+    font-size: .8rem;
+    color: var(--accent);
+    letter-spacing: .05em;
+    margin-bottom: 1.2rem;
+}
+
+.detail-list {
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+.detail-list li {
+    font-family: var(--font-thai);
+    font-size: .9rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    padding: .45rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-list li:last-child { border-bottom: none; }
+
+.detail-list .t {
+    display: inline-block;
+    width: 50px;
+    font-family: var(--font-body);
+    font-size: .8rem;
+    color: var(--ink);
+    font-weight: 400;
+}
+
+.detail-venue {
+    font-family: var(--font-body);
+    font-size: .8rem;
+    color: var(--ink-mute);
+    font-weight: 300;
+}
+
+.detail-divider {
+    width: 24px;
+    height: 1px;
+    background: var(--accent-l);
+    margin: 2rem 0;
+}
+
+.venue-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-l);
+    transition: border-color .2s;
+}
+
+.venue-link:hover { border-color: var(--accent); }
+
+/* ── Map ─────────────────────────────────── */
+.map-section {
+    border-top: 1px solid var(--border);
+    text-align: center;
+}
+
+.map-card {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.map-venue-name {
+    font-family: var(--font-thai);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: .4rem;
+}
+
+.map-address {
+    font-family: var(--font-body);
+    font-size: .85rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.map-link {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: .8rem;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: .04em;
+    padding: .6rem 1.6rem;
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background .25s var(--ease), color .25s var(--ease);
+}
+
+.map-link:hover {
+    background: var(--ink);
+    color: var(--white);
+}
+
+/* ── RSVP ────────────────────────────────── */
+.rsvp {
+    background: var(--bg-warm);
+    max-width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.rsvp-form {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    text-align: left;
+}
+
+.field {
+    margin-bottom: 1.2rem;
+}
+
+.field-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.field-row .field { flex: 1; margin-bottom: 0; }
+
+.field label {
+    display: block;
+    font-family: var(--font-thai);
+    font-size: .8rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-bottom: .35rem;
+}
+
+.field .optional {
+    color: var(--ink-mute);
+    font-weight: 300;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: .9rem;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: .6rem .8rem;
+    outline: none;
+    transition: border-color .2s;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color: var(--accent);
+}
+
+.field select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23a09890'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: .75rem;
+    margin-top: .4rem;
+    font-family: var(--font-thai);
+    font-size: .9rem;
+    font-weight: 400;
+    color: var(--white);
+    background: var(--ink);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: .04em;
+    transition: background .25s var(--ease);
+}
+
+.btn:hover { background: #3d3835; }
+.btn:active { background: #1a1614; }
+
+.rsvp-done {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.done-heading {
+    font-family: var(--font-thai);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: .4rem;
+}
+
+.done-sub {
+    font-family: var(--font-thai);
+    font-size: .9rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+}
+
+/* ── Footer ──────────────────────────────── */
+.footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-top: 1px solid var(--border);
+}
+
+.footer-names {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: .25rem;
+}
+
+.footer-date {
+    font-family: var(--font-display);
+    font-size: .9rem;
+    color: var(--ink-mute);
+    letter-spacing: .2em;
+}
+
+/* ── Fade-in ─────────────────────────────── */
+.fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .7s var(--ease), transform .7s var(--ease);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 480px) {
+    .section { padding: 3.5rem 1.25rem; }
+    .hero { padding-top: 4.5rem; }
+    .field-row { flex-direction: column; gap: 0; }
+    .field-row .field { margin-bottom: 1.2rem; }
+    .cd-num { font-size: 1.8rem; }
+    .cd-sep { font-size: 1.2rem; }
+    .cd-unit { min-width: 44px; }
+}
+
+/* ── Print ────────────────────────────────── */
+@media print {
+    .cover, .countdown-section, .rsvp { display: none; }
+    .card { opacity: 1 !important; }
+    .fade-in { opacity: 1 !important; transform: none !important; }
+}
