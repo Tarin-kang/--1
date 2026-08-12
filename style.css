@@ -1,25 +1,24 @@
 /*
   Wedding Invitation — Tarin & Warangkana
-  Palette: Soft off-white, Warm Taupe, Muted Rose Gold, Deep Charcoal, Sage Accent
+  Palette: Sage Green (#7a9a83), Deep Forest (#4b6854), Sage Mist (#eaf2ec), Cream White (#faf8f5)
   Typography: Cormorant Garamond, Alex Brush, Noto Serif/Sans Thai
 */
 
-/* ── Design System Tokens ──────────────── */
+/* ── Design System Tokens (Sage Green Theme) ── */
 :root {
-    --bg:          #faf8f5;
-    --bg-warm:     #f4efe9;
+    --bg:          #f5f8f6;
+    --bg-warm:     #ebeee9;
     --bg-card:     #ffffff;
-    --ink:         #2c2523;
-    --ink-soft:    #635a56;
-    --ink-mute:    #9c928c;
-    --accent:      #b59075;
-    --accent-dark: #967258;
-    --accent-l:    #e8decb;
-    --rose-gold:   #d4a59a;
-    --sage:        #9caf88;
-    --border:      #e6dfd5;
-    --shadow-soft: 0 10px 30px rgba(44, 37, 35, 0.06);
-    --shadow-lift: 0 16px 40px rgba(44, 37, 35, 0.12);
+    --ink:         #1b281f;
+    --ink-soft:    #526658;
+    --ink-mute:    #8ca092;
+    --accent:      #7a9a83;
+    --accent-dark: #4b6854;
+    --accent-l:    #d5e4d9;
+    --sage-light:  #eaf2ec;
+    --border:      #dce5df;
+    --shadow-soft: 0 10px 30px rgba(44, 60, 48, 0.06);
+    --shadow-lift: 0 16px 40px rgba(44, 60, 48, 0.12);
 
     --font-script:  'Alex Brush', cursive;
     --font-display: 'Cormorant Garamond', serif;
@@ -27,7 +26,7 @@
     --font-body:    'Noto Sans Thai', sans-serif;
 
     --ease: cubic-bezier(.4, 0, .2, 1);
-    --max-w: 640px;
+    --max-w: 680px;
 }
 
 /* ── Reset & Global Rules ──────────────── */
@@ -54,6 +53,69 @@ body {
     z-index: 99;
 }
 
+/* ── Animated Running Cat Character ──────── */
+.cat-character {
+    position: fixed;
+    bottom: 15px;
+    left: -80px;
+    z-index: 150;
+    cursor: pointer;
+    animation: catRunAcross 20s linear infinite;
+    user-select: none;
+    transition: transform .2s;
+}
+
+.cat-character:hover {
+    transform: scale(1.15) translateY(-5px);
+}
+
+.cat-bubble {
+    position: absolute;
+    top: -30px;
+    left: 15px;
+    background: var(--bg-card);
+    border: 1px solid var(--accent);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-family: var(--font-thai);
+    font-size: .7rem;
+    color: var(--accent-dark);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    animation: catBubblePulse 2s ease-in-out infinite;
+}
+
+.cat-tail {
+    transform-origin: 15px 50px;
+    animation: catTailWag 1.5s ease-in-out infinite alternate;
+}
+
+.paw-1, .paw-3 { animation: catPawStep 0.4s ease-in-out infinite alternate; }
+.paw-2, .paw-4 { animation: catPawStep 0.4s ease-in-out infinite alternate-reverse; }
+
+@keyframes catRunAcross {
+    0%   { left: -90px; transform: scaleX(1); }
+    48%  { left: calc(100vw + 20px); transform: scaleX(1); }
+    50%  { left: calc(100vw + 20px); transform: scaleX(-1); }
+    98%  { left: -90px; transform: scaleX(-1); }
+    100% { left: -90px; transform: scaleX(1); }
+}
+
+@keyframes catTailWag {
+    0%   { transform: rotate(-8deg); }
+    100% { transform: rotate(15deg); }
+}
+
+@keyframes catPawStep {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-3px); }
+}
+
+@keyframes catBubblePulse {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+}
+
 /* ── Floating Controls ──────────────────── */
 .floating-controls {
     position: fixed;
@@ -69,8 +131,8 @@ body {
     width: 46px;
     height: 46px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid var(--accent-l);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--border);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(8px);
     display: flex;
@@ -83,12 +145,12 @@ body {
 
 .control-btn:hover {
     transform: scale(1.1);
-    background: var(--white);
+    background: var(--bg-card);
 }
 
 .control-btn.active {
     border-color: var(--accent);
-    box-shadow: 0 0 12px rgba(181, 144, 117, 0.4);
+    box-shadow: 0 0 12px rgba(122, 154, 131, 0.4);
 }
 
 /* ── Cover / Envelope Entrance ──────────── */
@@ -96,7 +158,7 @@ body {
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: linear-gradient(135deg, #f7f4ef 0%, #ebe4d8 100%);
+    background: linear-gradient(135deg, #f3f7f4 0%, #e2ece5 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,7 +181,7 @@ body {
 .envelope-card {
     background: var(--bg-card);
     border-radius: 12px;
-    border: 1px solid var(--accent-l);
+    border: 1px solid var(--border);
     box-shadow: var(--shadow-lift);
     padding: 3rem 2rem;
     text-align: center;
@@ -146,7 +208,7 @@ body {
     font-family: var(--font-display);
     font-size: .85rem;
     letter-spacing: .35em;
-    color: var(--accent);
+    color: var(--accent-dark);
     margin-bottom: .8rem;
     text-transform: uppercase;
 }
@@ -174,14 +236,14 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Wax Seal Button */
+/* Wax Seal Button (Sage Green & Gold) */
 .wax-seal {
     width: 100px;
     height: 100px;
     margin: 0 auto;
-    background: radial-gradient(circle, #c87a6d 0%, #9e4b3e 100%);
+    background: radial-gradient(circle, #7a9a83 0%, #4b6854 100%);
     border-radius: 50%;
-    box-shadow: 0 6px 20px rgba(158, 75, 62, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(75, 104, 84, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -192,7 +254,7 @@ body {
 
 .wax-seal:hover {
     transform: scale(1.08);
-    box-shadow: 0 10px 25px rgba(158, 75, 62, 0.6);
+    box-shadow: 0 10px 25px rgba(75, 104, 84, 0.6);
 }
 
 .seal-inner {
@@ -247,7 +309,7 @@ body {
     font-size: .8rem;
     letter-spacing: .35em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-dark);
     margin-bottom: .4rem;
 }
 
@@ -264,7 +326,7 @@ body {
     font-size: .9rem;
     font-weight: 300;
     color: var(--ink-soft);
-    max-width: 420px;
+    max-width: 460px;
     margin: 0 auto;
 }
 
@@ -279,7 +341,7 @@ body {
 .hero-bg-texture {
     position: absolute;
     inset: 0;
-    opacity: 0.12;
+    opacity: 0.1;
     background-size: cover;
     background-position: center;
     pointer-events: none;
@@ -306,17 +368,17 @@ body {
 .hero-names .name-en {
     display: block;
     font-family: var(--font-display);
-    font-size: clamp(2.4rem, 8vw, 3.8rem);
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
     font-weight: 300;
     color: var(--ink);
-    line-height: 1.1;
+    line-height: 1.15;
 }
 
 .hero-names .amp {
     display: block;
     font-family: var(--font-script);
     font-size: 2.8rem;
-    color: var(--accent);
+    color: var(--accent-dark);
     margin: .2rem 0;
 }
 
@@ -336,20 +398,20 @@ body {
 .hero-branch {
     width: 100px;
     height: auto;
-    opacity: .4;
+    opacity: .35;
     mix-blend-mode: multiply;
 }
 
 /* Pre-Wedding Card Frame */
 .couple-card-wrap {
     margin: 2.5rem auto;
-    max-width: 440px;
+    max-width: 480px;
 }
 
 .couple-frame {
     background: var(--bg-card);
-    padding: 12px;
-    border-radius: 12px;
+    padding: 14px;
+    border-radius: 14px;
     box-shadow: var(--shadow-soft);
     border: 1px solid var(--border);
     transition: transform .3s var(--ease);
@@ -362,7 +424,9 @@ body {
 .couple-img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
     display: block;
 }
 
@@ -373,7 +437,7 @@ body {
 .couple-caption .quote {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--ink-soft);
     line-height: 1.5;
 }
@@ -385,9 +449,10 @@ body {
     color: var(--ink);
     letter-spacing: .05em;
     display: inline-block;
-    padding: .5rem 1.4rem;
+    padding: .5rem 1.6rem;
     border-radius: 30px;
-    background: rgba(181, 144, 117, 0.12);
+    background: var(--sage-light);
+    border: 1px solid var(--accent-l);
 }
 
 /* ── Countdown & Calendar ────────────────── */
@@ -478,89 +543,167 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* ── Timeline Schedule ───────────────────── */
-.details { text-align: left; }
-
-.timeline {
-    position: relative;
-    max-width: 520px;
-    margin: 0 auto;
-}
-
-.detail-card {
+/* ── Horizontal Timeline (Matching Reference Image #2) ── */
+.hz-timeline-wrap {
     background: var(--bg-card);
-    border-radius: 12px;
-    padding: 1.8rem;
     border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem 1.5rem;
     box-shadow: var(--shadow-soft);
-    margin-bottom: 1.5rem;
-    transition: transform .3s var(--ease);
+    margin-top: 1rem;
+    position: relative;
 }
 
-.detail-card:hover {
-    transform: translateY(-2px);
+.hz-timeline-nodes {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
 }
 
-.event-badge {
-    display: inline-block;
+.hz-node {
+    text-align: center;
+    flex: 1;
+    padding: 0 .4rem;
+}
+
+.node-icon {
+    font-size: 2.2rem;
+    margin-bottom: .4rem;
+}
+
+.node-time {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #e57c68;
+    line-height: 1.2;
+}
+
+.node-title {
     font-family: var(--font-thai);
-    font-size: .75rem;
-    font-weight: 500;
+    font-size: .92rem;
     color: var(--accent-dark);
-    background: rgba(181, 144, 117, 0.15);
-    padding: .25rem .8rem;
-    border-radius: 20px;
-    margin-bottom: .6rem;
-}
-
-.event-badge.evening-badge {
-    color: #6a537c;
-    background: rgba(106, 83, 124, 0.12);
-}
-
-.detail-title {
-    font-family: var(--font-thai);
-    font-size: 1.2rem;
     font-weight: 500;
-    color: var(--ink);
-    margin-bottom: .2rem;
+    margin-top: .2rem;
 }
 
-.detail-time {
-    font-family: var(--font-body);
-    font-size: .85rem;
-    color: var(--accent-dark);
-    margin-bottom: 1.2rem;
-    font-weight: 500;
+/* Continuous Axis Line */
+.hz-timeline-line {
+    height: 2px;
+    background: #f7b2a3;
+    position: relative;
+    margin: 1.2rem 1rem 2.2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.detail-list {
-    list-style: none;
+.hz-timeline-line .dot {
+    width: 14px;
+    height: 14px;
+    background: #e57c68;
+    border-radius: 50%;
+    border: 3px solid var(--bg-card);
+    box-shadow: 0 0 0 2px #f7b2a3;
 }
 
-.detail-list li {
+/* Bottom Info Grid */
+.hz-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 1.2rem;
+    align-items: center;
+    padding-top: 1.2rem;
+    border-top: 1px dashed var(--border);
+    text-align: center;
+}
+
+.info-col {
+    padding: .4rem;
+}
+
+.col-date-venue .col-main {
     font-family: var(--font-thai);
     font-size: .9rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    padding: .5rem 0;
-    border-bottom: 1px dashed var(--border);
-    display: flex;
-    gap: .8rem;
-}
-
-.detail-list li:last-child { border-bottom: none; }
-
-.detail-list .t {
     font-weight: 500;
-    color: var(--ink);
-    min-width: 65px;
+    color: var(--accent-dark);
 }
 
-.timeline-connector {
-    text-align: center;
-    margin: -0.5rem 0 1rem;
-    font-size: 1.2rem;
+.col-date-venue .col-sub {
+    font-family: var(--font-thai);
+    font-size: .8rem;
+    color: var(--ink-soft);
+    margin-top: .2rem;
+}
+
+.col-dresscode .col-tag {
+    font-family: var(--font-display);
+    font-size: .95rem;
+    color: var(--accent-dark);
+    font-style: italic;
+    margin-bottom: .4rem;
+}
+
+.dresscode-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.dc-title {
+    font-family: var(--font-thai);
+    font-size: .8rem;
+    color: var(--ink-soft);
+}
+
+.dc-dots {
+    display: flex;
+    gap: .35rem;
+}
+
+.dot-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.col-map .col-main {
+    font-family: var(--font-thai);
+    font-size: .85rem;
+    color: var(--ink-soft);
+    margin-bottom: .4rem;
+}
+
+.qr-placeholder {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .4rem .8rem;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    color: var(--accent-dark);
+    text-decoration: none;
+    font-family: var(--font-thai);
+    font-size: .8rem;
+    transition: background .25s;
+}
+
+.qr-placeholder:hover {
+    background: var(--sage-light);
+}
+
+.courtesy-text {
+    font-family: var(--font-thai);
+    font-size: .85rem;
+    color: var(--accent-dark);
+    margin-top: 2rem;
+    font-style: italic;
 }
 
 /* ── Dress Code ──────────────────────────── */
@@ -592,7 +735,7 @@ body {
     border-radius: 50%;
     background-color: var(--swatch-color);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border: 2px solid var(--white);
+    border: 2px solid var(--bg-card);
     transition: transform .25s var(--ease);
 }
 
@@ -609,7 +752,7 @@ body {
 /* ── Location & Map ──────────────────────── */
 .map-card {
     background: var(--bg-card);
-    border-radius: 12px;
+    border-radius: 14px;
     border: 1px solid var(--border);
     padding: 2.5rem 1.5rem;
     box-shadow: var(--shadow-soft);
@@ -647,7 +790,7 @@ body {
     font-family: var(--font-thai);
     font-size: .8rem;
     color: var(--accent-dark);
-    background: rgba(181, 144, 117, 0.12);
+    background: var(--sage-light);
     padding: .4rem 1rem;
     border-radius: 20px;
 }
@@ -659,8 +802,8 @@ body {
     gap: .5rem;
     font-family: var(--font-thai);
     font-size: .9rem;
-    color: var(--white);
-    background: var(--ink);
+    color: #ffffff;
+    background: var(--accent-dark);
     border: none;
     border-radius: 6px;
     padding: .75rem 1.8rem;
@@ -670,15 +813,15 @@ body {
 }
 
 .btn-primary:hover {
-    background: #3d3431;
+    background: #364d3d;
     transform: translateY(-2px);
 }
 
 /* ── Digital Gifting ─────────────────────── */
 .gifting-card {
-    background: linear-gradient(135deg, #fdfbf7 0%, #f7f1e9 100%);
-    border: 1px solid var(--accent-l);
-    border-radius: 12px;
+    background: linear-gradient(135deg, #f7fafd 0%, #edf4ef 100%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
     padding: 2rem 1.5rem;
     max-width: 500px;
     margin: 0 auto;
@@ -703,8 +846,8 @@ body {
     font-family: var(--font-thai);
     font-size: .85rem;
     color: var(--accent-dark);
-    background: var(--white);
-    border: 1px solid var(--accent-l);
+    background: var(--bg-card);
+    border: 1px solid var(--accent);
     padding: .6rem 1.2rem;
     border-radius: 6px;
     cursor: pointer;
@@ -712,8 +855,7 @@ body {
 }
 
 .btn-secondary:hover {
-    border-color: var(--accent);
-    background: #faf6f0;
+    background: var(--sage-light);
 }
 
 .gifting-box {
@@ -722,9 +864,7 @@ body {
     border-top: 1px dashed var(--border);
 }
 
-.bank-item {
-    text-align: center;
-}
+.bank-item { text-align: center; }
 
 .bank-owner {
     font-family: var(--font-thai);
@@ -759,8 +899,8 @@ body {
 .btn-copy {
     font-family: var(--font-thai);
     font-size: .75rem;
-    color: var(--white);
-    background: var(--accent);
+    color: #ffffff;
+    background: var(--accent-dark);
     border: none;
     padding: .4rem 1rem;
     border-radius: 4px;
@@ -808,7 +948,7 @@ body {
     font-family: var(--font-body);
     font-size: .9rem;
     color: var(--ink);
-    background: var(--white);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: .7rem .9rem;
@@ -820,13 +960,13 @@ body {
 .field select:focus,
 .field textarea:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(181, 144, 117, 0.15);
+    box-shadow: 0 0 0 3px rgba(122, 154, 131, 0.2);
 }
 
 .field select {
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239c928c'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23526658'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     padding-right: 32px;
@@ -864,14 +1004,14 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1.2rem;
-    max-width: 600px;
+    max-width: 620px;
     margin: 0 auto;
     text-align: left;
 }
 
 .wish-card {
     background: var(--bg-card);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 1.2rem;
     border: 1px solid var(--border);
     box-shadow: var(--shadow-soft);
@@ -958,6 +1098,7 @@ body {
 /* ── Responsive ──────────────────────────── */
 @media (max-width: 600px) {
     .section { padding: 3.5rem 1.25rem; }
+    .hz-info-grid { grid-template-columns: 1fr; gap: 1rem; }
     .field-row { flex-direction: column; gap: 0; }
     .field-row .field { margin-bottom: 1.2rem; }
     .color-palette { gap: 1rem; }
@@ -965,8 +1106,9 @@ body {
 }
 
 @media print {
-    .cover, .floating-controls, .petals-canvas, .calendar-actions, .gifting-section, .rsvp { display: none; }
+    .cover, .floating-controls, .petals-canvas, .calendar-actions, .gifting-section, .rsvp, .cat-character { display: none; }
     .card { opacity: 1 !important; }
     .fade-in { opacity: 1 !important; transform: none !important; }
 }
+
 

@@ -17,7 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.style.overflow = 'hidden';
 
-    // ── 2. Scroll Animations (IntersectionObserver) ──
+    // ── 2. Animated Cat Interaction ──
+    const catCharacter = document.getElementById('catCharacter');
+    const catBubble = document.getElementById('catBubble');
+    const catMessages = [
+        "Meow~ 🤍",
+        "ยินดีกับบ่าวสาวน๊า! 🐾",
+        "ทารินทร์ & วรางคณา 💍",
+        "แล้วพบกันวันงานนะคะ 🌸",
+        "Sage Green ธีมเขียวเหนี่ยวทรัพย์ 🌿"
+    ];
+
+    if (catCharacter && catBubble) {
+        catCharacter.addEventListener('click', () => {
+            const randomMsg = catMessages[Math.floor(Math.random() * catMessages.length)];
+            catBubble.textContent = randomMsg;
+            catBubble.style.animation = 'none';
+            void catBubble.offsetWidth; // trigger reflow
+            catBubble.style.animation = 'catBubblePulse 0.5s ease';
+        });
+    }
+
+    // ── 3. Scroll Animations (IntersectionObserver) ──
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (e.isIntersecting) {
@@ -29,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // ── 3. Real-Time Countdown Timer ──
-    const weddingTargetDate = new Date('2026-12-12T07:00:00+07:00').getTime();
+    // ── 4. Real-Time Countdown Timer ──
+    const weddingTargetDate = new Date('2026-12-12T15:00:00+07:00').getTime();
 
     function updateCountdown() {
         const now = Date.now();
@@ -58,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // ── 4. iCal / Apple Calendar File Generator (.ics) ──
+    // ── 5. iCal / Apple Calendar File Generator (.ics) ──
     const downloadIcsBtn = document.getElementById('downloadIcsBtn');
     if (downloadIcsBtn) {
         downloadIcsBtn.addEventListener('click', () => {
@@ -68,9 +89,9 @@ VERSION:2.0
 PRODID:-//Tarin & Warangkana Wedding Invitation//TH
 BEGIN:VEVENT
 SUMMARY:งานมงคลสมรส Tarin & Warangkana
-DESCRIPTION:ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง Tarin Panya & Warangkana
+DESCRIPTION:ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง Tarin Panya & Warangkana Wittayapreechakorn
 LOCATION:โกดังเจ๊ชิง & เฮียฟู่ 410 หมู่ 8 บ้านสระธรรมขันธ์ ต.จอหอ อ.เมือง จ.นครราชสีมา 30310
-DTSTART:20261212T070000
+DTSTART:20261212T150000
 DTEND:20261212T220000
 STATUS:CONFIRMED
 END:VEVENT
@@ -86,7 +107,7 @@ END:VCALENDAR`;
         });
     }
 
-    // ── 5. Falling Petals Canvas Animation ──
+    // ── 6. Falling Petals Canvas Animation ──
     const canvas = document.getElementById('petalsCanvas');
     const ctx = canvas.getContext('2d');
     const petalToggleBtn = document.getElementById('petalToggleBtn');
@@ -129,7 +150,7 @@ END:VCALENDAR`;
             ctx.translate(this.x, this.y);
             ctx.rotate((this.rotation * Math.PI) / 180);
             ctx.globalAlpha = this.opacity;
-            ctx.fillStyle = '#e8aebb';
+            ctx.fillStyle = '#9caf88'; // Sage green petal tone
 
             // Draw petal shape
             ctx.beginPath();
@@ -172,13 +193,13 @@ END:VCALENDAR`;
         }
     });
 
-    // ── 6. Romantic Web Audio Synth Player ──
+    // ── 7. Romantic Web Audio Synth Player ──
     const musicToggleBtn = document.getElementById('musicToggleBtn');
     let audioCtx = null;
     let isPlayingMusic = false;
     let synthTimer = null;
 
-    const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23, 293.66, 392.00]; // Gentle C major / A minor chord tones
+    const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23, 293.66, 392.00];
 
     function playSoftNote() {
         if (!isPlayingMusic || !audioCtx) return;
@@ -233,7 +254,7 @@ END:VCALENDAR`;
         }
     });
 
-    // ── 7. Digital Gifting Toggle & Copy Account ──
+    // ── 8. Digital Gifting Toggle & Copy Account ──
     const toggleGiftingBtn = document.getElementById('toggleGiftingBtn');
     const giftingBox = document.getElementById('giftingBox');
     const copyBankBtn = document.getElementById('copyBankBtn');
@@ -253,7 +274,7 @@ END:VCALENDAR`;
             navigator.clipboard.writeText(textToCopy).then(() => {
                 const origText = copyBankBtn.textContent;
                 copyBankBtn.textContent = 'คัดลอกสำเร็จ! ✓';
-                copyBankBtn.style.background = '#8a9a86';
+                copyBankBtn.style.background = '#4b6854';
                 setTimeout(() => {
                     copyBankBtn.textContent = origText;
                     copyBankBtn.style.background = '';
@@ -262,16 +283,16 @@ END:VCALENDAR`;
         });
     }
 
-    // ── 8. RSVP Submission & Guestbook Wishes Wall ──
+    // ── 9. RSVP Submission & Guestbook Wishes Wall ──
     const rsvpForm = document.getElementById('rsvpForm');
     const rsvpDone = document.getElementById('rsvpDone');
     const wishesGrid = document.getElementById('wishesGrid');
 
     // Default sample wishes
     const defaultWishes = [
-        { name: 'ครอบครัวปัญญา', text: 'ขอให้ทั้งคู่มีความสุขมากๆ ถนอมความรักและดูแลกันและกันตลอดไปนะจ๊ะ' },
-        { name: 'กลุ่มเพื่อนสนิท มข.', text: 'ยินดีด้วยนะทารินและวรังคณา! ขอให้ชีวิตคู่เติมเต็มไปด้วยรอยยิ้มและความรักหวานๆ' },
-        { name: 'คุณน้าสมศรี & ครอบครัว', text: 'ขออวยพรให้ครองคู่กันยาวนาน มีความสุขและความเจริญรุ่งเรืองในชีวิตคู่นะคะ' }
+        { name: 'ครอบครัวปัญญา & วิทยปรีชากร', text: 'ขอให้ทั้งคู่ครองรักกันด้วยความเข้าใจ มีความสุขและความอบอุ่นตลอดไปนะจ๊ะ' },
+        { name: 'กลุ่มเพื่อนสนิท', text: 'ยินดีด้วยนะธารินทร์และวรางคณา! ขอให้ชีวิตคู่หวานฉ่ำเหมือนธีมสี Sage Green นะคะ' },
+        { name: 'คุณน้าสมศรี & ครอบครัว', text: 'ขออวยพรให้ทั้งสองคนครองคู่กันยาวนาน มีความสุขและความเจริญรุ่งเรืองในชีวิตคู่นะคะ' }
     ];
 
     function getStoredWishes() {
@@ -321,4 +342,5 @@ END:VCALENDAR`;
     }
 
 });
+
 

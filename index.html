@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarin & Warangkana — 12.12.2569 | Wedding Invitation</title>
-    <meta name="description" content="ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง Tarin Panya & Warangkana วันเสาร์ที่ 12 ธันวาคม 2569 ณ โกดังเจ๊ชิง & เฮียฟู่ จ.นครราชสีมา">
+    <meta name="description" content="ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง Tarin Panya & Warangkana Wittayapreechakorn วันเสาร์ที่ 12 ธันวาคม 2569 ณ โกดังเจ๊ชิง & เฮียฟู่ จ.นครราชสีมา">
     
     <!-- Open Graph for Line & Social Sharing -->
     <meta property="og:title" content="Tarin & Warangkana — Wedding Invitation">
@@ -24,6 +24,41 @@
 
     <!-- Falling Petals Canvas -->
     <canvas id="petalsCanvas" class="petals-canvas"></canvas>
+
+    <!-- Animated Running Cat Element -->
+    <div id="catCharacter" class="cat-character" title="คลิกเพื่อทักทายพี่แมว 🐾" aria-label="ตัวการ์ตูนแมววิ่งเล่น">
+        <div class="cat-bubble" id="catBubble">Meow~ 🤍</div>
+        <svg class="cat-svg" viewBox="0 0 100 80" width="70" height="56">
+            <!-- Cat Tail -->
+            <path class="cat-tail" d="M 15 50 Q 5 35 12 25 Q 18 20 16 32" fill="none" stroke="#4b6854" stroke-width="4" stroke-linecap="round"/>
+            <!-- Cat Body -->
+            <ellipse cx="45" cy="52" rx="26" ry="18" fill="#7a9a83"/>
+            <!-- Cat Head -->
+            <circle cx="70" cy="38" r="16" fill="#7a9a83"/>
+            <!-- Ears -->
+            <polygon points="60,26 66,12 72,24" fill="#4b6854"/>
+            <polygon points="72,24 78,12 84,26" fill="#4b6854"/>
+            <!-- Inner Ears -->
+            <polygon points="62,25 66,15 70,24" fill="#e8cfc4"/>
+            <polygon points="74,24 78,15 82,25" fill="#e8cfc4"/>
+            <!-- Eyes -->
+            <circle cx="66" cy="36" r="2" fill="#1b281f"/>
+            <circle cx="76" cy="36" r="2" fill="#1b281f"/>
+            <!-- Nose & Mouth -->
+            <polygon points="70,40 72,40 71,42" fill="#e8cfc4"/>
+            <path d="M 68 43 Q 71 45 74 43" fill="none" stroke="#1b281f" stroke-width="1"/>
+            <!-- Whiskers -->
+            <line x1="56" y1="38" x2="48" y2="36" stroke="#1b281f" stroke-width="0.8"/>
+            <line x1="56" y1="41" x2="48" y2="42" stroke="#1b281f" stroke-width="0.8"/>
+            <line x1="82" y1="38" x2="90" y2="36" stroke="#1b281f" stroke-width="0.8"/>
+            <line x1="82" y1="41" x2="90" y2="42" stroke="#1b281f" stroke-width="0.8"/>
+            <!-- Paws -->
+            <ellipse class="paw paw-1" cx="28" cy="67" rx="5" ry="4" fill="#4b6854"/>
+            <ellipse class="paw paw-2" cx="40" cy="67" rx="5" ry="4" fill="#4b6854"/>
+            <ellipse class="paw paw-3" cx="52" cy="67" rx="5" ry="4" fill="#4b6854"/>
+            <ellipse class="paw paw-4" cx="64" cy="67" rx="5" ry="4" fill="#4b6854"/>
+        </svg>
+    </div>
 
     <!-- Floating Audio & Ambient Controls -->
     <div class="floating-controls">
@@ -73,19 +108,19 @@
                     <h1 class="hero-names">
                         <span class="name-en">Tarin Panya</span>
                         <span class="amp">&amp;</span>
-                        <span class="name-en">Warangkana</span>
+                        <span class="name-en">Warangkana Wittayapreechakorn</span>
                     </h1>
-                    <p class="name-th">ทารินทร์ ปัญญา &amp; วรังคณา</p>
+                    <p class="name-th">ธารินทร์ ปัญญา &amp; วรางคณา วิทยปรีชากร</p>
                 </div>
 
                 <div class="hero-divider fade-in">
                     <img src="images/branch.jpg" alt="" class="hero-branch" aria-hidden="true">
                 </div>
 
-                <!-- Pre-Wedding Card Frame -->
+                <!-- Pre-Wedding Card Frame with Error Fallback -->
                 <div class="couple-card-wrap fade-in">
                     <div class="couple-frame">
-                        <img src="images/couple.jpg" alt="Tarin & Warangkana Pre-wedding" class="couple-img">
+                        <img src="images/couple.jpg" alt="Tarin & Warangkana Pre-wedding" class="couple-img" id="preweddingImg" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 500 350\' width=\'100%\' height=\'100%\'><rect width=\'500\' height=\'350\' fill=\'%23eaf2ec\' rx=\'8\'/><g fill=\'%237a9a83\' opacity=\'0.85\'><circle cx=\'210\' cy=\'130\' r=\'40\'/><circle cx=\'290\' cy=\'135\' r=\'35\'/><path d=\'M150,260 C150,190 260,190 260,260 Z\'/><path d=\'M230,260 C230,200 340,200 340,260 Z\'/><path d=\'M242,160 Q250,150 258,160 Q266,172 250,185 Q234,172 242,160 Z\' fill=\'%23c87a6d\'/></g><text x=\'50%\' y=\'305\' font-family=\'serif\' font-size=\'18\' fill=\'%234b6854\' text-anchor=\'middle\'>Tarin %26 Warangkana</text></svg>';">
                         <div class="couple-caption">
                             <p class="quote">“Two lives, two hearts, joined together in friendship, united forever in love.”</p>
                         </div>
@@ -131,7 +166,7 @@
             <div class="calendar-actions fade-in">
                 <p class="calendar-hint">บันทึกวันงานลงในปฏิทินของคุณ</p>
                 <div class="calendar-btn-group">
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=งานมงคลสมรส+Tarin+%26+Warangkana&dates=20261212T000000Z/20261212T150000Z&details=ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง+Tarin+%26+Warangkana&location=โกดังเจ๊ชิง+%26+เฮียฟู่+นครราชสีมา" target="_blank" class="btn-outline calendar-btn">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=งานมงคลสมรส+Tarin+%26+Warangkana&dates=20261212T080000Z/20261212T150000Z&details=ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง+Tarin+Panya+%26+Warangkana+Wittayapreechakorn&location=โกดังเจ๊ชิง+%26+เฮียฟู่+นครราชสีมา" target="_blank" class="btn-outline calendar-btn">
                         <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
                         Google Calendar
                     </a>
@@ -143,47 +178,77 @@
             </div>
         </section>
 
-        <!-- Schedule & Events -->
+        <!-- Schedule & Events Horizontal Timeline (Matching Reference Image #2) -->
         <section class="section details">
             <div class="section-header fade-in">
-                <p class="section-label">SCHEDULE</p>
+                <p class="section-label">TIMELINE</p>
                 <h2 class="section-title">กำหนดการพิธีการ</h2>
             </div>
 
-            <div class="timeline">
-                <!-- Morning Event -->
-                <div class="detail-card fade-in">
-                    <div class="detail-header">
-                        <div class="event-badge">พิธีเช้า</div>
-                        <h3 class="detail-title">พิธีมงคลสมรส &amp; ฉลองรดน้ำสังข์</h3>
-                        <p class="detail-time">⏰ 07.00 – 10.00 น.</p>
+            <!-- Horizontal Timeline Layout -->
+            <div class="hz-timeline-wrap fade-in">
+                <div class="hz-timeline-nodes">
+                    <!-- Step 1 -->
+                    <div class="hz-node">
+                        <div class="node-icon">💍</div>
+                        <div class="node-time">15.00 น.</div>
+                        <div class="node-title">สวมแหวน ไหว้ผู้ใหญ่</div>
                     </div>
-                    <ul class="detail-list">
-                        <li><span class="t">07.00 น.</span> <span class="desc">แห่ขบวนขันหมาก</span></li>
-                        <li><span class="t">08.00 น.</span> <span class="desc">พิธีหมั้นสวมแหวน</span></li>
-                        <li><span class="t">08.30 น.</span> <span class="desc">พิธีหลั่งน้ำพระพุทธมนต์ (รดน้ำสังข์)</span></li>
-                        <li><span class="t">09.30 น.</span> <span class="desc">ถ่ายภาพร่วมกัน &amp; ร่วมรับประทานอาหาร</span></li>
-                    </ul>
+                    <!-- Step 2 -->
+                    <div class="hz-node">
+                        <div class="node-icon">🐚</div>
+                        <div class="node-time">16.00 น.</div>
+                        <div class="node-title">พิธีรดน้ำสังข์</div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="hz-node">
+                        <div class="node-icon">🍽️</div>
+                        <div class="node-time">17.00 น.</div>
+                        <div class="node-title">ร่วมรับประทานอาหารเย็น</div>
+                    </div>
                 </div>
 
-                <div class="timeline-connector fade-in">
-                    <span class="connector-dot">🌸</span>
+                <!-- Continuous Axis Line -->
+                <div class="hz-timeline-line">
+                    <span class="dot d1"></span>
+                    <span class="dot d2"></span>
+                    <span class="dot d3"></span>
                 </div>
 
-                <!-- Evening Event -->
-                <div class="detail-card fade-in">
-                    <div class="detail-header">
-                        <div class="event-badge evening-badge">งานเลี้ยงฉลอง</div>
-                        <h3 class="detail-title">งานเลี้ยงฉลองมงคลสมรส</h3>
-                        <p class="detail-time">⏰ 18.00 – 22.00 น.</p>
+                <!-- Bottom Information Grid (Matching Reference Image #2) -->
+                <div class="hz-info-grid">
+                    <!-- Column 1: Date & Venue -->
+                    <div class="info-col col-date-venue">
+                        <p class="col-main">วันเสาร์ที่ 12 ธันวาคม พ.ศ. 2569</p>
+                        <p class="col-sub">ณ โกดังเจ๊ชิง &amp; เฮียฟู่ จ.นครราชสีมา</p>
                     </div>
-                    <ul class="detail-list">
-                        <li><span class="t">18.00 น.</span> <span class="desc">ลงทะเบียนต้อนรับแขกผู้มีเกียรติ</span></li>
-                        <li><span class="t">18.30 น.</span> <span class="desc">ต้อนรับคู่บ่าวสาวเข้าสู่ห้องจัดเลี้ยง</span></li>
-                        <li><span class="t">19.00 น.</span> <span class="desc">พิธีการ ตัดเค้กมงคล &amp; ดื่มอวยพร</span></li>
-                        <li><span class="t">19.30 น.</span> <span class="desc">ร่วมรับประทานอาหาร &amp; ดนตรีสด</span></li>
-                    </ul>
+
+                    <!-- Column 2: Hashtag & Dress Code -->
+                    <div class="info-col col-dresscode">
+                        <p class="col-tag">#TarinWarangkana #TWwedding2026</p>
+                        <div class="dresscode-inline">
+                            <span class="dc-title">Dress Code:</span>
+                            <div class="dc-dots">
+                                <span class="dot-swatch" style="background:#7a9a83;" title="Sage Green"></span>
+                                <span class="dot-swatch" style="background:#5a7863;" title="Dark Sage"></span>
+                                <span class="dot-swatch" style="background:#9caf88;" title="Soft Sage"></span>
+                                <span class="dot-swatch" style="background:#d2e2d6;" title="Light Sage"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Map QR & Direction -->
+                    <div class="info-col col-map">
+                        <p class="col-main">สแกนแผนที่</p>
+                        <a href="https://www.google.com/maps/dir//410+%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%888+%E0%B8%9A%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B9%8C+%E0%B8%AB%E0%B8%99%E0%B8%AD%E0%B8%87%E0%B8%A1%E0%B9%88%E0%B8%A7%E0%B8%87+%E0%B8%95%E0%B8%B3%E0%B8%9A%E0%B8%A5+%E0%B8%88%E0%B8%AD%E0%B8%AB%E0%B8%AD+%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87+%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%AA%E0%B8%B5%E0%B8%A1%E0%B8%B2+30310" target="_blank" class="qr-placeholder" title="กดเพื่อนำทางด้วย Google Maps">
+                            <span class="qr-icon">📍</span>
+                            <span class="qr-text">Google Maps</span>
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Bottom Courtesy Line -->
+                <p class="courtesy-text fade-in">ขออภัยหากมิได้มาเรียนเชิญด้วยตัวเอง</p>
             </div>
         </section>
 
@@ -192,29 +257,29 @@
             <div class="section-header fade-in">
                 <p class="section-label">DRESS CODE</p>
                 <h2 class="section-title">ธีมสีเครื่องแต่งกาย</h2>
-                <p class="section-sub">เพื่อความสวยงามและเป็นโทนเดียวกัน ขอเชิญชวนสวมใส่ชุดในโทนสีดังนี้</p>
+                <p class="section-sub">เพื่อความสวยงามและเป็นโทนเดียวกัน ขอเชิญชวนสวมใส่ชุดในโทนสี **Sage Green**</p>
             </div>
 
             <div class="color-palette fade-in">
-                <div class="color-swatch" style="--swatch-color: #D4A59A;" data-name="Rose Gold">
+                <div class="color-swatch" style="--swatch-color: #7a9a83;" data-name="Classic Sage">
                     <span class="swatch-circle"></span>
-                    <span class="swatch-label">Rose Gold</span>
+                    <span class="swatch-label">Classic Sage</span>
                 </div>
-                <div class="color-swatch" style="--swatch-color: #9CAF88;" data-name="Sage Green">
+                <div class="color-swatch" style="--swatch-color: #4b6854;" data-name="Deep Sage">
                     <span class="swatch-circle"></span>
-                    <span class="swatch-label">Sage Green</span>
+                    <span class="swatch-label">Deep Sage</span>
                 </div>
-                <div class="color-swatch" style="--swatch-color: #D8C09D;" data-name="Champagne">
+                <div class="color-swatch" style="--swatch-color: #9caf88;" data-name="Soft Eucalyptus">
                     <span class="swatch-circle"></span>
-                    <span class="swatch-label">Champagne</span>
+                    <span class="swatch-label">Soft Eucalyptus</span>
                 </div>
-                <div class="color-swatch" style="--swatch-color: #E5D4C0;" data-name="Warm Sand">
+                <div class="color-swatch" style="--swatch-color: #d2e2d6;" data-name="Sage Mist">
                     <span class="swatch-circle"></span>
-                    <span class="swatch-label">Warm Sand</span>
+                    <span class="swatch-label">Sage Mist</span>
                 </div>
-                <div class="color-swatch" style="--swatch-color: #F7F4F0;" data-name="Off White">
+                <div class="color-swatch" style="--swatch-color: #faf8f5;" data-name="Cream White">
                     <span class="swatch-circle"></span>
-                    <span class="swatch-label">Off White</span>
+                    <span class="swatch-label">Cream White</span>
                 </div>
             </div>
         </section>
@@ -262,7 +327,7 @@
                             <p class="bank-owner">บัญชีร่วมสำหรับงานมงคลสมรส</p>
                             <p class="bank-name">ธนาคารกสิกรไทย (KBank)</p>
                             <p class="bank-num" id="accountNum">123-4-56789-0</p>
-                            <p class="bank-holder">ทารินทร์ ปัญญา &amp; วรังคณา</p>
+                            <p class="bank-holder">ทารินทร์ ปัญญา &amp; วรางคณา วิทยปรีชากร</p>
                             <button type="button" class="btn-copy" id="copyBankBtn">คัดลอกเลขบัญชี</button>
                         </div>
                     </div>
@@ -298,9 +363,7 @@
                     <div class="field">
                         <label for="attend">ช่วงเวลาที่เข้าร่วม / Attendance</label>
                         <select id="attend">
-                            <option value="both">เข้าร่วมทั้ง 2 ช่วง (เช้า + เย็น)</option>
-                            <option value="morning">พิธีเช้าเท่านั้น</option>
-                            <option value="evening">งานเลี้ยงฉลองเย็นเท่านั้น</option>
+                            <option value="evening" selected>เข้าร่วมงานพิธี (15.00 น. เป็นต้นไป)</option>
                             <option value="sorry">ติดภารกิจ ขอส่งใจไปร่วมอวยพร</option>
                         </select>
                     </div>
@@ -349,4 +412,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
