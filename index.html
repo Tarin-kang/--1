@@ -114,11 +114,15 @@
                 
                 <div class="hero-names-wrap fade-in">
                     <h1 class="hero-names">
-                        <span class="name-en">Warangkana Wittayapreechakorn</span>
+                        <span class="name-en name-bride">Warangkana Wittayapreechakorn</span>
                         <span class="amp">&amp;</span>
-                        <span class="name-en">Tarin Panya</span>
+                        <span class="name-en name-groom">Tarin Panya</span>
                     </h1>
-                    <p class="name-th">วรางคณา วิทยปรีชากร &amp; ธารินทร์ ปัญญา</p>
+                    <div class="name-th-wrap">
+                        <p class="name-th-bride">วรางคณา วิทยปรีชากร</p>
+                        <span class="amp-th">&amp;</span>
+                        <p class="name-th-groom">ธารินทร์ ปัญญา</p>
+                    </div>
                 </div>
 
                 <div class="hero-divider fade-in">
@@ -135,24 +139,20 @@
                     </svg>
                 </div>
 
-                <!-- Pre-Wedding Card Frame with Seamless Vector Graphic Fallback (No Broken Icon Error) -->
+                <!-- Pre-Wedding Card Frame with Clean SVG Fallback Element -->
                 <div class="couple-card-wrap fade-in">
                     <div class="couple-frame">
                         <div class="couple-img-container">
-                            <img src="images/couple.jpg" alt="" class="couple-img" id="preweddingImg" onerror="this.style.display='none'; document.getElementById('vectorCoupleFallback').style.display='block';">
-                            <!-- SVG Vector Illustration Fallback (Renders gracefully without broken icon) -->
-                            <div id="vectorCoupleFallback" class="vector-couple-card" style="display:none;">
+                            <img src="images/couple.jpg" alt="" class="couple-img" id="preweddingImg" onerror="this.style.display='none'; document.getElementById('coupleSvgFallback').style.display='block';">
+                            <div id="coupleSvgFallback" class="vector-couple-card" style="display:none;">
                                 <svg viewBox="0 0 480 320" width="100%" height="100%">
                                     <rect width="480" height="320" fill="#eaf2ec" rx="12"/>
-                                    <!-- Romantic Floral Border Wreath -->
                                     <circle cx="240" cy="140" r="110" fill="none" stroke="#7a9a83" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-                                    <!-- Silhouette Couple Watercolor Concept -->
                                     <g fill="#4b6854">
                                         <circle cx="210" cy="115" r="32"/>
                                         <circle cx="270" cy="120" r="28"/>
                                         <path d="M165,230 C165,170 255,170 255,230 Z"/>
                                         <path d="M225,230 C225,180 315,180 315,230 Z"/>
-                                        <!-- Heart -->
                                         <path d="M234,140 Q240,130 246,140 Q252,152 240,165 Q228,152 234,140 Z" fill="#c87a6d"/>
                                     </g>
                                     <text x="50%" y="275" font-family="'Cormorant Garamond', serif" font-size="22" fill="#2d3e33" text-anchor="middle" font-weight="600">Warangkana &amp; Tarin</text>
@@ -218,29 +218,25 @@
             </div>
         </section>
 
-        <!-- Schedule & Events Horizontal Timeline (Matching Reference Image #2) -->
+        <!-- Schedule & Events Horizontal Timeline -->
         <section class="section details">
             <div class="section-header fade-in">
                 <p class="section-label">TIMELINE</p>
                 <h2 class="section-title">กำหนดการพิธีการ</h2>
             </div>
 
-            <!-- Horizontal Timeline Layout -->
             <div class="hz-timeline-wrap fade-in">
                 <div class="hz-timeline-nodes">
-                    <!-- Step 1 -->
                     <div class="hz-node">
                         <div class="node-icon">💍</div>
                         <div class="node-time">15.00 น.</div>
                         <div class="node-title">สวมแหวน ไหว้ผู้ใหญ่</div>
                     </div>
-                    <!-- Step 2 -->
                     <div class="hz-node">
                         <div class="node-icon">🐚</div>
                         <div class="node-time">16.00 น.</div>
                         <div class="node-title">พิธีรดน้ำสังข์</div>
                     </div>
-                    <!-- Step 3 -->
                     <div class="hz-node">
                         <div class="node-icon">🍽️</div>
                         <div class="node-time">17.00 น.</div>
@@ -248,22 +244,18 @@
                     </div>
                 </div>
 
-                <!-- Continuous Axis Line -->
                 <div class="hz-timeline-line">
                     <span class="dot d1"></span>
                     <span class="dot d2"></span>
                     <span class="dot d3"></span>
                 </div>
 
-                <!-- Bottom Information Grid (Matching Reference Image #2) -->
                 <div class="hz-info-grid">
-                    <!-- Column 1: Date & Venue -->
                     <div class="info-col col-date-venue">
                         <p class="col-main">วันเสาร์ที่ 12 ธันวาคม พ.ศ. 2569</p>
                         <p class="col-sub">ณ โกดังเจ๊ชิง &amp; เฮียฟู่ จ.นครราชสีมา</p>
                     </div>
 
-                    <!-- Column 2: Hashtag & Dress Code -->
                     <div class="info-col col-dresscode">
                         <p class="col-tag">#WarangkanaTarin #WTwedding2026</p>
                         <div class="dresscode-inline">
@@ -277,7 +269,6 @@
                         </div>
                     </div>
 
-                    <!-- Column 3: Map QR & Direction -->
                     <div class="info-col col-map">
                         <p class="col-main">สแกนแผนที่</p>
                         <a href="https://www.google.com/maps/dir//410+%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%888+%E0%B8%9A%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B9%8C+%E0%B8%AB%E0%B8%99%E0%B8%AD%E0%B8%87%E0%B8%A1%E0%B9%88%E0%B8%A7%E0%B8%87+%E0%B8%95%E0%B8%B3%E0%B8%9A%E0%B8%A5+%E0%B8%88%E0%B8%AD%E0%B8%AB%E0%B8%AD+%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87+%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%AA%E0%B8%B5%E0%B8%A1%E0%B8%B2+30310" target="_blank" class="qr-placeholder" title="กดเพื่อนำทางด้วย Google Maps">
@@ -287,7 +278,6 @@
                     </div>
                 </div>
 
-                <!-- Bottom Courtesy Line -->
                 <p class="courtesy-text fade-in">ขออภัยหากมิได้มาเรียนเชิญด้วยตัวเอง</p>
             </div>
         </section>
@@ -352,7 +342,7 @@
             </div>
         </section>
 
-        <!-- Digital Gifting / PromptPay QR Section (Always visible & crisp) -->
+        <!-- Digital Gifting / PromptPay QR Section -->
         <section class="section gifting-section">
             <div class="gifting-card fade-in">
                 <h3 class="gifting-title">🎁 ร่วมอวยพร &amp; สมทบทุน (PromptPay QR)</h3>
@@ -361,7 +351,23 @@
                 <div class="qr-payment-wrap">
                     <p class="qr-owner">ธนาคารกรุงไทย (Krungthai) — PromptPay</p>
                     <div class="qr-frame">
-                        <img src="images/qr_code.jpg" alt="PromptPay QR Code - น.ส.วรางคณา วิทยปรีชากร" class="qr-code-img" id="promptpayQrImg" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 480\' width=\'100%\' height=\'100%\'><rect width=\'400\' height=\'480\' fill=\'%23ffffff\' rx=\'16\' stroke=\'%237a9a83\' stroke-width=\'2\'/><rect x=\'0\' y=\'0\' width=\'400\' height=\'75\' fill=\'%23004d80\' rx=\'16\'/><text x=\'50%\' y=\'48\' font-family=\'sans-serif\' font-size=\'18\' fill=\'%23ffffff\' text-anchor=\'middle\' font-weight=\'bold\'>THAI QR PAYMENT</text><text x=\'50%\' y=\'120\' font-family=\'sans-serif\' font-size=\'16\' fill=\'%23004d80\' text-anchor=\'middle\' font-weight=\'bold\'>PromptPay พร้อมเพย์</text><rect x=\'80\' y=\'150\' width=\'240\' height=\'240\' fill=\'%23111111\'/><rect x=\'105\' y=\'175\' width=\'65\' height=\'65\' fill=\'%23ffffff\'/><rect x=\'118\' y=\'188\' width=\'39\' height=\'39\' fill=\'%23111111\'/><rect x=\'230\' y=\'175\' width=\'65\' height=\'65\' fill=\'%23ffffff\'/><rect x=\'243\' y=\'188\' width=\'39\' height=\'39\' fill=\'%23111111\'/><rect x=\'105\' y=\'300\' width=\'65\' height=\'65\' fill=\'%23ffffff\'/><rect x=\'118\' y=\'313\' width=\'39\' height=\'39\' fill=\'%23111111\'/><text x=\'50%\' y=\'435\' font-family=\'sans-serif\' font-size=\'16\' fill=\'%231b281f\' text-anchor=\'middle\' font-weight=\'bold\'>ชื่อบัญชี: น.ส.วรางคณา วิทยปรีชากร</text></svg>';">
+                        <img src="images/qr_code.jpg" alt="PromptPay QR Code" class="qr-code-img" id="promptpayQrImg" onerror="this.style.display='none'; document.getElementById('qrSvgFallback').style.display='block';">
+                        <div id="qrSvgFallback" style="display:none;">
+                            <svg viewBox="0 0 400 480" width="100%" height="100%">
+                                <rect width="400" height="480" fill="#ffffff" rx="16" stroke="#7a9a83" stroke-width="2"/>
+                                <rect x="0" y="0" width="400" height="75" fill="#004d80" rx="16"/>
+                                <text x="50%" y="48" font-family="sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="bold">THAI QR PAYMENT</text>
+                                <text x="50%" y="120" font-family="sans-serif" font-size="16" fill="#004d80" text-anchor="middle" font-weight="bold">PromptPay พร้อมเพย์</text>
+                                <rect x="80" y="150" width="240" height="240" fill="#111111"/>
+                                <rect x="105" y="175" width="65" height="65" fill="#ffffff"/>
+                                <rect x="118" y="188" width="39" height="39" fill="#111111"/>
+                                <rect x="230" y="175" width="65" height="65" fill="#ffffff"/>
+                                <rect x="243" y="188" width="39" height="39" fill="#111111"/>
+                                <rect x="105" y="300" width="65" height="65" fill="#ffffff"/>
+                                <rect x="118" y="313" width="39" height="39" fill="#111111"/>
+                                <text x="50%" y="435" font-family="sans-serif" font-size="16" fill="#1b281f" text-anchor="middle" font-weight="bold">ชื่อบัญชี: น.ส.วรางคณา วิทยปรีชากร</text>
+                            </svg>
+                        </div>
                     </div>
                     <p class="bank-holder">ชื่อบัญชี: **น.ส.วรางคณา วิทยปรีชากร**</p>
                     <a href="images/qr_code.jpg" download="PromptPay-Warangkana.jpg" class="btn-copy">บันทึกรูป QR Code</a>
