@@ -1,5 +1,5 @@
 /*
-  Wedding Invitation — Tarin & Warangkana
+  Wedding Invitation — Warangkana & Tarin
   Palette: Sage Green (#7a9a83), Deep Forest (#4b6854), Sage Mist (#eaf2ec), Cream White (#faf8f5)
   Typography: Cormorant Garamond, Alex Brush, Noto Serif/Sans Thai
 */
@@ -53,7 +53,69 @@ body {
     z-index: 99;
 }
 
+/* ── Animated Running WHITE Cat Character (น้องแมวขาว 🐱🤍) ── */
+.cat-character {
+    position: fixed;
+    bottom: 15px;
+    left: -80px;
+    z-index: 150;
+    cursor: pointer;
+    animation: catRunAcross 20s linear infinite;
+    user-select: none;
+    transition: transform .2s;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+}
 
+.cat-character:hover {
+    transform: scale(1.15) translateY(-5px);
+}
+
+.cat-bubble {
+    position: absolute;
+    top: -30px;
+    left: 15px;
+    background: #ffffff;
+    border: 1px solid var(--accent);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-family: var(--font-thai);
+    font-size: .75rem;
+    color: var(--accent-dark);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    animation: catBubblePulse 2s ease-in-out infinite;
+}
+
+.cat-tail {
+    transform-origin: 15px 50px;
+    animation: catTailWag 1.5s ease-in-out infinite alternate;
+}
+
+.paw-1, .paw-3 { animation: catPawStep 0.4s ease-in-out infinite alternate; }
+.paw-2, .paw-4 { animation: catPawStep 0.4s ease-in-out infinite alternate-reverse; }
+
+@keyframes catRunAcross {
+    0%   { left: -90px; transform: scaleX(1); }
+    48%  { left: calc(100vw + 20px); transform: scaleX(1); }
+    50%  { left: calc(100vw + 20px); transform: scaleX(-1); }
+    98%  { left: -90px; transform: scaleX(-1); }
+    100% { left: -90px; transform: scaleX(1); }
+}
+
+@keyframes catTailWag {
+    0%   { transform: rotate(-8deg); }
+    100% { transform: rotate(15deg); }
+}
+
+@keyframes catPawStep {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-3px); }
+}
+
+@keyframes catBubblePulse {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+}
 
 /* ── Floating Controls ──────────────────── */
 .floating-controls {

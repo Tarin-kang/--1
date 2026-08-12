@@ -17,7 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.style.overflow = 'hidden';
 
+    // ── 2. Animated WHITE Cat Interaction (น้องแมวขาว 🐱🤍) ──
+    const catCharacter = document.getElementById('catCharacter');
+    const catBubble = document.getElementById('catBubble');
+    const catMessages = [
+        "Meow~ 🤍",
+        "ยินดีกับบ่าวสาวน๊า! 🐾",
+        "วรางคณา & ธารินทร์ 💍",
+        "เหมียวขาวมาร่วมอวยพรค่ะ 🌸",
+        "Sage Green ธีมเขียวเหนี่ยวทรัพย์ 🌿"
+    ];
 
+    if (catCharacter && catBubble) {
+        catCharacter.addEventListener('click', () => {
+            const randomMsg = catMessages[Math.floor(Math.random() * catMessages.length)];
+            catBubble.textContent = randomMsg;
+            catBubble.style.animation = 'none';
+            void catBubble.offsetWidth;
+            catBubble.style.animation = 'catBubblePulse 0.5s ease';
+        });
+    }
 
     // ── 3. Scroll Animations (IntersectionObserver) ──
     const observer = new IntersectionObserver((entries) => {
@@ -67,10 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const icsContent = 
 `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Tarin & Warangkana Wedding Invitation//TH
+PRODID:-//Warangkana & Tarin Wedding Invitation//TH
 BEGIN:VEVENT
-SUMMARY:งานมงคลสมรส Tarin & Warangkana
-DESCRIPTION:ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง Tarin Panya & Warangkana Wittayapreechakorn
+SUMMARY:งานมงคลสมรส Warangkana & Tarin
+DESCRIPTION:ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง Warangkana Wittayapreechakorn & Tarin Panya
 LOCATION:โกดังเจ๊ชิง & เฮียฟู่ 410 หมู่ 8 บ้านสระธรรมขันธ์ ต.จอหอ อ.เมือง จ.นครราชสีมา 30310
 DTSTART:20261212T150000
 DTEND:20261212T220000
@@ -81,7 +100,7 @@ END:VCALENDAR`;
             const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
             const link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
-            link.setAttribute('download', 'Tarin-Warangkana-Wedding.ics');
+            link.setAttribute('download', 'Warangkana-Tarin-Wedding.ics');
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -269,8 +288,8 @@ END:VCALENDAR`;
 
     // Default sample wishes
     const defaultWishes = [
-        { name: 'ครอบครัวปัญญา & วิทยปรีชากร', text: 'ขอให้ทั้งคู่ครองรักกันด้วยความเข้าใจ มีความสุขและความอบอุ่นตลอดไปนะจ๊ะ' },
-        { name: 'กลุ่มเพื่อนสนิท', text: 'ยินดีด้วยนะธารินทร์และวรางคณา! ขอให้ชีวิตคู่หวานฉ่ำเหมือนธีมสี Sage Green นะคะ' },
+        { name: 'ครอบครัววิทยปรีชากร & ปัญญา', text: 'ขอให้ทั้งคู่ครองรักกันด้วยความเข้าใจ มีความสุขและความอบอุ่นตลอดไปนะจ๊ะ' },
+        { name: 'กลุ่มเพื่อนสนิท', text: 'ยินดีด้วยนะวรางคณาและธารินทร์! ขอให้ชีวิตคู่หวานฉ่ำเหมือนธีมสี Sage Green นะคะ' },
         { name: 'คุณน้าสมศรี & ครอบครัว', text: 'ขออวยพรให้ทั้งสองคนครองคู่กันยาวนาน มีความสุขและความเจริญรุ่งเรืองในชีวิตคู่นะคะ' }
     ];
 
