@@ -75,7 +75,11 @@
         <div class="envelope-wrapper">
             <div class="envelope-card">
                 <div class="envelope-decoration">
-                    <img src="images/floral_frame.jpg" alt="" class="cover-frame-img">
+                    <!-- Inline Floral Wreath Vector so it never 404s -->
+                    <svg class="cover-wreath-svg" viewBox="0 0 300 300" width="100%" height="100%">
+                        <circle cx="150" cy="150" r="120" fill="none" stroke="#7a9a83" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.4"/>
+                        <path d="M 60 150 C 40 100, 100 40, 150 60 C 200 40, 260 100, 240 150 C 260 200, 200 260, 150 240 C 100 260, 40 200, 60 150 Z" fill="none" stroke="#b5a07a" stroke-width="1" opacity="0.3"/>
+                    </svg>
                 </div>
                 <div class="cover-content">
                     <p class="cover-sub">THE WEDDING INVITATION</p>
@@ -99,8 +103,6 @@
 
         <!-- Header / Hero Banner -->
         <header class="section hero">
-            <div class="hero-bg-texture" style="background-image: url('images/floral_bg.jpg');"></div>
-            
             <div class="hero-container">
                 <p class="hero-kicker fade-in">ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรส</p>
                 
@@ -114,13 +116,23 @@
                 </div>
 
                 <div class="hero-divider fade-in">
-                    <img src="images/branch.jpg" alt="" class="hero-branch" aria-hidden="true">
+                    <!-- Inline Botanical Branch Vector so it never 404s -->
+                    <svg class="hero-branch-svg" viewBox="0 0 200 40" width="160" height="32">
+                        <path d="M 10 20 Q 100 5 190 20" fill="none" stroke="#7a9a83" stroke-width="1.5"/>
+                        <!-- Leaves -->
+                        <path d="M 40 17 Q 35 8 45 14 Z" fill="#7a9a83"/>
+                        <path d="M 60 15 Q 65 5 55 12 Z" fill="#7a9a83"/>
+                        <path d="M 90 12 Q 85 2 95 10 Z" fill="#7a9a83"/>
+                        <path d="M 110 12 Q 115 2 105 10 Z" fill="#7a9a83"/>
+                        <path d="M 140 15 Q 135 7 145 13 Z" fill="#7a9a83"/>
+                        <path d="M 160 17 Q 165 8 155 14 Z" fill="#7a9a83"/>
+                    </svg>
                 </div>
 
-                <!-- Pre-Wedding Card Frame with Error Fallback -->
+                <!-- Pre-Wedding Card Frame with Dual Image & Vector Fallback -->
                 <div class="couple-card-wrap fade-in">
                     <div class="couple-frame">
-                        <img src="images/couple.jpg" alt="Tarin & Warangkana Pre-wedding" class="couple-img" id="preweddingImg" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 500 350\' width=\'100%\' height=\'100%\'><rect width=\'500\' height=\'350\' fill=\'%23eaf2ec\' rx=\'8\'/><g fill=\'%237a9a83\' opacity=\'0.85\'><circle cx=\'210\' cy=\'130\' r=\'40\'/><circle cx=\'290\' cy=\'135\' r=\'35\'/><path d=\'M150,260 C150,190 260,190 260,260 Z\'/><path d=\'M230,260 C230,200 340,200 340,260 Z\'/><path d=\'M242,160 Q250,150 258,160 Q266,172 250,185 Q234,172 242,160 Z\' fill=\'%23c87a6d\'/></g><text x=\'50%\' y=\'305\' font-family=\'serif\' font-size=\'18\' fill=\'%234b6854\' text-anchor=\'middle\'>Tarin %26 Warangkana</text></svg>';">
+                        <img src="images/couple.jpg" alt="Tarin & Warangkana Pre-wedding" class="couple-img" id="preweddingImg" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 500 350\' width=\'100%\' height=\'100%\'><rect width=\'500\' height=\'350\' fill=\'%23eaf2ec\' rx=\'10\'/><g fill=\'%237a9a83\' opacity=\'0.85\'><circle cx=\'210\' cy=\'130\' r=\'40\'/><circle cx=\'290\' cy=\'135\' r=\'35\'/><path d=\'M150,260 C150,190 260,190 260,260 Z\'/><path d=\'M230,260 C230,200 340,200 340,260 Z\'/><path d=\'M242,160 Q250,150 258,160 Q266,172 250,185 Q234,172 242,160 Z\' fill=\'%23c87a6d\'/></g><text x=\'50%\' y=\'305\' font-family=\'serif\' font-size=\'18\' fill=\'%234b6854\' text-anchor=\'middle\'>Tarin %26 Warangkana Pre-wedding</text></svg>';">
                         <div class="couple-caption">
                             <p class="quote">“Two lives, two hearts, joined together in friendship, united forever in love.”</p>
                         </div>
@@ -399,7 +411,6 @@
         <!-- Footer -->
         <footer class="section footer">
             <div class="footer-inner fade-in">
-                <img src="images/branch.jpg" alt="" class="footer-branch" aria-hidden="true">
                 <p class="footer-names">Tarin &amp; Warangkana</p>
                 <p class="footer-thank">ขอขอบพระคุณทุกท่านจากใจจริง</p>
                 <p class="footer-date">12.12.2569</p>
