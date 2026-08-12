@@ -3,155 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarin & Warangkana — 12.12.2569</title>
-    <meta name="description" content="ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสของ Tarin & Warangkana วันที่ 12 ธันวาคม 2569">
+    <title>Tarin & Warangkana — 12.12.2569 | Wedding Invitation</title>
+    <meta name="description" content="ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง Tarin Panya & Warangkana วันเสาร์ที่ 12 ธันวาคม 2569 ณ โกดังเจ๊ชิง & เฮียฟู่ จ.นครราชสีมา">
+    
+    <!-- Open Graph for Line & Social Sharing -->
+    <meta property="og:title" content="Tarin & Warangkana — Wedding Invitation">
+    <meta property="og:description" content="ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรส วันที่ 12 ธันวาคม 2569">
+    <meta property="og:image" content="images/couple.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+Thai:wght@200;300;400;500;600&family=Noto+Sans+Thai:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+Thai:wght@200;300;400;500;600&family=Noto+Serif+Thai:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Cover -->
+    <!-- Falling Petals Canvas -->
+    <canvas id="petalsCanvas" class="petals-canvas"></canvas>
+
+    <!-- Floating Audio & Ambient Controls -->
+    <div class="floating-controls">
+        <button id="petalToggleBtn" class="control-btn" title="เปิด/ปิด กลีบดอกไม้" aria-label="เปิด/ปิด กลีบดอกไม้">
+            <span class="icon">🌸</span>
+        </button>
+        <button id="musicToggleBtn" class="control-btn" title="เปิด/ปิด เสียงเพลง" aria-label="เปิด/ปิด เสียงเพลง">
+            <span class="icon sound-icon">🎵</span>
+        </button>
+    </div>
+
+    <!-- Cover Envelope Entrance -->
     <section class="cover" id="cover">
-        <div class="cover-inner">
-            <p class="cover-label">wedding invitation</p>
-            <div class="cover-line"></div>
-            <p class="cover-tap">แตะเพื่อเปิด</p>
+        <div class="envelope-wrapper">
+            <div class="envelope-card">
+                <div class="envelope-decoration">
+                    <img src="images/floral_frame.jpg" alt="" class="cover-frame-img">
+                </div>
+                <div class="cover-content">
+                    <p class="cover-sub">THE WEDDING INVITATION</p>
+                    <h1 class="cover-title">Tarin &amp; Warangkana</h1>
+                    <div class="cover-line"></div>
+                    <p class="cover-date">12 DECEMBER 2026</p>
+                    
+                    <div class="wax-seal" id="openCardBtn">
+                        <div class="seal-inner">
+                            <span class="seal-initials">T &amp; W</span>
+                            <span class="seal-tap">แตะเพื่อเปิดการ์ด</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Card -->
+    <!-- Main Card Content -->
     <main class="card" id="card">
 
-        <!-- 1. Hero -->
-        <section class="section hero">
-            <p class="hero-kicker fade-in">ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรส</p>
-            <h1 class="hero-names fade-in">
-                <span class="name">Tarin Panya</span>
-                <span class="amp">&</span>
-                <span class="name">Warangkana</span>
-            </h1>
-            <img src="images/branch.jpg" alt="" class="hero-branch fade-in" aria-hidden="true">
-            <time class="hero-date fade-in" datetime="2026-12-12">
-                วันเสาร์ที่ 12 ธันวาคม 2569
-            </time>
-        </section>
+        <!-- Header / Hero Banner -->
+        <header class="section hero">
+            <div class="hero-bg-texture" style="background-image: url('images/floral_bg.jpg');"></div>
+            
+            <div class="hero-container">
+                <p class="hero-kicker fade-in">ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรส</p>
+                
+                <div class="hero-names-wrap fade-in">
+                    <h1 class="hero-names">
+                        <span class="name-en">Tarin Panya</span>
+                        <span class="amp">&amp;</span>
+                        <span class="name-en">Warangkana</span>
+                    </h1>
+                    <p class="name-th">ทารินทร์ ปัญญา &amp; วรังคณา</p>
+                </div>
 
-        <!-- 2. Countdown -->
+                <div class="hero-divider fade-in">
+                    <img src="images/branch.jpg" alt="" class="hero-branch" aria-hidden="true">
+                </div>
+
+                <!-- Pre-Wedding Card Frame -->
+                <div class="couple-card-wrap fade-in">
+                    <div class="couple-frame">
+                        <img src="images/couple.jpg" alt="Tarin & Warangkana Pre-wedding" class="couple-img">
+                        <div class="couple-caption">
+                            <p class="quote">“Two lives, two hearts, joined together in friendship, united forever in love.”</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-date-badge fade-in">
+                    <time datetime="2026-12-12">วันเสาร์ที่ 12 ธันวาคม พ.ศ. 2569</time>
+                </div>
+            </div>
+        </header>
+
+        <!-- Countdown & Save The Date -->
         <section class="section countdown-section">
-            <p class="section-label fade-in">Save the Date</p>
+            <div class="section-header fade-in">
+                <p class="section-label">COUNTDOWN</p>
+                <h2 class="section-title">นับถอยหลังสู่วันพิเศษ</h2>
+            </div>
+
             <div class="countdown fade-in" id="countdown" aria-label="นับถอยหลังสู่วันแต่งงาน">
                 <div class="cd-unit">
-                    <span class="cd-num" id="cd-days">130</span>
-                    <span class="cd-label">วัน</span>
+                    <span class="cd-num" id="cd-days">00</span>
+                    <span class="cd-label">วัน (Days)</span>
                 </div>
                 <span class="cd-sep" aria-hidden="true">:</span>
                 <div class="cd-unit">
                     <span class="cd-num" id="cd-hours">00</span>
-                    <span class="cd-label">ชม.</span>
+                    <span class="cd-label">ชม. (Hours)</span>
                 </div>
                 <span class="cd-sep" aria-hidden="true">:</span>
                 <div class="cd-unit">
                     <span class="cd-num" id="cd-min">00</span>
-                    <span class="cd-label">นาที</span>
+                    <span class="cd-label">นาที (Mins)</span>
                 </div>
                 <span class="cd-sep" aria-hidden="true">:</span>
                 <div class="cd-unit">
                     <span class="cd-num" id="cd-sec">00</span>
-                    <span class="cd-label">วินาที</span>
+                    <span class="cd-label">วินาที (Secs)</span>
+                </div>
+            </div>
+
+            <!-- Add to Calendar Buttons -->
+            <div class="calendar-actions fade-in">
+                <p class="calendar-hint">บันทึกวันงานลงในปฏิทินของคุณ</p>
+                <div class="calendar-btn-group">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=งานมงคลสมรส+Tarin+%26+Warangkana&dates=20261212T000000Z/20261212T150000Z&details=ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรสระหว่าง+Tarin+%26+Warangkana&location=โกดังเจ๊ชิง+%26+เฮียฟู่+นครราชสีมา" target="_blank" class="btn-outline calendar-btn">
+                        <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+                        Google Calendar
+                    </a>
+                    <button type="button" id="downloadIcsBtn" class="btn-outline calendar-btn">
+                        <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+                        iCal / Apple Calendar
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- 3. Details -->
+        <!-- Schedule & Events -->
         <section class="section details">
-            <p class="section-label fade-in">กำหนดการ</p>
-
-            <div class="detail-block fade-in">
-                <h2 class="detail-title">พิธีเช้า</h2>
-                <p class="detail-time">07.00 – 10.00 น.</p>
-                <ul class="detail-list">
-                    <li><span class="t">07.00</span> ขบวนขันหมาก</li>
-                    <li><span class="t">08.00</span> พิธีหมั้น</li>
-                    <li><span class="t">08.30</span> พิธีรดน้ำสังข์</li>
-                    <li><span class="t">09.30</span> ถ่ายรูปหมู่ &amp; รับประทานอาหาร</li>
-                </ul>
-                <p class="detail-venue"><a href="https://www.google.com/maps/dir//410+%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%888+%E0%B8%9A%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B9%8C+%E0%B8%AB%E0%B8%99%E0%B8%AD%E0%B8%87%E0%B8%A1%E0%B9%88%E0%B8%A7%E0%B8%87+%E0%B8%95%E0%B8%B3%E0%B8%9A%E0%B8%A5+%E0%B8%88%E0%B8%AD%E0%B8%AB%E0%B8%AD+%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87+%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%AA%E0%B8%B5%E0%B8%A1%E0%B8%B2+30310" target="_blank" class="venue-link">โกดังเจ๊ชิง &amp; เฮียฟู่</a> — 410 หมู่ 8 บ้านสระธรรมขันธ์ ต.จอหอ อ.เมือง จ.นครราชสีมา</p>
+            <div class="section-header fade-in">
+                <p class="section-label">SCHEDULE</p>
+                <h2 class="section-title">กำหนดการพิธีการ</h2>
             </div>
 
-            <div class="detail-divider fade-in" aria-hidden="true"></div>
+            <div class="timeline">
+                <!-- Morning Event -->
+                <div class="detail-card fade-in">
+                    <div class="detail-header">
+                        <div class="event-badge">พิธีเช้า</div>
+                        <h3 class="detail-title">พิธีมงคลสมรส &amp; ฉลองรดน้ำสังข์</h3>
+                        <p class="detail-time">⏰ 07.00 – 10.00 น.</p>
+                    </div>
+                    <ul class="detail-list">
+                        <li><span class="t">07.00 น.</span> <span class="desc">แห่ขบวนขันหมาก</span></li>
+                        <li><span class="t">08.00 น.</span> <span class="desc">พิธีหมั้นสวมแหวน</span></li>
+                        <li><span class="t">08.30 น.</span> <span class="desc">พิธีหลั่งน้ำพระพุทธมนต์ (รดน้ำสังข์)</span></li>
+                        <li><span class="t">09.30 น.</span> <span class="desc">ถ่ายภาพร่วมกัน &amp; ร่วมรับประทานอาหาร</span></li>
+                    </ul>
+                </div>
 
-            <div class="detail-block fade-in">
-                <h2 class="detail-title">งานเลี้ยงฉลอง</h2>
-                <p class="detail-time">18.00 – 22.00 น.</p>
-                <ul class="detail-list">
-                    <li><span class="t">18.00</span> ลงทะเบียน</li>
-                    <li><span class="t">18.30</span> คู่บ่าวสาวเข้าห้อง</li>
-                    <li><span class="t">19.00</span> ตัดเค้ก &amp; ดื่มอวยพร</li>
-                    <li><span class="t">19.30</span> รับประทานอาหาร</li>
-                </ul>
-                <p class="detail-venue"><a href="https://www.google.com/maps/dir//410+%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%888+%E0%B8%9A%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B9%8C+%E0%B8%AB%E0%B8%99%E0%B8%AD%E0%B8%87%E0%B8%A1%E0%B9%88%E0%B8%A7%E0%B8%87+%E0%B8%95%E0%B8%B3%E0%B8%9A%E0%B8%A5+%E0%B8%88%E0%B8%AD%E0%B8%AB%E0%B8%AD+%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87+%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%AA%E0%B8%B5%E0%B8%A1%E0%B8%B2+30310" target="_blank" class="venue-link">โกดังเจ๊ชิง &amp; เฮียฟู่</a> — 410 หมู่ 8 บ้านสระธรรมขันธ์ ต.จอหอ อ.เมือง จ.นครราชสีมา</p>
+                <div class="timeline-connector fade-in">
+                    <span class="connector-dot">🌸</span>
+                </div>
+
+                <!-- Evening Event -->
+                <div class="detail-card fade-in">
+                    <div class="detail-header">
+                        <div class="event-badge evening-badge">งานเลี้ยงฉลอง</div>
+                        <h3 class="detail-title">งานเลี้ยงฉลองมงคลสมรส</h3>
+                        <p class="detail-time">⏰ 18.00 – 22.00 น.</p>
+                    </div>
+                    <ul class="detail-list">
+                        <li><span class="t">18.00 น.</span> <span class="desc">ลงทะเบียนต้อนรับแขกผู้มีเกียรติ</span></li>
+                        <li><span class="t">18.30 น.</span> <span class="desc">ต้อนรับคู่บ่าวสาวเข้าสู่ห้องจัดเลี้ยง</span></li>
+                        <li><span class="t">19.00 น.</span> <span class="desc">พิธีการ ตัดเค้กมงคล &amp; ดื่มอวยพร</span></li>
+                        <li><span class="t">19.30 น.</span> <span class="desc">ร่วมรับประทานอาหาร &amp; ดนตรีสด</span></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <!-- 3.5 Map -->
+        <!-- Dress Code / Theme Colors -->
+        <section class="section dresscode-section">
+            <div class="section-header fade-in">
+                <p class="section-label">DRESS CODE</p>
+                <h2 class="section-title">ธีมสีเครื่องแต่งกาย</h2>
+                <p class="section-sub">เพื่อความสวยงามและเป็นโทนเดียวกัน ขอเชิญชวนสวมใส่ชุดในโทนสีดังนี้</p>
+            </div>
+
+            <div class="color-palette fade-in">
+                <div class="color-swatch" style="--swatch-color: #D4A59A;" data-name="Rose Gold">
+                    <span class="swatch-circle"></span>
+                    <span class="swatch-label">Rose Gold</span>
+                </div>
+                <div class="color-swatch" style="--swatch-color: #9CAF88;" data-name="Sage Green">
+                    <span class="swatch-circle"></span>
+                    <span class="swatch-label">Sage Green</span>
+                </div>
+                <div class="color-swatch" style="--swatch-color: #D8C09D;" data-name="Champagne">
+                    <span class="swatch-circle"></span>
+                    <span class="swatch-label">Champagne</span>
+                </div>
+                <div class="color-swatch" style="--swatch-color: #E5D4C0;" data-name="Warm Sand">
+                    <span class="swatch-circle"></span>
+                    <span class="swatch-label">Warm Sand</span>
+                </div>
+                <div class="color-swatch" style="--swatch-color: #F7F4F0;" data-name="Off White">
+                    <span class="swatch-circle"></span>
+                    <span class="swatch-label">Off White</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Venue & Location -->
         <section class="section map-section">
-            <p class="section-label fade-in">สถานที่จัดงาน</p>
+            <div class="section-header fade-in">
+                <p class="section-label">LOCATION &amp; MAP</p>
+                <h2 class="section-title">สถานที่จัดงาน &amp; การเดินทาง</h2>
+            </div>
+
             <div class="map-card fade-in">
-                <h2 class="map-venue-name">โกดังเจ๊ชิง & เฮียฟู่</h2>
-                <p class="map-address">410 หมู่ 8 บ้านสระธรรมขันธ์ หนองม่วง<br>ต.จอหอ อ.เมือง จ.นครราชสีมา 30310</p>
-                <a href="https://www.google.com/maps/dir//410+%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%888+%E0%B8%9A%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B9%8C+%E0%B8%AB%E0%B8%99%E0%B8%AD%E0%B8%87%E0%B8%A1%E0%B9%88%E0%B8%A7%E0%B8%87+%E0%B8%95%E0%B8%B3%E0%B8%9A%E0%B8%A5+%E0%B8%88%E0%B8%AD%E0%B8%AB%E0%B8%AD+%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87+%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%AA%E0%B8%B5%E0%B8%A1%E0%B8%B2+30310" target="_blank" class="map-link">เปิดแผนที่ Google Maps</a>
+                <div class="venue-icon">📍</div>
+                <h3 class="map-venue-name">โกดังเจ๊ชิง &amp; เฮียฟู่</h3>
+                <p class="map-address">
+                    410 หมู่ 8 บ้านสระธรรมขันธ์ หนองม่วง<br>
+                    ต.จอหอ อ.เมือง จ.นครราชสีมา 30310
+                </p>
+
+                <div class="parking-info">
+                    <span class="info-tag">🚗 มีพื้นที่จอดรถกว้างขวางรองรับสะดวกสบาย</span>
+                </div>
+
+                <div class="map-actions">
+                    <a href="https://www.google.com/maps/dir//410+%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%888+%E0%B8%9A%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B9%8C+%E0%B8%AB%E0%B8%99%E0%B8%AD%E0%B8%87%E0%B8%A1%E0%B9%88%E0%B8%A7%E0%B8%87+%E0%B8%95%E0%B8%B3%E0%B8%9A%E0%B8%A5+%E0%B8%88%E0%B8%AD%E0%B8%AB%E0%B8%AD+%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87+%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%AA%E0%B8%B5%E0%B8%A1%E0%B8%B2+30310" target="_blank" class="btn-primary map-link">
+                        <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        นำทางด้วย Google Maps
+                    </a>
+                </div>
             </div>
         </section>
 
-        <!-- 4. RSVP -->
+        <!-- Digital Gifting / PromptPay Modal Section -->
+        <section class="section gifting-section">
+            <div class="gifting-card fade-in">
+                <h3 class="gifting-title">🎁 ร่วมอวยพร &amp; สมทบทุน</h3>
+                <p class="gifting-desc">สำหรับท่านที่ไม่สะดวกมาร่วมงาน หรือประสงค์จะร่วมอวยพรออนไลน์</p>
+                <button type="button" id="toggleGiftingBtn" class="btn-secondary">
+                    แสดงช่องทางโอนร่วมอวยพร
+                </button>
+
+                <div id="giftingBox" class="gifting-box" hidden>
+                    <div class="bank-details">
+                        <div class="bank-item">
+                            <p class="bank-owner">บัญชีร่วมสำหรับงานมงคลสมรส</p>
+                            <p class="bank-name">ธนาคารกสิกรไทย (KBank)</p>
+                            <p class="bank-num" id="accountNum">123-4-56789-0</p>
+                            <p class="bank-holder">ทารินทร์ ปัญญา &amp; วรังคณา</p>
+                            <button type="button" class="btn-copy" id="copyBankBtn">คัดลอกเลขบัญชี</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Form Section -->
         <section class="section rsvp">
-            <p class="section-label fade-in">ตอบรับ</p>
+            <div class="section-header fade-in">
+                <p class="section-label">RSVP</p>
+                <h2 class="section-title">ตอบรับเข้าร่วมงาน</h2>
+                <p class="section-sub">กรุณากรอกข้อมูลเพื่อความสะดวกในการจัดเตรียมต้อนรับ</p>
+            </div>
+
             <form class="rsvp-form fade-in" id="rsvpForm" autocomplete="off">
                 <div class="field">
-                    <label for="name">ชื่อ-นามสกุล</label>
-                    <input type="text" id="name" required>
+                    <label for="name">ชื่อ-นามสกุล / Name <span class="req">*</span></label>
+                    <input type="text" id="name" placeholder="เช่น คุณสมชาย และครอบครัว" required>
                 </div>
+                
                 <div class="field-row">
                     <div class="field">
-                        <label for="guests">จำนวนท่าน</label>
+                        <label for="guests">จำนวนผู้เข้าร่วม / Guests</label>
                         <select id="guests">
-                            <option>1</option>
-                            <option selected>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            <option value="1">1 ท่าน</option>
+                            <option value="2" selected>2 ท่าน</option>
+                            <option value="3">3 ท่าน</option>
+                            <option value="4">4 ท่าน</option>
+                            <option value="5+">5 ท่านขึ้นไป</option>
                         </select>
                     </div>
                     <div class="field">
-                        <label for="attend">เข้าร่วม</label>
+                        <label for="attend">ช่วงเวลาที่เข้าร่วม / Attendance</label>
                         <select id="attend">
-                            <option value="both">งานเช้า + งานเย็น</option>
-                            <option value="morning">งานเช้า</option>
-                            <option value="evening">งานเย็น</option>
+                            <option value="both">เข้าร่วมทั้ง 2 ช่วง (เช้า + เย็น)</option>
+                            <option value="morning">พิธีเช้าเท่านั้น</option>
+                            <option value="evening">งานเลี้ยงฉลองเย็นเท่านั้น</option>
+                            <option value="sorry">ติดภารกิจ ขอส่งใจไปร่วมอวยพร</option>
                         </select>
                     </div>
                 </div>
+
                 <div class="field">
-                    <label for="msg">คำอวยพร <span class="optional">(ถ้ามี)</span></label>
-                    <textarea id="msg" rows="3"></textarea>
+                    <label for="msg">คำอวยพรแด่คู่บ่าวสาว / Best Wishes <span class="optional">(ถ้ามี)</span></label>
+                    <textarea id="msg" rows="3" placeholder="เขียนคำอวยพรสั้นๆ ส่งถึงคู่บ่าวสาว..."></textarea>
                 </div>
-                <button type="submit" class="btn">ตอบรับเข้าร่วมงาน</button>
+
+                <button type="submit" class="btn-primary btn-submit">ส่งแบบตอบรับ &amp; คำอวยพร</button>
             </form>
+
             <div class="rsvp-done" id="rsvpDone" hidden>
-                <p class="done-heading">ขอบคุณที่ตอบรับ</p>
-                <p class="done-sub">ยินดีที่จะได้พบคุณในวันพิเศษของเรา</p>
+                <div class="done-icon">🤍</div>
+                <h3 class="done-heading">ขอบคุณสำหรับคำตอบรับ</h3>
+                <p class="done-sub">ยินดีและดีใจมากๆ ที่จะได้พบคุณในวันสำคัญของเรา</p>
             </div>
         </section>
 
-        <!-- 5. Footer -->
+        <!-- Wishes / Guestbook Wall -->
+        <section class="section wishes-section">
+            <div class="section-header fade-in">
+                <p class="section-label">GUESTBOOK</p>
+                <h2 class="section-title">สมุดอวยพรจากแขกผู้มีเกียรติ</h2>
+            </div>
+
+            <div class="wishes-grid fade-in" id="wishesGrid">
+                <!-- Dynamic wishes will be populated here via JS -->
+            </div>
+        </section>
+
+        <!-- Footer -->
         <footer class="section footer">
-            <p class="footer-names fade-in">Tarin &amp; Warangkana</p>
-            <p class="footer-date fade-in">12.12.2569</p>
+            <div class="footer-inner fade-in">
+                <img src="images/branch.jpg" alt="" class="footer-branch" aria-hidden="true">
+                <p class="footer-names">Tarin &amp; Warangkana</p>
+                <p class="footer-thank">ขอขอบพระคุณทุกท่านจากใจจริง</p>
+                <p class="footer-date">12.12.2569</p>
+            </div>
         </footer>
 
     </main>
 
+    <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
+
