@@ -17,26 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.style.overflow = 'hidden';
 
-    // ── 2. Animated Cat Interaction ──
-    const catCharacter = document.getElementById('catCharacter');
-    const catBubble = document.getElementById('catBubble');
-    const catMessages = [
-        "Meow~ 🤍",
-        "ยินดีกับบ่าวสาวน๊า! 🐾",
-        "ทารินทร์ & วรางคณา 💍",
-        "แล้วพบกันวันงานนะคะ 🌸",
-        "Sage Green ธีมเขียวเหนี่ยวทรัพย์ 🌿"
-    ];
 
-    if (catCharacter && catBubble) {
-        catCharacter.addEventListener('click', () => {
-            const randomMsg = catMessages[Math.floor(Math.random() * catMessages.length)];
-            catBubble.textContent = randomMsg;
-            catBubble.style.animation = 'none';
-            void catBubble.offsetWidth; // trigger reflow
-            catBubble.style.animation = 'catBubblePulse 0.5s ease';
-        });
-    }
 
     // ── 3. Scroll Animations (IntersectionObserver) ──
     const observer = new IntersectionObserver((entries) => {
@@ -254,17 +235,15 @@ END:VCALENDAR`;
         }
     });
 
-    // ── 8. Digital Gifting Toggle & Copy Account ──
+    // ── 8. Digital Gifting QR Code Toggle ──
     const toggleGiftingBtn = document.getElementById('toggleGiftingBtn');
     const giftingBox = document.getElementById('giftingBox');
-    const copyBankBtn = document.getElementById('copyBankBtn');
-    const accountNum = document.getElementById('accountNum');
 
     if (toggleGiftingBtn && giftingBox) {
         toggleGiftingBtn.addEventListener('click', () => {
             const isHidden = giftingBox.hidden;
             giftingBox.hidden = !isHidden;
-            toggleGiftingBtn.textContent = isHidden ? 'ซ่อนช่องทางโอน' : 'แสดงช่องทางโอนร่วมอวยพร';
+            toggleGiftingBtn.textContent = isHidden ? 'ซ่อน QR Code ร่วมอวยพร' : 'แสดง QR Code ร่วมอวยพร';
         });
     }
 

@@ -25,40 +25,7 @@
     <!-- Falling Petals Canvas -->
     <canvas id="petalsCanvas" class="petals-canvas"></canvas>
 
-    <!-- Animated Running Cat Element -->
-    <div id="catCharacter" class="cat-character" title="คลิกเพื่อทักทายพี่แมว 🐾" aria-label="ตัวการ์ตูนแมววิ่งเล่น">
-        <div class="cat-bubble" id="catBubble">Meow~ 🤍</div>
-        <svg class="cat-svg" viewBox="0 0 100 80" width="70" height="56">
-            <!-- Cat Tail -->
-            <path class="cat-tail" d="M 15 50 Q 5 35 12 25 Q 18 20 16 32" fill="none" stroke="#4b6854" stroke-width="4" stroke-linecap="round"/>
-            <!-- Cat Body -->
-            <ellipse cx="45" cy="52" rx="26" ry="18" fill="#7a9a83"/>
-            <!-- Cat Head -->
-            <circle cx="70" cy="38" r="16" fill="#7a9a83"/>
-            <!-- Ears -->
-            <polygon points="60,26 66,12 72,24" fill="#4b6854"/>
-            <polygon points="72,24 78,12 84,26" fill="#4b6854"/>
-            <!-- Inner Ears -->
-            <polygon points="62,25 66,15 70,24" fill="#e8cfc4"/>
-            <polygon points="74,24 78,15 82,25" fill="#e8cfc4"/>
-            <!-- Eyes -->
-            <circle cx="66" cy="36" r="2" fill="#1b281f"/>
-            <circle cx="76" cy="36" r="2" fill="#1b281f"/>
-            <!-- Nose & Mouth -->
-            <polygon points="70,40 72,40 71,42" fill="#e8cfc4"/>
-            <path d="M 68 43 Q 71 45 74 43" fill="none" stroke="#1b281f" stroke-width="1"/>
-            <!-- Whiskers -->
-            <line x1="56" y1="38" x2="48" y2="36" stroke="#1b281f" stroke-width="0.8"/>
-            <line x1="56" y1="41" x2="48" y2="42" stroke="#1b281f" stroke-width="0.8"/>
-            <line x1="82" y1="38" x2="90" y2="36" stroke="#1b281f" stroke-width="0.8"/>
-            <line x1="82" y1="41" x2="90" y2="42" stroke="#1b281f" stroke-width="0.8"/>
-            <!-- Paws -->
-            <ellipse class="paw paw-1" cx="28" cy="67" rx="5" ry="4" fill="#4b6854"/>
-            <ellipse class="paw paw-2" cx="40" cy="67" rx="5" ry="4" fill="#4b6854"/>
-            <ellipse class="paw paw-3" cx="52" cy="67" rx="5" ry="4" fill="#4b6854"/>
-            <ellipse class="paw paw-4" cx="64" cy="67" rx="5" ry="4" fill="#4b6854"/>
-        </svg>
-    </div>
+
 
     <!-- Floating Audio & Ambient Controls -->
     <div class="floating-controls">
@@ -324,24 +291,23 @@
             </div>
         </section>
 
-        <!-- Digital Gifting / PromptPay Modal Section -->
+        <!-- Digital Gifting / PromptPay QR Section -->
         <section class="section gifting-section">
             <div class="gifting-card fade-in">
-                <h3 class="gifting-title">🎁 ร่วมอวยพร &amp; สมทบทุน</h3>
-                <p class="gifting-desc">สำหรับท่านที่ไม่สะดวกมาร่วมงาน หรือประสงค์จะร่วมอวยพรออนไลน์</p>
+                <h3 class="gifting-title">🎁 ร่วมอวยพร &amp; สมทบทุน (PromptPay QR)</h3>
+                <p class="gifting-desc">สำหรับท่านที่ไม่สะดวกมาร่วมงาน หรือประสงค์จะร่วมส่งคำอวยพรออนไลน์ผ่าน QR Code</p>
                 <button type="button" id="toggleGiftingBtn" class="btn-secondary">
-                    แสดงช่องทางโอนร่วมอวยพร
+                    แสดง QR Code ร่วมอวยพร
                 </button>
 
                 <div id="giftingBox" class="gifting-box" hidden>
-                    <div class="bank-details">
-                        <div class="bank-item">
-                            <p class="bank-owner">บัญชีร่วมสำหรับงานมงคลสมรส</p>
-                            <p class="bank-name">ธนาคารกสิกรไทย (KBank)</p>
-                            <p class="bank-num" id="accountNum">123-4-56789-0</p>
-                            <p class="bank-holder">ทารินทร์ ปัญญา &amp; วรางคณา วิทยปรีชากร</p>
-                            <button type="button" class="btn-copy" id="copyBankBtn">คัดลอกเลขบัญชี</button>
+                    <div class="qr-payment-wrap">
+                        <p class="qr-owner">ธนาคารกรุงไทย (Krungthai) — PromptPay</p>
+                        <div class="qr-frame">
+                            <img src="images/qr_code.jpg" alt="PromptPay QR Code - น.ส.วรางคณา วิทยปรีชากร" class="qr-code-img" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 480\' width=\'100%\' height=\'100%\'><rect width=\'400\' height=\'480\' fill=\'%23ffffff\' rx=\'16\' stroke=\'%237a9a83\' stroke-width=\'2\'/><rect x=\'0\' y=\'0\' width=\'400\' height=\'75\' fill=\'%23004d80\' rx=\'16\'/><text x=\'50%\' y=\'48\' font-family=\'sans-serif\' font-size=\'18\' fill=\'%23ffffff\' text-anchor=\'middle\' font-weight=\'bold\'>THAI QR PAYMENT</text><text x=\'50%\' y=\'120\' font-family=\'sans-serif\' font-size=\'16\' fill=\'%23004d80\' text-anchor=\'middle\' font-weight=\'bold\'>PromptPay พร้อมเพย์</text><rect x=\'80\' y=\'150\' width=\'240\' height=\'240\' fill=\'%23111111\'/><rect x=\'105\' y=\'175\' width=\'65\' height=\'65\' fill=\'%23ffffff\'/><rect x=\'118\' y=\'188\' width=\'39\' height=\'39\' fill=\'%23111111\'/><rect x=\'230\' y=\'175\' width=\'65\' height=\'65\' fill=\'%23ffffff\'/><rect x=\'243\' y=\'188\' width=\'39\' height=\'39\' fill=\'%23111111\'/><rect x=\'105\' y=\'300\' width=\'65\' height=\'65\' fill=\'%23ffffff\'/><rect x=\'118\' y=\'313\' width=\'39\' height=\'39\' fill=\'%23111111\'/><text x=\'50%\' y=\'435\' font-family=\'sans-serif\' font-size=\'16\' fill=\'%231b281f\' text-anchor=\'middle\' font-weight=\'bold\'>ชื่อบัญชี: น.ส.วรางคณา วิทยปรีชากร</text></svg>';">
                         </div>
+                        <p class="bank-holder">ชื่อบัญชี: **น.ส.วรางคณา วิทยปรีชากร**</p>
+                        <a href="images/qr_code.jpg" download="PromptPay-Warangkana.jpg" class="btn-copy">บันทึกรูป QR Code</a>
                     </div>
                 </div>
             </div>

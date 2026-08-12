@@ -53,68 +53,7 @@ body {
     z-index: 99;
 }
 
-/* ── Animated Running Cat Character ──────── */
-.cat-character {
-    position: fixed;
-    bottom: 15px;
-    left: -80px;
-    z-index: 150;
-    cursor: pointer;
-    animation: catRunAcross 20s linear infinite;
-    user-select: none;
-    transition: transform .2s;
-}
 
-.cat-character:hover {
-    transform: scale(1.15) translateY(-5px);
-}
-
-.cat-bubble {
-    position: absolute;
-    top: -30px;
-    left: 15px;
-    background: var(--bg-card);
-    border: 1px solid var(--accent);
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-family: var(--font-thai);
-    font-size: .7rem;
-    color: var(--accent-dark);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    white-space: nowrap;
-    animation: catBubblePulse 2s ease-in-out infinite;
-}
-
-.cat-tail {
-    transform-origin: 15px 50px;
-    animation: catTailWag 1.5s ease-in-out infinite alternate;
-}
-
-.paw-1, .paw-3 { animation: catPawStep 0.4s ease-in-out infinite alternate; }
-.paw-2, .paw-4 { animation: catPawStep 0.4s ease-in-out infinite alternate-reverse; }
-
-@keyframes catRunAcross {
-    0%   { left: -90px; transform: scaleX(1); }
-    48%  { left: calc(100vw + 20px); transform: scaleX(1); }
-    50%  { left: calc(100vw + 20px); transform: scaleX(-1); }
-    98%  { left: -90px; transform: scaleX(-1); }
-    100% { left: -90px; transform: scaleX(1); }
-}
-
-@keyframes catTailWag {
-    0%   { transform: rotate(-8deg); }
-    100% { transform: rotate(15deg); }
-}
-
-@keyframes catPawStep {
-    0%   { transform: translateY(0); }
-    100% { transform: translateY(-3px); }
-}
-
-@keyframes catBubblePulse {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-3px); }
-}
 
 /* ── Floating Controls ──────────────────── */
 .floating-controls {
@@ -817,7 +756,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* ── Digital Gifting ─────────────────────── */
+/* ── Digital Gifting & QR Payment ────────── */
 .gifting-card {
     background: linear-gradient(135deg, #f7fafd 0%, #edf4ef 100%);
     border: 1px solid var(--border);
@@ -864,47 +803,61 @@ body {
     border-top: 1px dashed var(--border);
 }
 
-.bank-item { text-align: center; }
-
-.bank-owner {
-    font-family: var(--font-thai);
-    font-size: .8rem;
-    color: var(--ink-mute);
-    margin-bottom: .2rem;
+.qr-payment-wrap {
+    text-align: center;
 }
 
-.bank-name {
+.qr-owner {
     font-family: var(--font-thai);
-    font-size: .95rem;
-    font-weight: 500;
-    color: var(--ink);
-}
-
-.bank-num {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: .1em;
+    font-size: .85rem;
     color: var(--accent-dark);
-    margin: .3rem 0;
+    font-weight: 500;
+    margin-bottom: .8rem;
+}
+
+.qr-frame {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border);
+    margin-bottom: .8rem;
+    max-width: 280px;
+}
+
+.qr-code-img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
 }
 
 .bank-holder {
     font-family: var(--font-thai);
-    font-size: .85rem;
-    color: var(--ink-soft);
+    font-size: .9rem;
+    color: var(--ink);
     margin-bottom: 1rem;
 }
 
 .btn-copy {
+    display: inline-block;
     font-family: var(--font-thai);
-    font-size: .75rem;
+    font-size: .8rem;
     color: #ffffff;
     background: var(--accent-dark);
     border: none;
-    padding: .4rem 1rem;
-    border-radius: 4px;
+    padding: .5rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
     cursor: pointer;
+    transition: background .2s;
+}
+
+.btn-copy:hover {
+    background: #364d3d;
 }
 
 /* ── RSVP ────────────────────────────────── */
