@@ -397,7 +397,8 @@ body {
     line-height: 1.2;
 }
 
-.hero-names .name-bride {
+.hero-names .name-bride,
+.hero-names .name-groom {
     color: var(--accent-dark);
     font-weight: 500;
 }
@@ -418,7 +419,8 @@ body {
     gap: .15rem;
 }
 
-.name-th-bride {
+.name-th-bride,
+.name-th-groom {
     font-family: var(--font-thai);
     font-size: 1.05rem;
     font-weight: 500;
@@ -431,14 +433,6 @@ body {
     font-size: 1.5rem;
     color: var(--accent);
     line-height: 1;
-}
-
-.name-th-groom {
-    font-family: var(--font-thai);
-    font-size: .95rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    letter-spacing: .05em;
 }
 
 .hero-divider {
@@ -482,6 +476,16 @@ body {
 
 .couple-caption {
     padding: 1.2rem .8rem .4rem;
+}
+
+.couple-card-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--accent-dark);
+    margin-bottom: .4rem;
+    letter-spacing: .02em;
 }
 
 .couple-caption .quote {
