@@ -53,13 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 catCharacter.classList.remove('paused');
                 if (catBodyFlip) catBodyFlip.classList.remove('paused');
                 
-                // 2.1 เพิ่มอนิเมชันกระโดดเด้งดึ๋ง (Jump Prep)
-                catCharacter.classList.add('jump-prep');
+                // 2.1 เพิ่มอนิเมชันกระโดดเด้งดึ๋ง ณ ตำแหน่งที่คลิก (Jump Prep on catBodyFlip)
+                if (catBodyFlip) catBodyFlip.classList.add('jump-prep');
                 spawnCatHeartParticles(catCharacter);
 
-                // 2.2 เมื่อกระโดดเสร็จ 400ms -> พุ่งตัวสปริ้นท์ซิ่งทันที!
+                // 2.2 เมื่อกระโดดเสร็จ 450ms -> พุ่งตัวสปริ้นท์ซิ่งทันที!
                 setTimeout(() => {
-                    catCharacter.classList.remove('jump-prep');
+                    if (catBodyFlip) catBodyFlip.classList.remove('jump-prep');
                     catCharacter.classList.add('fast-speed');
                     if (catBodyFlip) catBodyFlip.classList.add('fast-speed');
 
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         catCharacter.classList.remove('fast-speed');
                         if (catBodyFlip) catBodyFlip.classList.remove('fast-speed');
                     }, 2000);
-                }, 400);
+                }, 450);
 
                 return;
             }
