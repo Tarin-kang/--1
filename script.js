@@ -353,6 +353,12 @@ END:VCALENDAR`;
                 events: {
                     'onReady': function(event) {
                         event.target.setVolume(100);
+                        if (isPlayingMusic) {
+                            try {
+                                event.target.unMute();
+                                event.target.playVideo();
+                            } catch (err) {}
+                        }
                     }
                 }
             });
