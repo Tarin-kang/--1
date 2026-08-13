@@ -41,29 +41,35 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. นับจำนวนครั้งการกด
             catClickCount++;
 
-            // 2. ถ้ากดครบทุกๆ 3 ครั้ง -> วิ่งไวไปข้างหน้า 2 วินาที!
+            // 2. ถ้ากดครบทุกๆ 3 ครั้ง -> กระโดดเด้งดึ๋ง 0.4 วินาทีก่อนออกสปริ้นท์ซิ่ง!
             if (catClickCount % 3 === 0) {
-                // แสดงข้อความสปริ้นท์ตื่นเต้น
-                catBubble.textContent = "สปริ้นท์ซิ่งแล้วน้า! 💨🐱⚡";
+                // แสดงข้อความกระโดดสปริ้นท์
+                catBubble.textContent = "ย่อตัวกระโดด... ซิ่งเลย! 💨🐱⚡";
                 catBubble.style.animation = 'none';
                 void catBubble.offsetWidth;
                 catBubble.style.animation = 'catBubblePulse 0.5s ease';
 
-                // เพิ่มคลาสสปริ้นท์ไวขึ้น (5s loop)
+                // ปลดคลาสหยุดชั่วคราว
                 catCharacter.classList.remove('paused');
                 if (catBodyFlip) catBodyFlip.classList.remove('paused');
                 
-                catCharacter.classList.add('fast-speed');
-                if (catBodyFlip) catBodyFlip.classList.add('fast-speed');
-
+                // 2.1 เพิ่มอนิเมชันกระโดดเด้งดึ๋ง (Jump Prep)
+                catCharacter.classList.add('jump-prep');
                 spawnCatHeartParticles(catCharacter);
 
-                // ตั้งเวลา 2 วินาที แล้วกลับมาเดินปกติ (20s loop)
-                if (catFastTimer) clearTimeout(catFastTimer);
-                catFastTimer = setTimeout(() => {
-                    catCharacter.classList.remove('fast-speed');
-                    if (catBodyFlip) catBodyFlip.classList.remove('fast-speed');
-                }, 2000);
+                // 2.2 เมื่อกระโดดเสร็จ 400ms -> พุ่งตัวสปริ้นท์ซิ่งทันที!
+                setTimeout(() => {
+                    catCharacter.classList.remove('jump-prep');
+                    catCharacter.classList.add('fast-speed');
+                    if (catBodyFlip) catBodyFlip.classList.add('fast-speed');
+
+                    // สปริ้นท์ 2 วินาที แล้วกลับมาสปีดปกติ
+                    if (catFastTimer) clearTimeout(catFastTimer);
+                    catFastTimer = setTimeout(() => {
+                        catCharacter.classList.remove('fast-speed');
+                        if (catBodyFlip) catBodyFlip.classList.remove('fast-speed');
+                    }, 2000);
+                }, 400);
 
                 return;
             }
@@ -91,58 +97,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    let ytCatPlayer = null;
-
     function playCuteMeowSound() {
-        // 1. เล่นเสียงตรงจาก YouTube Shorts: https://youtube.com/shorts/zqJsHfCajaY
-        if (ytCatPlayer && typeof ytCatPlayer.playVideo === 'function') {
-            try {
-                ytCatPlayer.seekTo(0);
-                ytCatPlayer.unMute();
-                ytCatPlayer.setVolume(100);
-                ytCatPlayer.playVideo();
-
-                // หยดเสียงหลังจากเล่นไป 2 วินาที
-                setTimeout(() => {
-                    if (ytCatPlayer && typeof ytCatPlayer.pauseVideo === 'function') {
-                        ytCatPlayer.pauseVideo();
-                    }
-                }, 2000);
-            } catch (e) {
-                console.log('YT Cat audio error:', e);
-                playSynthMeowSound();
-            }
-        } else {
-            playSynthMeowSound();
-        }
-    }
-
-    function playSynthMeowSound() {
         try {
+            // ใช้ Web Audio API ที่ทำงานแยกอิสระ ไม่รบกวนและไม่หยุดเสียงเพลงบรรเลงหลัก (ytPlayer)
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             if (!AudioContext) return;
             const ctx = new AudioContext();
-            
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'sine';
-
             const now = ctx.currentTime;
-            osc.frequency.setValueAtTime(750, now);
-            osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
-            osc.frequency.exponentialRampToValueAtTime(500, now + 0.35);
+            
+            // Oscillator 1: High pitched cute meow sweep (750Hz -> 920Hz -> 540Hz)
+            const osc1 = ctx.createOscillator();
+            const gain1 = ctx.createGain();
+            osc1.type = 'sine';
 
-            gain.gain.setValueAtTime(0.01, now);
-            gain.gain.linearRampToValueAtTime(0.28, now + 0.06);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+            osc1.frequency.setValueAtTime(750, now);
+            osc1.frequency.exponentialRampToValueAtTime(920, now + 0.08);
+            osc1.frequency.exponentialRampToValueAtTime(540, now + 0.38);
 
-            osc.connect(gain);
-            gain.connect(ctx.destination);
+            gain1.gain.setValueAtTime(0.01, now);
+            gain1.gain.linearRampToValueAtTime(0.3, now + 0.06);
+            gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
 
-            osc.start(now);
-            osc.stop(now + 0.4);
+            osc1.connect(gain1);
+            gain1.connect(ctx.destination);
+            osc1.start(now);
+            osc1.stop(now + 0.42);
+
+            // Oscillator 2: Warm 3D harmonic body sound (375Hz -> 460Hz -> 270Hz)
+            const osc2 = ctx.createOscillator();
+            const gain2 = ctx.createGain();
+            osc2.type = 'triangle';
+
+            osc2.frequency.setValueAtTime(375, now);
+            osc2.frequency.exponentialRampToValueAtTime(460, now + 0.08);
+            osc2.frequency.exponentialRampToValueAtTime(270, now + 0.38);
+
+            gain2.gain.setValueAtTime(0.01, now);
+            gain2.gain.linearRampToValueAtTime(0.12, now + 0.06);
+            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+
+            osc2.connect(gain2);
+            gain2.connect(ctx.destination);
+            osc2.start(now);
+            osc2.stop(now + 0.42);
+
+            // ตรวจสอบรักษาให้เพลงบรรเลงหลัก (ytPlayer) เล่นต่อเนื่องไม่สะดุด
+            if (isPlayingMusic && ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                try {
+                    ytPlayer.playVideo();
+                } catch (err) {}
+            }
         } catch (e) {
-            console.log('Synth Meow Audio Error:', e);
+            console.log('Meow Audio Error:', e);
         }
     }
 
