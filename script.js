@@ -30,30 +30,120 @@ document.addEventListener('DOMContentLoaded', () => {
         "12.12.2569 🌿"
     ];
     let catPauseTimer = null;
+    let catClickCount = 0;
+    let catFastTimer = null;
 
     if (catCharacter && catBubble) {
         catCharacter.addEventListener('click', () => {
-            // 1. นิ่งหยุดวิ่งเป็นเวลา 2 วินาที
+            // 0. เล่นเสียงเมี๊ยววน่ารักๆ (Cute Meow Audio Sound)
+            playCuteMeowSound();
+
+            // 1. นับจำนวนครั้งการกด
+            catClickCount++;
+
+            // 2. ถ้ากดครบทุกๆ 3 ครั้ง -> วิ่งไวไปข้างหน้า 2 วินาที!
+            if (catClickCount % 3 === 0) {
+                // แสดงข้อความสปริ้นท์ตื่นเต้น
+                catBubble.textContent = "สปริ้นท์ซิ่งแล้วน้า! 💨🐱⚡";
+                catBubble.style.animation = 'none';
+                void catBubble.offsetWidth;
+                catBubble.style.animation = 'catBubblePulse 0.5s ease';
+
+                // เพิ่มคลาสสปริ้นท์ไวขึ้น (5s loop)
+                catCharacter.classList.remove('paused');
+                if (catBodyFlip) catBodyFlip.classList.remove('paused');
+                
+                catCharacter.classList.add('fast-speed');
+                if (catBodyFlip) catBodyFlip.classList.add('fast-speed');
+
+                spawnCatHeartParticles(catCharacter);
+
+                // ตั้งเวลา 2 วินาที แล้วกลับมาเดินปกติ (20s loop)
+                if (catFastTimer) clearTimeout(catFastTimer);
+                catFastTimer = setTimeout(() => {
+                    catCharacter.classList.remove('fast-speed');
+                    if (catBodyFlip) catBodyFlip.classList.remove('fast-speed');
+                }, 2000);
+
+                return;
+            }
+
+            // 3. การกดครั้งปกติ -> นิ่งหยุดวิ่งเป็นเวลา 2 วินาที
             catCharacter.classList.add('paused');
             if (catBodyFlip) catBodyFlip.classList.add('paused');
 
-            // 2. สุ่มข้อความน่ารักๆ
+            // สุ่มข้อความน่ารักๆ
             const randomMsg = catMessages[Math.floor(Math.random() * catMessages.length)];
             catBubble.textContent = randomMsg;
             catBubble.style.animation = 'none';
             void catBubble.offsetWidth;
             catBubble.style.animation = 'catBubblePulse 0.5s ease';
 
-            // 3. สร้างเอฟเฟกต์หัวใจลอยรอบตัวแมว
+            // สร้างเอฟเฟกต์หัวใจลอยรอบตัวแมว
             spawnCatHeartParticles(catCharacter);
 
-            // 4. ตั้งเวลา 2 วินาที (2000ms) แล้วให้แมวออกวิ่งต่อสม่ำเสมอ
+            // ตั้งเวลา 2 วินาที (2000ms) แล้วให้แมวออกวิ่งต่อสม่ำเสมอ
             if (catPauseTimer) clearTimeout(catPauseTimer);
             catPauseTimer = setTimeout(() => {
                 catCharacter.classList.remove('paused');
                 if (catBodyFlip) catBodyFlip.classList.remove('paused');
             }, 2000);
         });
+    }
+
+    let ytCatPlayer = null;
+
+    function playCuteMeowSound() {
+        // 1. เล่นเสียงตรงจาก YouTube Shorts: https://youtube.com/shorts/zqJsHfCajaY
+        if (ytCatPlayer && typeof ytCatPlayer.playVideo === 'function') {
+            try {
+                ytCatPlayer.seekTo(0);
+                ytCatPlayer.unMute();
+                ytCatPlayer.setVolume(100);
+                ytCatPlayer.playVideo();
+
+                // หยดเสียงหลังจากเล่นไป 2 วินาที
+                setTimeout(() => {
+                    if (ytCatPlayer && typeof ytCatPlayer.pauseVideo === 'function') {
+                        ytCatPlayer.pauseVideo();
+                    }
+                }, 2000);
+            } catch (e) {
+                console.log('YT Cat audio error:', e);
+                playSynthMeowSound();
+            }
+        } else {
+            playSynthMeowSound();
+        }
+    }
+
+    function playSynthMeowSound() {
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            const ctx = new AudioContext();
+            
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+
+            const now = ctx.currentTime;
+            osc.frequency.setValueAtTime(750, now);
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+            osc.frequency.exponentialRampToValueAtTime(500, now + 0.35);
+
+            gain.gain.setValueAtTime(0.01, now);
+            gain.gain.linearRampToValueAtTime(0.28, now + 0.06);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(now);
+            osc.stop(now + 0.4);
+        } catch (e) {
+            console.log('Synth Meow Audio Error:', e);
+        }
     }
 
     function spawnCatHeartParticles(el) {
@@ -251,6 +341,24 @@ END:VCALENDAR`;
                     'controls': 0,
                     'loop': 1,
                     'playlist': 'QgaTQ5-XfMM',
+                    'playsinline': 1,
+                    'enablejsapi': 1
+                },
+                events: {
+                    'onReady': function(event) {
+                        event.target.setVolume(100);
+                    }
+                }
+            });
+
+            // 2. YouTube Shorts Cat Sound: zqJsHfCajaY
+            ytCatPlayer = new YT.Player('ytcat', {
+                height: '1',
+                width: '1',
+                videoId: 'zqJsHfCajaY', // Link: https://youtube.com/shorts/zqJsHfCajaY
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
                     'playsinline': 1,
                     'enablejsapi': 1
                 },

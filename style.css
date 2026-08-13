@@ -80,6 +80,14 @@ body {
     animation-play-state: paused !important;
 }
 
+.cat-character.fast-speed {
+    animation-duration: 5s !important;
+}
+
+.cat-body-flip.fast-speed {
+    animation-duration: 5s !important;
+}
+
 .cat-character:hover {
     transform: scale(1.15) translateY(-5px);
 }
