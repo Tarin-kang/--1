@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
     // ── 1. Cover / Envelope Unseal ──
     const cover = document.getElementById('cover');
@@ -320,18 +320,41 @@ END:VCALENDAR`;
 
     renderWishes();
 
+    // URL ของ Google Apps Script Web App (สำหรับบันทึกลง Google Sheets & แจ้งเตือนเข้า LINE)
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzFnfq08ZFDIe_g-Hu8fAXpsseKDNnnd-OfWLnCAjhakVCUVDLfHhQU7TnMTLy424DyWw/exec';
+
     if (rsvpForm) {
         rsvpForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
             const nameVal = document.getElementById('name').value.trim();
+            const guestsVal = document.getElementById('guests').value;
+            const attendVal = document.getElementById('attend').value;
             const msgVal = document.getElementById('msg').value.trim();
 
-            if (nameVal && msgVal) {
+            const payload = {
+                name: nameVal,
+                guests: guestsVal,
+                attend: attendVal,
+                msg: msgVal
+            };
+
+            // 1. อัปเดตคำอวยพรขึ้นหน้าเว็บสมุดอวยพรทันที (Guestbook Wall)
+            if (nameVal) {
                 const list = getStoredWishes();
-                list.unshift({ name: nameVal, text: msgVal });
+                list.unshift({ name: nameVal, text: msgVal || 'ยินดีด้วยนะ ขอให้มีความสุขมากๆ ครับ/ค่ะ' });
                 localStorage.setItem('tw_wedding_wishes', JSON.stringify(list));
                 renderWishes();
+            }
+
+            // 2. ส่งข้อมูลไปยัง Google Sheets & LINE Notify ผ่าน Google Apps Script
+            if (GOOGLE_SCRIPT_URL) {
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.log('RSVP Sync Error:', err));
             }
 
             rsvpForm.hidden = true;
