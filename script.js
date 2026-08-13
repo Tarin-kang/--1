@@ -193,9 +193,8 @@ END:VCALENDAR`;
         }
     });
 
-    // ── 7. Dual-Engine Background Music Player (A Thousand Years - Piano) ──
+    // ── 7. Exact YouTube Background Music Player (The Piano Guys - QgaTQ5-XfMM) ──
     const musicToggleBtn = document.getElementById('musicToggleBtn');
-    const bgAudio = document.getElementById('bgAudio');
     let ytPlayer = null;
     let isPlayingMusic = false;
 
@@ -204,13 +203,19 @@ END:VCALENDAR`;
             ytPlayer = new YT.Player('ytmusic', {
                 height: '1',
                 width: '1',
-                videoId: 'QgaTQ5-XfMM', // A Thousand Years - Piano & Cello
+                videoId: 'QgaTQ5-XfMM', // Link: https://www.youtube.com/watch?v=QgaTQ5-XfMM
                 playerVars: {
                     'autoplay': 0,
                     'controls': 0,
                     'loop': 1,
                     'playlist': 'QgaTQ5-XfMM',
-                    'playsinline': 1
+                    'playsinline': 1,
+                    'enablejsapi': 1
+                },
+                events: {
+                    'onReady': function(event) {
+                        event.target.setVolume(100);
+                    }
                 }
             });
         } catch (e) {
@@ -223,18 +228,10 @@ END:VCALENDAR`;
         isPlayingMusic = true;
         if (musicToggleBtn) musicToggleBtn.classList.add('active');
 
-        // 1. Play direct HTML5 Audio (100% reliable on iOS & Android)
-        if (bgAudio) {
-            bgAudio.volume = 0.6;
-            bgAudio.play().catch(err => {
-                console.log('HTML5 Audio play error:', err);
-            });
-        }
-
-        // 2. Play YouTube Video as fallback/secondary
         if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
             try {
                 ytPlayer.unMute();
+                ytPlayer.setVolume(100);
                 ytPlayer.playVideo();
             } catch (e) {
                 console.log('YouTube play error:', e);
@@ -245,10 +242,6 @@ END:VCALENDAR`;
     function stopMusic() {
         isPlayingMusic = false;
         if (musicToggleBtn) musicToggleBtn.classList.remove('active');
-
-        if (bgAudio) {
-            bgAudio.pause();
-        }
 
         if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
             try {
