@@ -356,24 +356,6 @@ END:VCALENDAR`;
                     }
                 }
             });
-
-            // 2. YouTube Shorts Cat Sound: zqJsHfCajaY
-            ytCatPlayer = new YT.Player('ytcat', {
-                height: '1',
-                width: '1',
-                videoId: 'zqJsHfCajaY', // Link: https://youtube.com/shorts/zqJsHfCajaY
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'playsinline': 1,
-                    'enablejsapi': 1
-                },
-                events: {
-                    'onReady': function(event) {
-                        event.target.setVolume(100);
-                    }
-                }
-            });
         } catch (e) {
             console.log('YT Init error:', e);
         }

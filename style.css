@@ -540,28 +540,42 @@ body {
 .couple-card-wrap {
     margin: 2.5rem auto;
     max-width: 480px;
+    width: 100%;
 }
 
 .couple-frame {
     background: var(--bg-card);
     padding: 14px;
-    border-radius: 14px;
+    border-radius: 16px;
     box-shadow: var(--shadow-soft);
     border: 1px solid var(--border);
     transition: transform .3s var(--ease);
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .couple-frame:hover {
     transform: translateY(-4px);
 }
 
-.couple-img {
+.couple-img-container {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+    box-sizing: border-box;
+}
+
+.couple-img,
+#preweddingImg {
     width: 100%;
     height: auto;
-    max-height: 400px;
+    max-height: 480px;
     object-fit: cover;
     border-radius: 10px;
     display: block;
+    box-sizing: border-box;
 }
 
 .couple-caption {
