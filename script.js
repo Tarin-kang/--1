@@ -17,25 +17,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.style.overflow = 'hidden';
 
-    // ── 2. Animated WHITE Cat Interaction (น้องแมวขาว 🐱🤍) ──
+    // ── 2. Animated 3D WHITE Cat Interaction (น้องแมวขาว 🐱🤍) ──
     const catCharacter = document.getElementById('catCharacter');
     const catBubble = document.getElementById('catBubble');
+    const catBodyFlip = document.querySelector('.cat-body-flip');
     const catMessages = [
         "Meow~ 🤍",
         "ยินดีกับบ่าวสาวน๊า! 🐾",
-        "วรางคณา & ธารินทร์ 💍",
+        "Warangkana & Tarin 💍",
         "เหมียวขาวมาร่วมอวยพรค่ะ 🌸",
-        "Sage Green ธีมเขียวเหนี่ยวทรัพย์ 🌿"
+        "ขอให้มีความสุขตลอดไปค่ะ ✨",
+        "12.12.2569 🌿"
     ];
+    let catPauseTimer = null;
 
     if (catCharacter && catBubble) {
         catCharacter.addEventListener('click', () => {
+            // 1. นิ่งหยุดวิ่งเป็นเวลา 2 วินาที
+            catCharacter.classList.add('paused');
+            if (catBodyFlip) catBodyFlip.classList.add('paused');
+
+            // 2. สุ่มข้อความน่ารักๆ
             const randomMsg = catMessages[Math.floor(Math.random() * catMessages.length)];
             catBubble.textContent = randomMsg;
             catBubble.style.animation = 'none';
             void catBubble.offsetWidth;
             catBubble.style.animation = 'catBubblePulse 0.5s ease';
+
+            // 3. สร้างเอฟเฟกต์หัวใจลอยรอบตัวแมว
+            spawnCatHeartParticles(catCharacter);
+
+            // 4. ตั้งเวลา 2 วินาที (2000ms) แล้วให้แมวออกวิ่งต่อสม่ำเสมอ
+            if (catPauseTimer) clearTimeout(catPauseTimer);
+            catPauseTimer = setTimeout(() => {
+                catCharacter.classList.remove('paused');
+                if (catBodyFlip) catBodyFlip.classList.remove('paused');
+            }, 2000);
         });
+    }
+
+    function spawnCatHeartParticles(el) {
+        const rect = el.getBoundingClientRect();
+        const particles = ['💖', '🐾', '✨', '🌸', '🤍'];
+        for (let i = 0; i < 4; i++) {
+            const p = document.createElement('span');
+            p.textContent = particles[Math.floor(Math.random() * particles.length)];
+            p.style.position = 'fixed';
+            p.style.left = (rect.left + 20 + Math.random() * 30) + 'px';
+            p.style.top = (rect.top - 10 + Math.random() * 20) + 'px';
+            p.style.fontSize = '1.2rem';
+            p.style.pointerEvents = 'none';
+            p.style.zIndex = '300';
+            p.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+            document.body.appendChild(p);
+
+            requestAnimationFrame(() => {
+                p.style.transform = `translate(${(Math.random() - 0.5) * 60}px, -${40 + Math.random() * 40}px) scale(1.3)`;
+                p.style.opacity = '0';
+            });
+
+            setTimeout(() => p.remove(), 1000);
+        }
     }
 
     // ── 3. Scroll Animations (IntersectionObserver) ──

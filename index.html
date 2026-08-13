@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+Thai:wght@200;300;400;500;600&family=Noto+Serif+Thai:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=10.0">
+    <link rel="stylesheet" href="style.css?v=11.0">
     <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
@@ -27,45 +27,70 @@
     <!-- Falling Petals Canvas -->
     <canvas id="petalsCanvas" class="petals-canvas"></canvas>
 
-    <!-- Animated Running WHITE Cat Element (น้องแมวตัวสีขาว) -->
-    <div id="catCharacter" class="cat-character" title="คลิกเพื่อทักทายพี่แมวขาว 🐱🤍" aria-label="ตัวการ์ตูนแมวสีขาววิ่งเล่น">
-        <div class="cat-bubble" id="catBubble">Meow~ 🤍</div>
-        <svg class="cat-svg" viewBox="0 0 100 80" width="70" height="56">
-            <!-- Cat Tail -->
-            <path class="cat-tail" d="M 15 50 Q 5 35 12 25 Q 18 20 16 32" fill="#ffffff" stroke="#4b6854" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- Cat Body (White) -->
-            <ellipse cx="45" cy="52" rx="26" ry="18" fill="#ffffff" stroke="#4b6854" stroke-width="2"/>
-            <!-- Cat Head (White) -->
-            <circle cx="70" cy="38" r="16" fill="#ffffff" stroke="#4b6854" stroke-width="2"/>
-            <!-- Ears -->
-            <polygon points="60,26 66,12 72,24" fill="#ffffff" stroke="#4b6854" stroke-width="2"/>
-            <polygon points="72,24 78,12 84,26" fill="#ffffff" stroke="#4b6854" stroke-width="2"/>
-            <!-- Inner Ears (Pink) -->
-            <polygon points="63,24 66,15 69,23" fill="#f4c2c2"/>
-            <polygon points="75,23 78,15 81,24" fill="#f4c2c2"/>
-            <!-- Eyes -->
-            <circle cx="66" cy="36" r="2.2" fill="#2d3e33"/>
-            <circle cx="76" cy="36" r="2.2" fill="#2d3e33"/>
-            <!-- Eye Highlights -->
-            <circle cx="65.3" cy="35.3" r="0.7" fill="#ffffff"/>
-            <circle cx="75.3" cy="35.3" r="0.7" fill="#ffffff"/>
-            <!-- Nose & Mouth -->
-            <polygon points="70,40 72,40 71,42" fill="#f4c2c2"/>
-            <path d="M 68 43 Q 71 45 74 43" fill="none" stroke="#2d3e33" stroke-width="1"/>
-            <!-- Cheeks (Blush) -->
-            <ellipse cx="62" cy="40" rx="2.5" ry="1.5" fill="#f4c2c2" opacity="0.6"/>
-            <ellipse cx="80" cy="40" rx="2.5" ry="1.5" fill="#f4c2c2" opacity="0.6"/>
-            <!-- Whiskers -->
-            <line x1="56" y1="38" x2="48" y2="36" stroke="#4b6854" stroke-width="1"/>
-            <line x1="56" y1="41" x2="48" y2="42" stroke="#4b6854" stroke-width="1"/>
-            <line x1="82" y1="38" x2="90" y2="36" stroke="#4b6854" stroke-width="1"/>
-            <line x1="82" y1="41" x2="90" y2="42" stroke="#4b6854" stroke-width="1"/>
-            <!-- Paws (White) -->
-            <ellipse class="paw paw-1" cx="28" cy="67" rx="5" ry="4" fill="#ffffff" stroke="#4b6854" stroke-width="1.5"/>
-            <ellipse class="paw paw-2" cx="40" cy="67" rx="5" ry="4" fill="#ffffff" stroke="#4b6854" stroke-width="1.5"/>
-            <ellipse class="paw paw-3" cx="52" cy="67" rx="5" ry="4" fill="#ffffff" stroke="#4b6854" stroke-width="1.5"/>
-            <ellipse class="paw paw-4" cx="64" cy="67" rx="5" ry="4" fill="#ffffff" stroke="#4b6854" stroke-width="1.5"/>
-        </svg>
+    <!-- Animated Running 3D Fluffy WHITE Cat Element (น้องแมวขาว 🐱🤍) -->
+    <div id="catCharacter" class="cat-character" title="คลิกเพื่อเล่นกับน้องแมวขาว 🐱🤍" aria-label="ตัวการ์ตูนแมวสีขาววิ่งเล่น">
+        <div class="cat-bubble-wrap">
+            <div class="cat-bubble" id="catBubble">Meow~ 🤍</div>
+        </div>
+        <div class="cat-body-flip">
+            <svg class="cat-svg" viewBox="0 0 100 80" width="76" height="60">
+                <defs>
+                    <radialGradient id="catBodyGrad" cx="45%" cy="40%" r="55%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="85%" stop-color="#f2f5f3"/>
+                        <stop offset="100%" stop-color="#dce3df"/>
+                    </radialGradient>
+                    <radialGradient id="catHeadGrad" cx="40%" cy="35%" r="60%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="80%" stop-color="#f0f4f1"/>
+                        <stop offset="100%" stop-color="#d5ded8"/>
+                    </radialGradient>
+                    <linearGradient id="bellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffe259"/>
+                        <stop offset="100%" stop-color="#ffa751"/>
+                    </linearGradient>
+                </defs>
+                <!-- Cat Tail -->
+                <path class="cat-tail" d="M 15 50 Q 5 30 12 20 Q 20 15 16 30" fill="url(#catHeadGrad)" stroke="#4b6854" stroke-width="2.2" stroke-linecap="round"/>
+                <!-- Cat Body (3D White) -->
+                <ellipse cx="45" cy="52" rx="26" ry="18" fill="url(#catBodyGrad)" stroke="#4b6854" stroke-width="2"/>
+                <!-- Cute Gold Bell Collar -->
+                <path d="M 54 44 Q 68 47 78 40" fill="none" stroke="#e05638" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="66" cy="46" r="3.5" fill="url(#bellGrad)" stroke="#4b6854" stroke-width="1"/>
+                <!-- Cat Head (3D White) -->
+                <circle cx="70" cy="38" r="16" fill="url(#catHeadGrad)" stroke="#4b6854" stroke-width="2"/>
+                <!-- Ears -->
+                <polygon points="59,26 65,10 72,23" fill="url(#catHeadGrad)" stroke="#4b6854" stroke-width="2"/>
+                <polygon points="72,23 79,10 85,26" fill="url(#catHeadGrad)" stroke="#4b6854" stroke-width="2"/>
+                <!-- Inner Ears (Rosy Pink) -->
+                <polygon points="62,24 65,14 68,22" fill="#ffb7b2"/>
+                <polygon points="75,22 79,14 82,24" fill="#ffb7b2"/>
+                <!-- Sparkle Cute Eyes -->
+                <circle cx="66" cy="36" r="2.6" fill="#1b281f"/>
+                <circle cx="76" cy="36" r="2.6" fill="#1b281f"/>
+                <!-- Eye Sparkle Highlights -->
+                <circle cx="65.2" cy="34.8" r="0.9" fill="#ffffff"/>
+                <circle cx="67.0" cy="37.0" r="0.4" fill="#ffffff"/>
+                <circle cx="75.2" cy="34.8" r="0.9" fill="#ffffff"/>
+                <circle cx="77.0" cy="37.0" r="0.4" fill="#ffffff"/>
+                <!-- Pink Nose & Cute Mouth -->
+                <polygon points="70,39.5 72,39.5 71,41.5" fill="#ff9aa2"/>
+                <path d="M 68 42 Q 71 44.5 74 42" fill="none" stroke="#1b281f" stroke-width="1.2" stroke-linecap="round"/>
+                <!-- Cute Blush Cheeks -->
+                <ellipse cx="61" cy="40" rx="3" ry="1.8" fill="#ffb7b2" opacity="0.7"/>
+                <ellipse cx="81" cy="40" rx="3" ry="1.8" fill="#ffb7b2" opacity="0.7"/>
+                <!-- Whiskers -->
+                <line x1="55" y1="37" x2="46" y2="35" stroke="#4b6854" stroke-width="1.2"/>
+                <line x1="55" y1="40" x2="46" y2="41" stroke="#4b6854" stroke-width="1.2"/>
+                <line x1="83" y1="37" x2="92" y2="35" stroke="#4b6854" stroke-width="1.2"/>
+                <line x1="83" y1="40" x2="92" y2="41" stroke="#4b6854" stroke-width="1.2"/>
+                <!-- Paws (White) -->
+                <ellipse class="paw paw-1" cx="28" cy="67" rx="5" ry="4" fill="#ffffff" stroke="#4b6854" stroke-width="1.5"/>
+                <ellipse class="paw paw-2" cx="40" cy="67" rx="5" ry="4" fill="#ffffff" stroke="#4b6854" stroke-width="1.5"/>
+                <ellipse class="paw paw-3" cx="52" cy="67" rx="5" ry="4" fill="#ffffff" stroke="#4b6854" stroke-width="1.5"/>
+                <ellipse class="paw paw-4" cx="64" cy="67" rx="5" ry="4" fill="#ffffff" stroke="#4b6854" stroke-width="1.5"/>
+            </svg>
+        </div>
     </div>
 
     <!-- Floating Audio & Ambient Controls -->
@@ -428,6 +453,6 @@
     </main>
 
     <!-- JavaScript -->
-    <script src="script.js?v=10.0"></script>
+    <script src="script.js?v=11.0"></script>
 </body>
 </html>
