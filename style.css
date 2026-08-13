@@ -381,6 +381,41 @@ body {
     z-index: 2;
 }
 
+.hero-side-vine {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.5s var(--ease);
+}
+
+.hero-side-vine.vine-left {
+    left: -20px;
+    animation: floatLeftVine 4s ease-in-out infinite alternate;
+}
+
+.hero-side-vine.vine-right {
+    right: -20px;
+    animation: floatRightVine 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes floatLeftVine {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-53%) rotate(-3deg); }
+}
+
+@keyframes floatRightVine {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-47%) rotate(3deg); }
+}
+
+@media (max-width: 768px) {
+    .hero-side-vine {
+        display: none;
+    }
+}
+
 .hero-kicker {
     font-family: var(--font-thai);
     font-size: .9rem;
