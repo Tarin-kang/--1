@@ -193,30 +193,45 @@ END:VCALENDAR`;
         }
     });
 
-    // ── 7. YouTube Background Music Player (A Thousand Years - Piano & Cello) ──
+    // ── 7. Dual-Engine Background Music Player (A Thousand Years - Piano) ──
     const musicToggleBtn = document.getElementById('musicToggleBtn');
+    const bgAudio = document.getElementById('bgAudio');
     let ytPlayer = null;
     let isPlayingMusic = false;
 
     window.onYouTubeIframeAPIReady = function() {
-        ytPlayer = new YT.Player('ytmusic', {
-            height: '1',
-            width: '1',
-            videoId: 'QgaTQ5-XfMM', // A Thousand Years - Piano & Cello (The Piano Guys)
-            playerVars: {
-                'autoplay': 0,
-                'controls': 0,
-                'loop': 1,
-                'playlist': 'QgaTQ5-XfMM',
-                'playsinline': 1
-            }
-        });
+        try {
+            ytPlayer = new YT.Player('ytmusic', {
+                height: '1',
+                width: '1',
+                videoId: 'QgaTQ5-XfMM', // A Thousand Years - Piano & Cello
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'QgaTQ5-XfMM',
+                    'playsinline': 1
+                }
+            });
+        } catch (e) {
+            console.log('YT Init error:', e);
+        }
     };
 
     function tryStartMusic() {
         if (isPlayingMusic) return;
         isPlayingMusic = true;
-        musicToggleBtn.classList.add('active');
+        if (musicToggleBtn) musicToggleBtn.classList.add('active');
+
+        // 1. Play direct HTML5 Audio (100% reliable on iOS & Android)
+        if (bgAudio) {
+            bgAudio.volume = 0.6;
+            bgAudio.play().catch(err => {
+                console.log('HTML5 Audio play error:', err);
+            });
+        }
+
+        // 2. Play YouTube Video as fallback/secondary
         if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
             try {
                 ytPlayer.unMute();
@@ -229,7 +244,12 @@ END:VCALENDAR`;
 
     function stopMusic() {
         isPlayingMusic = false;
-        musicToggleBtn.classList.remove('active');
+        if (musicToggleBtn) musicToggleBtn.classList.remove('active');
+
+        if (bgAudio) {
+            bgAudio.pause();
+        }
+
         if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
             try {
                 ytPlayer.pauseVideo();
