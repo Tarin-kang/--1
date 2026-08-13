@@ -193,66 +193,61 @@ END:VCALENDAR`;
         }
     });
 
-    // ── 7. Romantic Web Audio Synth Player ──
+    // ── 7. YouTube Background Music Player (A Thousand Years - Piano & Cello) ──
     const musicToggleBtn = document.getElementById('musicToggleBtn');
-    let audioCtx = null;
+    let ytPlayer = null;
     let isPlayingMusic = false;
-    let synthTimer = null;
 
-    const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23, 293.66, 392.00];
-
-    function playSoftNote() {
-        if (!isPlayingMusic || !audioCtx) return;
-
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        const freq = notes[Math.floor(Math.random() * notes.length)];
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.04, audioCtx.currentTime + 0.8);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.2);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 3.3);
-    }
+    window.onYouTubeIframeAPIReady = function() {
+        ytPlayer = new YT.Player('ytmusic', {
+            height: '1',
+            width: '1',
+            videoId: 'QgaTQ5-XfMM', // A Thousand Years - Piano & Cello (The Piano Guys)
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'loop': 1,
+                'playlist': 'QgaTQ5-XfMM',
+                'playsinline': 1
+            }
+        });
+    };
 
     function tryStartMusic() {
         if (isPlayingMusic) return;
-        try {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        isPlayingMusic = true;
+        musicToggleBtn.classList.add('active');
+        if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+            try {
+                ytPlayer.unMute();
+                ytPlayer.playVideo();
+            } catch (e) {
+                console.log('YouTube play error:', e);
             }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-            isPlayingMusic = true;
-            musicToggleBtn.classList.add('active');
-            playSoftNote();
-            synthTimer = setInterval(playSoftNote, 1600);
-        } catch (err) {
-            console.log('Audio autoplay prevented or failed:', err);
         }
     }
 
     function stopMusic() {
         isPlayingMusic = false;
         musicToggleBtn.classList.remove('active');
-        if (synthTimer) clearInterval(synthTimer);
+        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+            try {
+                ytPlayer.pauseVideo();
+            } catch (e) {
+                console.log('YouTube pause error:', e);
+            }
+        }
     }
 
-    musicToggleBtn.addEventListener('click', () => {
-        if (isPlayingMusic) {
-            stopMusic();
-        } else {
-            tryStartMusic();
-        }
-    });
+    if (musicToggleBtn) {
+        musicToggleBtn.addEventListener('click', () => {
+            if (isPlayingMusic) {
+                stopMusic();
+            } else {
+                tryStartMusic();
+            }
+        });
+    }
 
     // ── 8. Digital Gifting QR Code Toggle ──
     const toggleGiftingBtn = document.getElementById('toggleGiftingBtn');
