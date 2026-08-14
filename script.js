@@ -95,15 +95,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const catBodyFlip = document.querySelector('.cat-body-flip');
     const catMessages = [
         "Meow~ 🤍",
-        "ยินดีกับบ่าวสาวน๊า! 🐾",
-        "Warangkana & Tarin 💍",
-        "เหมียวขาวมาร่วมอวยพรค่ะ 🌸",
-        "ขอให้มีความสุขตลอดไปค่ะ ✨",
-        "12.12.2569 🌿"
+        "ยินดีกับพี่วรังค์และพี่ธารินทร์ด้วยนะคะ 🌸",
+        "ขอให้รักกันยืนยาว 1000 ปี ✨",
+        "ขอให้มีเบบี้ไวๆ น้าา 👶",
+        "เจ้าบ่าวเจ้าสาวน่ารักที่สุดเลย 💖",
+        "12 ธันวาคม 2569 ณ โกดังเจ๊ชิง & เฮียฟู่ 🌿"
     ];
     let catPauseTimer = null;
     let catClickCount = 0;
     let catFastTimer = null;
+    let catMsgIndex = 0;
+
+    // Auto-cycle speech bubble wishes every 3.8 seconds while cat is running
+    setInterval(() => {
+        try {
+            if (catCharacter && catBubble && !catCharacter.classList.contains('paused')) {
+                catMsgIndex = (catMsgIndex + 1) % catMessages.length;
+                catBubble.textContent = catMessages[catMsgIndex];
+                catBubble.style.animation = 'none';
+                void catBubble.offsetWidth;
+                catBubble.style.animation = 'catBubblePulse 0.5s ease';
+            }
+        } catch (err) {}
+    }, 3800);
 
     if (catCharacter && catBubble) {
         let lastCatInteractTime = 0;
