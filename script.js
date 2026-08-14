@@ -495,19 +495,25 @@ END:VCALENDAR`;
         if (!animationFrameId) renderPetals();
     }
 
-    petalToggleBtn.addEventListener('click', () => {
-        petalsActive = !petalsActive;
-        petalToggleBtn.classList.toggle('active', petalsActive);
-        if (petalsActive) {
-            renderPetals();
-        } else {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            animationFrameId = null;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-    });
+    window.startPetals = startPetals;
+    // Auto start falling petals canvas
+    startPetals();
 
-    // ── 7. Exact YouTube Background Music Player (The Piano Guys - QgaTQ5-XfMM) ──
+    if (petalToggleBtn) {
+        petalToggleBtn.addEventListener('click', () => {
+            petalsActive = !petalsActive;
+            petalToggleBtn.classList.toggle('active', petalsActive);
+            if (petalsActive) {
+                renderPetals();
+            } else {
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+    }
+
+    // ── 7. Exact YouTube Background Music Player & Audio Fallback ──
     const musicToggleBtn = document.getElementById('musicToggleBtn');
     let ytPlayer = null;
     let isPlayingMusic = false;
@@ -528,13 +534,13 @@ END:VCALENDAR`;
                 },
                 events: {
                     'onReady': function(event) {
-                        event.target.setVolume(100);
-                        if (isPlayingMusic) {
-                            try {
+                        try {
+                            event.target.setVolume(100);
+                            if (isPlayingMusic) {
                                 event.target.unMute();
                                 event.target.playVideo();
-                            } catch (err) {}
-                        }
+                            }
+                        } catch (err) {}
                     }
                 }
             });
@@ -544,10 +550,21 @@ END:VCALENDAR`;
     };
 
     function tryStartMusic() {
-        if (isPlayingMusic) return;
         isPlayingMusic = true;
         if (musicToggleBtn) musicToggleBtn.classList.add('active');
 
+        // Play HTML5 <audio id="bg-music">
+        const bgMusic = document.getElementById('bg-music');
+        if (bgMusic) {
+            try {
+                bgMusic.currentTime = 0;
+                bgMusic.play().catch(function(err) {
+                    console.log('bgMusic play failed:', err);
+                });
+            } catch (err) {}
+        }
+
+        // Play YouTube Player
         if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
             try {
                 ytPlayer.unMute();
@@ -559,9 +576,18 @@ END:VCALENDAR`;
         }
     }
 
+    window.tryStartMusic = tryStartMusic;
+
     function stopMusic() {
         isPlayingMusic = false;
         if (musicToggleBtn) musicToggleBtn.classList.remove('active');
+
+        const bgMusic = document.getElementById('bg-music');
+        if (bgMusic) {
+            try {
+                bgMusic.pause();
+            } catch (err) {}
+        }
 
         if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
             try {
@@ -571,6 +597,8 @@ END:VCALENDAR`;
             }
         }
     }
+
+    window.stopMusic = stopMusic;
 
     if (musicToggleBtn) {
         musicToggleBtn.addEventListener('click', () => {
