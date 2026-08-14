@@ -655,10 +655,10 @@ END:VCALENDAR`;
         rsvpForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const nameVal = document.getElementById('name').value.trim();
-            const guestsVal = document.getElementById('guests').value;
-            const attendVal = document.getElementById('attend').value;
-            const msgVal = document.getElementById('msg').value.trim();
+            const nameVal = (document.getElementById('guestName') || document.getElementById('name') || {value:''}).value.trim();
+            const guestsVal = (document.getElementById('guestCount') || document.getElementById('guests') || {value:'1'}).value;
+            const attendVal = (document.getElementById('attendance') || document.getElementById('attend') || {value:'attending'}).value;
+            const msgVal = (document.getElementById('wishesMsg') || document.getElementById('msg') || {value:''}).value.trim();
 
             const payload = {
                 name: nameVal,
