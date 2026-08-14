@@ -1,21 +1,93 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-    // ── 1. Cover / Envelope Unseal ──
-    const cover = document.getElementById('cover');
-    const card = document.getElementById('card');
-    const openCardBtn = document.getElementById('openCardBtn');
-
-    openCardBtn.addEventListener('click', () => {
-        cover.classList.add('open');
-        card.classList.add('show');
+// Global Open Card Functions (Defensive execution guarantee with Null-checks and Fallbacks)
+window.openWeddingCard = window.executeOpenCard = function() {
+    try {
+        const overlay = document.getElementById('cover-overlay') || document.getElementById('cover') || document.querySelector('.cover');
+        const card = document.getElementById('card') || document.querySelector('.card');
+        
+        if (overlay) {
+            overlay.classList.add('open');
+            overlay.style.transform = 'translateY(-100%)';
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
+            overlay.style.pointerEvents = 'none';
+            overlay.style.display = 'none';
+        }
+        
+        if (card) {
+            card.classList.add('show');
+            card.style.opacity = '1';
+            card.style.display = 'block';
+        }
+        
         document.body.style.overflow = 'auto';
 
-        // Trigger ambient sound automatically upon opening if supported
-        tryStartMusic();
-        startPetals();
-    });
+        // Play Background Music
+        const bgMusic = document.getElementById('bg-music');
+        if (bgMusic) {
+            bgMusic.play().catch(() => {});
+        }
 
-    document.body.style.overflow = 'hidden';
+        // Activate all sections visible
+        const els = document.querySelectorAll('.fade-in');
+        if (els) {
+            els.forEach(el => {
+                if (el) el.classList.add('visible');
+            });
+        }
+
+        if (typeof tryStartMusic === 'function') tryStartMusic();
+        if (typeof startPetals === 'function') startPetals();
+    } catch (err) {
+        console.log('openWeddingCard error:', err);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        // ── 1. Cover / Arch Shape Overlay Entrance (Click / Slide / Touch Open with Null-checks) ──
+        const cover = document.getElementById('cover') || document.getElementById('cover-overlay') || document.querySelector('.cover');
+        const card = document.getElementById('card') || document.querySelector('.card');
+        const openCardBtn = document.getElementById('openCardBtn') || document.getElementById('open-card-btn') || document.querySelector('.pill-open-btn') || document.querySelector('.open-card-btn');
+
+        ['click', 'touchstart'].forEach(evtType => {
+            if (openCardBtn) {
+                openCardBtn.addEventListener(evtType, (e) => {
+                    if (e) e.stopPropagation();
+                    window.openWeddingCard();
+                }, { passive: true });
+            }
+
+            if (cover) {
+                cover.addEventListener(evtType, () => {
+                    window.openWeddingCard();
+                }, { passive: true });
+            }
+        });
+
+        if (cover) {
+            // Support Touch Swipe / Drag up to open cover smoothly
+            let touchStartY = 0;
+            cover.addEventListener('touchstart', (e) => {
+                if (e && e.touches && e.touches[0]) {
+                    touchStartY = e.touches[0].clientY;
+                }
+            }, { passive: true });
+
+            cover.addEventListener('touchend', (e) => {
+                if (e && e.changedTouches && e.changedTouches[0]) {
+                    const touchEndY = e.changedTouches[0].clientY;
+                    const diffY = touchStartY - touchEndY;
+                    if (diffY > 30) {
+                        window.openWeddingCard();
+                    }
+                }
+            }, { passive: true });
+        }
+
+        document.body.style.overflow = 'hidden';
+    } catch (err) {
+        console.log('Cover setup error:', err);
+    }
 
     // ── 2. Animated 3D WHITE Cat Interaction (น้องแมวขาว 🐱🤍) ──
     const catCharacter = document.getElementById('catCharacter');
@@ -34,122 +106,219 @@ document.addEventListener('DOMContentLoaded', () => {
     let catFastTimer = null;
 
     if (catCharacter && catBubble) {
-        catCharacter.addEventListener('click', () => {
-            // 0. เล่นเสียงเมี๊ยววน่ารักๆ (Cute Meow Audio Sound)
+        let lastCatInteractTime = 0;
+
+        const handleCatInteract = (e) => {
+            if (e) {
+                if (e.cancelable) e.preventDefault();
+                e.stopPropagation();
+            }
+
+            const nowTime = Date.now();
+            if (nowTime - lastCatInteractTime < 220) return;
+            lastCatInteractTime = nowTime;
+
+            // 0. Play Meow Audio Sound
             playCuteMeowSound();
 
-            // 1. นับจำนวนครั้งการกด
+            // 1. Increment click count
             catClickCount++;
 
-            // 2. ถ้ากดครบทุกๆ 3 ครั้ง -> กระโดดเด้งดึ๋ง 0.4 วินาทีก่อนออกสปริ้นท์ซิ่ง!
+            // 2. Sprint jump on every 3rd click
             if (catClickCount % 3 === 0) {
-                // แสดงข้อความกระโดดสปริ้นท์
                 catBubble.textContent = "ย่อตัวกระโดด... ซิ่งเลย! 💨🐱⚡";
                 catBubble.style.animation = 'none';
                 void catBubble.offsetWidth;
                 catBubble.style.animation = 'catBubblePulse 0.5s ease';
 
-                // ปลดคลาสหยุดชั่วคราว
                 catCharacter.classList.remove('paused');
                 if (catBodyFlip) catBodyFlip.classList.remove('paused');
-                
-                // 2.1 เพิ่มอนิเมชันกระโดดเด้งดึ๋ง ณ ตำแหน่งที่คลิก (Jump Prep on catBodyFlip)
                 if (catBodyFlip) catBodyFlip.classList.add('jump-prep');
                 spawnCatHeartParticles(catCharacter);
 
-                // 2.2 เมื่อกระโดดเสร็จ 450ms -> พุ่งตัวสปริ้นท์ซิ่งทันที!
                 setTimeout(() => {
                     if (catBodyFlip) catBodyFlip.classList.remove('jump-prep');
                     catCharacter.classList.add('fast-speed');
                     if (catBodyFlip) catBodyFlip.classList.add('fast-speed');
 
-                    // สปริ้นท์ 2 วินาที แล้วกลับมาสปีดปกติ
                     if (catFastTimer) clearTimeout(catFastTimer);
                     catFastTimer = setTimeout(() => {
                         catCharacter.classList.remove('fast-speed');
                         if (catBodyFlip) catBodyFlip.classList.remove('fast-speed');
-                    }, 2000);
+                    }, 2500);
                 }, 450);
 
                 return;
             }
 
-            // 3. การกดครั้งปกติ -> นิ่งหยุดวิ่งเป็นเวลา 2 วินาที
+            // 3. Regular click: pause & show cute wish message
             catCharacter.classList.add('paused');
             if (catBodyFlip) catBodyFlip.classList.add('paused');
 
-            // สุ่มข้อความน่ารักๆ
             const randomMsg = catMessages[Math.floor(Math.random() * catMessages.length)];
             catBubble.textContent = randomMsg;
             catBubble.style.animation = 'none';
             void catBubble.offsetWidth;
             catBubble.style.animation = 'catBubblePulse 0.5s ease';
 
-            // สร้างเอฟเฟกต์หัวใจลอยรอบตัวแมว
             spawnCatHeartParticles(catCharacter);
 
-            // ตั้งเวลา 2 วินาที (2000ms) แล้วให้แมวออกวิ่งต่อสม่ำเสมอ
             if (catPauseTimer) clearTimeout(catPauseTimer);
             catPauseTimer = setTimeout(() => {
                 catCharacter.classList.remove('paused');
                 if (catBodyFlip) catBodyFlip.classList.remove('paused');
-            }, 2000);
-        });
+            }, 2500);
+        };
+
+        catCharacter.addEventListener('click', handleCatInteract);
+        catCharacter.addEventListener('touchstart', handleCatInteract, { passive: false });
     }
 
+    // Audio Sound Player for instant cat click sound (meow.mp3 & Web Audio Synth Fallback) 🐱🔊
     function playCuteMeowSound() {
+        const meowElem = document.getElementById('meow-sound') || document.querySelector('audio#meow-sound');
+        if (meowElem) {
+            try {
+                meowElem.currentTime = 0;
+                const playPromise = meowElem.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        playSynthesizedMeow();
+                    });
+                } else {
+                    playSynthesizedMeow();
+                }
+                return;
+            } catch (e) {
+                playSynthesizedMeow();
+            }
+        } else {
+            playSynthesizedMeow();
+        }
+    }
+
+    function playSynthesizedMeow() {
         try {
-            // ใช้ Web Audio API ที่ทำงานแยกอิสระ ไม่รบกวนและไม่หยุดเสียงเพลงบรรเลงหลัก (ytPlayer)
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'sine';
+            const now = ctx.currentTime;
+            
+            // Realistic pitch contour: 700Hz -> 1150Hz -> 450Hz
+            osc.frequency.setValueAtTime(700, now);
+            osc.frequency.exponentialRampToValueAtTime(1150, now + 0.15);
+            osc.frequency.exponentialRampToValueAtTime(450, now + 0.45);
+
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.3, now + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(now);
+            osc.stop(now + 0.5);
+        } catch (e) {
+            console.log('Synth meow error:', e);
+        }
+    }
+
+    function fallbackDynamicMeowPlay() {
+        try {
+            const audioSrc = meowAudioSources[currentMeowIdx % meowAudioSources.length];
+            meowAudioPlayer.src = audioSrc;
+            meowAudioPlayer.volume = 0.9;
+            meowAudioPlayer.currentTime = 0;
+            const promise = meowAudioPlayer.play();
+            
+            if (promise !== undefined) {
+                promise.catch(error => {
+                    console.log('Dynamic Meow Play Error:', error);
+                    currentMeowIdx++;
+                    const nextSrc = meowAudioSources[currentMeowIdx % meowAudioSources.length];
+                    const nextAudio = new Audio(nextSrc);
+                    nextAudio.volume = 0.9;
+                    nextAudio.currentTime = 0;
+                    nextAudio.play().catch(err => {
+                        console.log('Next Dynamic Audio Error:', err);
+                        playRealisticMeowFallback();
+                    });
+                });
+            }
+        } catch (e) {
+            playRealisticMeowFallback();
+        }
+
+        // รักษาให้เพลงบรรเลงหลัก (ytPlayer) เล่นต่อเนื่องไม่สะดุด
+        if (isPlayingMusic && ytPlayer && typeof ytPlayer.playVideo === 'function') {
+            try {
+                ytPlayer.playVideo();
+            } catch (err) {}
+        }
+    }
+
+        // รักษาให้เพลงบรรเลงหลัก (ytPlayer) เล่นต่อเนื่องไม่สะดุด
+        if (isPlayingMusic && ytPlayer && typeof ytPlayer.playVideo === 'function') {
+            try {
+                ytPlayer.playVideo();
+            } catch (err) {}
+        }
+    }
+
+    function playRealisticMeowFallback() {
+        try {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             if (!AudioContext) return;
             const ctx = new AudioContext();
             const now = ctx.currentTime;
-            
-            // Oscillator 1: High pitched cute meow sweep (750Hz -> 920Hz -> 540Hz)
+
+            // Oscillator 1: High Vocal Formant (800Hz -> 1050Hz -> 520Hz)
             const osc1 = ctx.createOscillator();
             const gain1 = ctx.createGain();
-            osc1.type = 'sine';
+            osc1.type = 'sawtooth';
 
-            osc1.frequency.setValueAtTime(750, now);
-            osc1.frequency.exponentialRampToValueAtTime(920, now + 0.08);
-            osc1.frequency.exponentialRampToValueAtTime(540, now + 0.38);
+            // Filter for natural cat vocal tract acoustics
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(1400, now);
+            filter.Q.setValueAtTime(3.0, now);
 
-            gain1.gain.setValueAtTime(0.01, now);
-            gain1.gain.linearRampToValueAtTime(0.3, now + 0.06);
-            gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+            osc1.frequency.setValueAtTime(780, now);
+            osc1.frequency.exponentialRampToValueAtTime(1080, now + 0.12);
+            osc1.frequency.exponentialRampToValueAtTime(520, now + 0.45);
 
-            osc1.connect(gain1);
+            gain1.gain.setValueAtTime(0.001, now);
+            gain1.gain.linearRampToValueAtTime(0.25, now + 0.08);
+            gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.48);
+
+            osc1.connect(filter);
+            filter.connect(gain1);
             gain1.connect(ctx.destination);
             osc1.start(now);
-            osc1.stop(now + 0.42);
+            osc1.stop(now + 0.5);
 
-            // Oscillator 2: Warm 3D harmonic body sound (375Hz -> 460Hz -> 270Hz)
+            // Sub harmonic for full natural cat body
             const osc2 = ctx.createOscillator();
             const gain2 = ctx.createGain();
-            osc2.type = 'triangle';
+            osc2.type = 'sine';
 
-            osc2.frequency.setValueAtTime(375, now);
-            osc2.frequency.exponentialRampToValueAtTime(460, now + 0.08);
-            osc2.frequency.exponentialRampToValueAtTime(270, now + 0.38);
+            osc2.frequency.setValueAtTime(390, now);
+            osc2.frequency.exponentialRampToValueAtTime(540, now + 0.12);
+            osc2.frequency.exponentialRampToValueAtTime(260, now + 0.45);
 
-            gain2.gain.setValueAtTime(0.01, now);
-            gain2.gain.linearRampToValueAtTime(0.12, now + 0.06);
-            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+            gain2.gain.setValueAtTime(0.001, now);
+            gain2.gain.linearRampToValueAtTime(0.15, now + 0.08);
+            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.48);
 
             osc2.connect(gain2);
             gain2.connect(ctx.destination);
             osc2.start(now);
-            osc2.stop(now + 0.42);
-
-            // ตรวจสอบรักษาให้เพลงบรรเลงหลัก (ytPlayer) เล่นต่อเนื่องไม่สะดุด
-            if (isPlayingMusic && ytPlayer && typeof ytPlayer.playVideo === 'function') {
-                try {
-                    ytPlayer.playVideo();
-                } catch (err) {}
-            }
-        } catch (e) {
-            console.log('Meow Audio Error:', e);
-        }
+            osc2.stop(now + 0.5);
+        } catch (err) {}
     }
 
     function spawnCatHeartParticles(el) {
@@ -186,7 +355,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-in').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight + 50) {
+            el.classList.add('visible');
+        } else {
+            observer.observe(el);
+        }
+    });
 
     // ── 4. Real-Time Countdown Timer ──
     const weddingTargetDate = new Date('2026-12-12T15:00:00+07:00').getTime();
