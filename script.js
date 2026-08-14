@@ -1,8 +1,8 @@
-// ── Global Open Card Function ──
-window.openWeddingCard = window.executeOpenCard = function() {
+// ── Global Open Card & Open Invitation Functions ──
+window.openInvitation = window.openWeddingCard = window.executeOpenCard = function() {
     try {
-        const overlay = document.getElementById('cover') || document.getElementById('cover-overlay') || document.querySelector('.cover');
-        const card = document.getElementById('card') || document.querySelector('.card');
+        const overlay = document.getElementById('cover') || document.getElementById('cover-overlay') || document.getElementById('envelope-screen') || document.querySelector('.cover');
+        const card = document.getElementById('card') || document.getElementById('card-content') || document.querySelector('.card');
         
         if (overlay) {
             overlay.classList.add('open');
@@ -21,8 +21,8 @@ window.openWeddingCard = window.executeOpenCard = function() {
         
         document.body.style.overflow = 'auto';
 
-        // Play HTML5 Audio Music
-        const bgMusic = document.getElementById('bg-music');
+        // Play Audio Music (HTML5 & YouTube)
+        const bgMusic = document.getElementById('bg-music') || document.getElementById('wedding-music');
         if (bgMusic) {
             bgMusic.play().catch(() => {});
         }
@@ -45,8 +45,8 @@ window.openWeddingCard = window.executeOpenCard = function() {
 document.addEventListener('DOMContentLoaded', () => {
     // ── 1. Cover Envelope Click & Swipe Handler ──
     try {
-        const cover = document.getElementById('cover') || document.getElementById('cover-overlay') || document.querySelector('.cover');
-        const openCardBtn = document.getElementById('openCardBtn') || document.querySelector('.pill-open-btn') || document.querySelector('.open-card-btn');
+        const cover = document.getElementById('cover') || document.getElementById('cover-overlay') || document.getElementById('envelope-screen') || document.querySelector('.cover');
+        const openCardBtn = document.getElementById('openCardBtn') || document.querySelector('.open-btn') || document.querySelector('.pill-open-btn') || document.querySelector('.open-card-btn');
 
         ['click', 'touchstart'].forEach(evtType => {
             if (openCardBtn) {
@@ -274,18 +274,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ── 4. Countdown Timer ──
-    const weddingTargetDate = new Date('2026-12-12T15:00:00+07:00').getTime();
+    // ── 4. Real-Time Countdown Timer ──
+    const targetDate = new Date('2026-12-12T16:00:00+07:00').getTime();
 
     function updateCountdown() {
         const now = Date.now();
-        const diff = weddingTargetDate - now;
+        const diff = targetDate - now;
+
+        const cdD = document.getElementById('cd-days') || document.getElementById('days');
+        const cdH = document.getElementById('cd-hours') || document.getElementById('hours');
+        const cdM = document.getElementById('cd-min') || document.getElementById('minutes');
+        const cdS = document.getElementById('cd-sec') || document.getElementById('seconds');
 
         if (diff <= 0) {
-            const cdD = document.getElementById('cd-days');
-            const cdH = document.getElementById('cd-hours');
-            const cdM = document.getElementById('cd-min');
-            const cdS = document.getElementById('cd-sec');
             if (cdD) cdD.textContent = '00';
             if (cdH) cdH.textContent = '00';
             if (cdM) cdM.textContent = '00';
@@ -298,10 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        const cdD = document.getElementById('cd-days');
-        const cdH = document.getElementById('cd-hours');
-        const cdM = document.getElementById('cd-min');
-        const cdS = document.getElementById('cd-sec');
         if (cdD) cdD.textContent = String(d).padStart(2, '0');
         if (cdH) cdH.textContent = String(h).padStart(2, '0');
         if (cdM) cdM.textContent = String(m).padStart(2, '0');
@@ -440,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isPlayingMusic = true;
         if (musicToggleBtn) musicToggleBtn.classList.add('active');
 
-        const bgMusic = document.getElementById('bg-music');
+        const bgMusic = document.getElementById('bg-music') || document.getElementById('wedding-music');
         if (bgMusic) {
             bgMusic.play().catch(() => {});
         }
@@ -458,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isPlayingMusic = false;
         if (musicToggleBtn) musicToggleBtn.classList.remove('active');
 
-        const bgMusic = document.getElementById('bg-music');
+        const bgMusic = document.getElementById('bg-music') || document.getElementById('wedding-music');
         if (bgMusic) {
             try { bgMusic.pause(); } catch (err) {}
         }
