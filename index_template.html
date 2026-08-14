@@ -146,14 +146,14 @@
                         <span class="v-day-num">12</span>
                         <span>DECEMBER</span>
                         <span style="color: #d4c7b5; opacity: 0.8;">|</span>
-                        <span>AT 3 PM</span>
+                        <span>AT 4 PM</span>
                     </div>
 
                     <!-- Venue Title -->
                     <p class="vintage-venue-text">ณ โกดังเจ๊ชิง &amp; เฮียฟู่</p>
                     
                     <!-- Luxury Arch Pill-Shaped Open Card Button with Direct Onclick & Touchstart Guarantee 🌿✨ -->
-                    <button class="pill-open-btn open-card-btn" id="openCardBtn" onclick="openWeddingCard(); executeOpenCard(); if(event) event.stopPropagation();" ontouchstart="openWeddingCard(); executeOpenCard(); if(event) event.stopPropagation();" aria-label="เปิดการ์ดแต่งงาน">
+                    <button class="pill-open-btn open-card-btn" id="openCardBtn" onclick="var m=document.getElementById('bg-music')||document.getElementById('wedding-music'); if(m){try{m.currentTime=0;m.play().catch(function(){});}catch(e){}} openWeddingCard(); if(event) event.stopPropagation();" ontouchstart="var m=document.getElementById('bg-music')||document.getElementById('wedding-music'); if(m){try{m.currentTime=0;m.play().catch(function(){});}catch(e){}} openWeddingCard(); if(event) event.stopPropagation();" aria-label="เปิดการ์ดแต่งงาน">
                         <span class="pill-text-th">✨ สไลด์ หรือ คลิกเปิดการ์ด ✨</span>
                         <span class="pill-text-en">SLIDE OR CLICK TO OPEN</span>
                     </button>
