@@ -61,6 +61,8 @@ window.tryStartMusic = function() {
     var audio = document.getElementById('bg-music') || document.getElementById('wedding-music');
     var btn = document.getElementById('musicToggleBtn');
     if (audio) {
+        audio.muted = false;
+        audio.volume = 1.0;
         audio.play().then(function() {
             if (btn) btn.classList.add('active');
         }).catch(function() {});
@@ -82,6 +84,8 @@ window.stopMusic = function() {
     var enableAutoMusic = function() {
         var audio = document.getElementById('bg-music') || document.getElementById('wedding-music');
         if (audio && audio.paused) {
+            audio.muted = false;
+            audio.volume = 1.0;
             audio.play().then(function() {
                 var btn = document.getElementById('musicToggleBtn');
                 if (btn) btn.classList.add('active');

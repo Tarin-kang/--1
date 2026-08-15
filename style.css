@@ -1109,55 +1109,65 @@ body {
     font-family: var(--font-thai);
     font-size: 0.9rem;
     color: var(--ink-mute);
-}
-    margin-top: 1rem;
+.hz-timeline-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.2rem 1.2rem 1.8rem;
+    box-shadow: var(--shadow-soft);
+    margin-top: 1.5rem;
     position: relative;
 }
 
 .hz-timeline-nodes {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    align-items: flex-end;
+    margin-bottom: 0.8rem;
     position: relative;
     z-index: 2;
 }
 
 .hz-node {
     text-align: center;
-    flex: 1;
-    padding: 0 .4rem;
+    padding: 0 0.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .node-icon {
     font-size: 2.2rem;
-    margin-bottom: .4rem;
+    line-height: 1;
+    margin-bottom: 0.4rem;
 }
 
 .node-time {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    font-weight: 500;
+    font-family: 'Cinzel', var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
     color: #e57c68;
     line-height: 1.2;
 }
 
 .node-title {
     font-family: var(--font-thai);
-    font-size: .92rem;
+    font-size: 0.9rem;
     color: var(--accent-dark);
     font-weight: 500;
-    margin-top: .2rem;
+    margin-top: 0.25rem;
 }
 
-/* Continuous Axis Line */
+/* Continuous Axis Line with 3 aligned dots */
 .hz-timeline-line {
     height: 2px;
     background: #f7b2a3;
     position: relative;
-    margin: 1.2rem 1rem 2.2rem;
-    display: flex;
-    justify-content: space-around;
+    margin: 0.8rem 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
 }
 
@@ -1168,6 +1178,7 @@ body {
     border-radius: 50%;
     border: 3px solid var(--bg-card);
     box-shadow: 0 0 0 2px #f7b2a3;
+    justify-self: center;
 }
 
 /* Bottom Info Grid */

@@ -22,10 +22,16 @@
 </head>
 <body>
     <!-- Audio Elements (Cat Meow & Background Music) 🐱🔊🎵 -->
-    <audio id="meow-sound" src="meow.mp3" preload="auto" onerror="this.src='images/meow.mp3';"></audio>
-    <audio id="bg-music" src="music.mp3" loop preload="auto" playsinline webkit-playsinline>
+    <audio id="meow-sound" preload="auto">
+        <source src="meow.mp3" type="audio/mpeg">
+        <source src="meow.mp3.mp3" type="audio/mpeg">
+        <source src="images/meow.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="bg-music" loop preload="auto" playsinline webkit-playsinline>
         <source src="music.mp3" type="audio/mpeg">
+        <source src="music.mp3.mp3" type="audio/mpeg">
         <source src="music.mp4" type="audio/mp4">
+        <source src="images/music.mp3" type="audio/mpeg">
     </audio>
     
     <div id="ytmusic" style="position:fixed; top:-9999px; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;"></div>
