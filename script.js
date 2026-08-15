@@ -1,25 +1,27 @@
 // ── Global Open Card & Open Invitation Functions ──
 window.openInvitation = window.openWeddingCard = window.executeOpenCard = function() {
     try {
-        // 1. สั่งเล่นเพลงทันทีจากการสัมผัส (ห้ามใส่ currentTime = 0 ก่อน play)
-        var audio = document.getElementById('bg-music');
+        // 1. สั่งเล่นเพลงทันทีจากการสัมผัส (Direct & Safe Play)
+        var audio = document.getElementById('bg-music') || document.getElementById('wedding-music');
         if (audio) {
-            var playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(function() {
-                    var btn = document.getElementById('musicToggleBtn');
-                    if (btn) btn.classList.add('active');
-                }).catch(function(err) {
-                    console.log('Local audio play error:', err);
-                    if (window.ytPlayer && typeof window.ytPlayer.playVideo === 'function') {
-                        try {
-                            window.ytPlayer.unMute();
-                            window.ytPlayer.setVolume(100);
-                            window.ytPlayer.playVideo();
-                        } catch (e) {}
-                    }
-                });
-            }
+            try {
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        var btn = document.getElementById('musicToggleBtn');
+                        if (btn) btn.classList.add('active');
+                    }).catch(function(err) {
+                        console.log('Local audio play error:', err);
+                        if (window.ytPlayer && typeof window.ytPlayer.playVideo === 'function') {
+                            try {
+                                window.ytPlayer.unMute();
+                                window.ytPlayer.setVolume(100);
+                                window.ytPlayer.playVideo();
+                            } catch (e) {}
+                        }
+                    });
+                }
+            } catch (e) {}
         }
 
         // 2. ปิดหน้าปกซองจดหมาย และแสดงเนื้อหาการ์ด
@@ -52,7 +54,7 @@ window.openInvitation = window.openWeddingCard = window.executeOpenCard = functi
 };
 
 window.tryStartMusic = function() {
-    var audio = document.getElementById('bg-music');
+    var audio = document.getElementById('bg-music') || document.getElementById('wedding-music');
     var btn = document.getElementById('musicToggleBtn');
     if (audio) {
         audio.play().then(function() {
@@ -62,7 +64,7 @@ window.tryStartMusic = function() {
 };
 
 window.stopMusic = function() {
-    var audio = document.getElementById('bg-music');
+    var audio = document.getElementById('bg-music') || document.getElementById('wedding-music');
     var btn = document.getElementById('musicToggleBtn');
     if (audio) audio.pause();
     if (btn) btn.classList.remove('active');
@@ -70,6 +72,22 @@ window.stopMusic = function() {
         try { window.ytPlayer.pauseVideo(); } catch (e) {}
     }
 };
+
+// Auto-play music unlock listener on any first touch or click
+(function() {
+    var enableAutoMusic = function() {
+        var audio = document.getElementById('bg-music') || document.getElementById('wedding-music');
+        if (audio && audio.paused) {
+            audio.play().then(function() {
+                var btn = document.getElementById('musicToggleBtn');
+                if (btn) btn.classList.add('active');
+            }).catch(function(){});
+        }
+    };
+    ['click', 'touchstart', 'pointerdown'].forEach(function(evt) {
+        window.addEventListener(evt, enableAutoMusic, { passive: true });
+    });
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
     // ── 1. Cover Envelope Click & Swipe Handler ──
