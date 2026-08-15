@@ -4,28 +4,28 @@
   Typography: Cormorant Garamond, Alex Brush, Noto Serif/Sans Thai
 */
 
-/* ── Design System Tokens (Sage Green Theme) ── */
+/* ── Design System Tokens (Luxury Minimal Editorial Theme) ── */
 :root {
-    --bg:          #f4f7f4;
-    --bg-warm:     #ebeee9;
-    --bg-card:     #ffffff;
-    --ink:         #152419;
-    --ink-soft:    #354b3c;
-    --ink-mute:    #697f70;
-    --accent:      #7a9a83;
-    --accent-dark: #4b6854;
-    --accent-l:    #d5e4d9;
-    --sage-light:  #eaf2ec;
-    --sandy-brown: #c89d7c;
-    --sandy-light: #f5eae0;
-    --border:      #d4e2d8;
-    --shadow-soft: 0 10px 30px rgba(21, 36, 25, 0.08);
-    --shadow-lift: 0 16px 40px rgba(21, 36, 25, 0.14);
+    --bg:          #FAF9F6;
+    --bg-warm:     #F3F1EC;
+    --bg-card:     #FFFFFF;
+    --ink:         #1C2820;
+    --ink-soft:    #3D5644;
+    --ink-mute:    #6E8F77;
+    --accent:      #6E8F77;
+    --accent-dark: #3D5644;
+    --accent-l:    #E4EBE6;
+    --sage-light:  #F0F4F1;
+    --sandy-brown: #C89D7C;
+    --sandy-light: #F7F1EB;
+    --border:      #E2E8E4;
+    --shadow-soft: 0 8px 24px rgba(28, 40, 32, 0.05);
+    --shadow-lift: 0 14px 35px rgba(28, 40, 32, 0.08);
 
     --font-script:  'Alex Brush', cursive;
-    --font-display: 'Cormorant Garamond', serif;
+    --font-display: 'Cinzel', 'Cormorant Garamond', serif;
     --font-thai:    'Noto Serif Thai', serif;
-    --font-body:    'Noto Serif Thai', 'Noto Sans Thai', sans-serif;
+    --font-body:    'Noto Sans Thai', 'Noto Serif Thai', sans-serif;
 
     --ease: cubic-bezier(.4, 0, .2, 1);
     --max-w: 680px;
@@ -976,13 +976,140 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* ── Horizontal Timeline (Matching Reference Image #2) ── */
-.hz-timeline-wrap {
+/* ── Vertical Timeline (Luxury Minimal Editorial) ── */
+.vertical-timeline {
+    position: relative;
+    max-width: 480px;
+    margin: 1.5rem auto 0;
+    padding-left: 2.2rem;
+}
+
+.vertical-timeline::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    left: 21px;
+    width: 2px;
+    background: var(--border);
+}
+
+.v-timeline-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 1.6rem;
+}
+
+.v-timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.v-timeline-icon {
+    position: relative;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 1px solid var(--accent-l);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-dark);
+    box-shadow: var(--shadow-soft);
+    flex-shrink: 0;
+}
+
+.v-timeline-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.4rem;
+    flex: 1;
+    box-shadow: var(--shadow-soft);
+    text-align: left;
+}
+
+.v-time {
+    font-family: 'Cinzel', var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--sandy-brown);
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.v-title {
+    font-family: var(--font-thai);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.name-th {
+    display: block;
+    font-family: var(--font-thai);
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 600;
+    color: var(--accent-dark);
+    line-height: 1.25;
+}
+
+.name-en-sub {
+    display: block;
+    font-family: 'Cinzel', 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 3.2vw, 1.4rem);
+    font-weight: 500;
+    color: var(--sandy-brown);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+}
+
+.countdown-status-msg {
+    text-align: center;
+    font-family: 'Cinzel', var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    letter-spacing: 0.15em;
+    margin-top: 1.2rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+}
+
+.rsvp-success-card {
+    text-align: center;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 2.5rem 1.5rem;
     box-shadow: var(--shadow-soft);
+    margin-top: 1rem;
+}
+
+.success-icon {
+    font-size: 2.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.success-title {
+    font-family: var(--font-thai);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 0.4rem;
+}
+
+.success-desc {
+    font-family: var(--font-thai);
+    font-size: 0.9rem;
+    color: var(--ink-mute);
+}
     margin-top: 1rem;
     position: relative;
 }

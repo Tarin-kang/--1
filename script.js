@@ -1,7 +1,7 @@
 // ── Global Open Card & Open Invitation Functions ──
 window.openInvitation = window.openWeddingCard = window.executeOpenCard = function() {
     try {
-        // 1. สั่งเล่นเพลงทันทีจากการสัมผัส (Direct & Safe Play)
+        // 1. สั่งเล่นเพลง MP3 ทันทีจากการสัมผัสแรก (Instant Gesture Play)
         var audio = document.getElementById('bg-music') || document.getElementById('wedding-music');
         if (audio) {
             try {
@@ -24,12 +24,16 @@ window.openInvitation = window.openWeddingCard = window.executeOpenCard = functi
             } catch (e) {}
         }
 
-        // 2. ปิดหน้าปกซองจดหมาย และแสดงเนื้อหาการ์ด
+        // 2. ซ่อนหน้าปกซองจดหมาย นุ่มนวล และเปิดเนื้อหาการ์ดหลัก
         var overlay = document.getElementById('cover') || document.getElementById('cover-overlay') || document.querySelector('.cover');
         var card = document.getElementById('card') || document.querySelector('.card');
         
         if (overlay) {
             overlay.classList.add('open');
+            overlay.style.transform = 'translateY(-100%)';
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
+            overlay.style.pointerEvents = 'none';
             overlay.style.display = 'none';
         }
         if (card) {
@@ -39,7 +43,7 @@ window.openInvitation = window.openWeddingCard = window.executeOpenCard = functi
         }
         document.body.style.overflow = 'auto';
 
-        // 3. เริ่มแสดง Effect กลีบดอกไม้และ Animation
+        // 3. เริ่มแสดง Effect กลีบดอกไม้ลอยล่องและ Animation
         var els = document.querySelectorAll('.fade-in');
         if (els) {
             els.forEach(function(el) {
@@ -73,7 +77,7 @@ window.stopMusic = function() {
     }
 };
 
-// Auto-play music unlock listener on any first touch or click
+// Global User Gesture Unlock for Autoplay Audio
 (function() {
     var enableAutoMusic = function() {
         var audio = document.getElementById('bg-music') || document.getElementById('wedding-music');
@@ -150,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let catFastTimer = null;
     let catMsgIndex = 0;
 
-    // Auto-loop wishes speech bubble every 3.5s while cat is running
     setInterval(() => {
         try {
             if (catCharacter && catBubble && !catCharacter.classList.contains('paused')) {
@@ -176,12 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (nowTime - lastCatInteractTime < 220) return;
             lastCatInteractTime = nowTime;
 
-            // Play Meow Sound
             playCuteMeowSound();
-
             catClickCount++;
 
-            // Sprint jump on 3rd click
             if (catClickCount % 3 === 0) {
                 catBubble.textContent = "ย่อตัวกระโดด... ซิ่งเลย! 💨🐱⚡";
                 catBubble.style.animation = 'none';
@@ -210,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Normal click: Pause & show random wish
             catCharacter.classList.add('paused');
             if (catBodyFlip) catBodyFlip.classList.add('paused');
 
@@ -233,7 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
         catCharacter.addEventListener('touchstart', handleCatInteract, { passive: false });
     }
 
-    // Audio Sound Player (meow.mp3 & Web Audio Synth Fallback)
     function playCuteMeowSound() {
         const meowElem = document.getElementById('meow-sound') || document.querySelector('audio#meow-sound');
         if (meowElem) {
@@ -321,25 +319,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ── 4. Real-Time Countdown Timer ──
+    // ── 4. Enhanced Countdown Timer (Asia/Bangkok 12 Dec 2026 16:00) ──
     const targetDate = new Date('2026-12-12T16:00:00+07:00').getTime();
 
     function updateCountdown() {
         const now = Date.now();
         const diff = targetDate - now;
 
+        const countdownBox = document.getElementById('countdown');
+        const countdownStatus = document.getElementById('countdownStatus');
         const cdD = document.getElementById('cd-days') || document.getElementById('days');
         const cdH = document.getElementById('cd-hours') || document.getElementById('hours');
         const cdM = document.getElementById('cd-min') || document.getElementById('minutes');
         const cdS = document.getElementById('cd-sec') || document.getElementById('seconds');
 
-        if (diff <= 0) {
-            if (cdD) cdD.textContent = '00';
-            if (cdH) cdH.textContent = '00';
-            if (cdM) cdM.textContent = '00';
-            if (cdS) cdS.textContent = '00';
+        // Event Day Window (within 10 hours after 16:00 on Dec 12)
+        if (diff <= 0 && diff >= -36000000) {
+            if (countdownBox) countdownBox.style.display = 'none';
+            if (countdownStatus) {
+                countdownStatus.style.display = 'block';
+                countdownStatus.textContent = 'TODAY IS THE DAY 🤍';
+            }
             return;
         }
+
+        // Post-event
+        if (diff < -36000000) {
+            if (countdownBox) countdownBox.style.display = 'none';
+            if (countdownStatus) {
+                countdownStatus.style.display = 'block';
+                countdownStatus.textContent = 'THANK YOU FOR CELEBRATING WITH US';
+            }
+            return;
+        }
+
+        // Pre-event Countdown
+        if (countdownBox) countdownBox.style.display = 'flex';
+        if (countdownStatus) countdownStatus.style.display = 'none';
 
         const d = Math.floor(diff / (1000 * 60 * 60 * 24));
         const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -399,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.translate(this.x, this.y);
                 ctx.rotate((this.rotation * Math.PI) / 180);
                 ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = '#9caf88';
+                ctx.fillStyle = '#6E8F77';
 
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
@@ -492,8 +508,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── 7. RSVP & Wishes Wall ──
+    // ── 7. RSVP & Wishes Wall (Validation & Loading & Feedback) ──
     const rsvpForm = document.getElementById('rsvpForm');
+    const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
+    const rsvpSuccessCard = document.getElementById('rsvpSuccessCard');
+    const rsvpResetBtn = document.getElementById('rsvpResetBtn');
     const wishesList = document.getElementById('wishesList');
 
     if (rsvpForm) {
@@ -505,6 +524,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const nameVal = nameInput ? nameInput.value.trim() : '';
             const msgVal = msgInput ? msgInput.value.trim() : '';
 
+            // Required Name Validation Notice
+            if (!nameVal) {
+                alert('กรุณากรอกชื่อ - นามสกุล ก่อนส่งคำตอบรับค่ะ 🌸');
+                if (nameInput) nameInput.focus();
+                return;
+            }
+
+            // Disable submit button & show loading state
+            if (rsvpSubmitBtn) {
+                rsvpSubmitBtn.disabled = true;
+                rsvpSubmitBtn.textContent = 'กำลังส่งข้อมูล... 💌';
+            }
+
+            // Prepend wish to Wishes Wall immediately with XSS protection
             if (wishesList && nameVal) {
                 const wishCard = document.createElement('div');
                 wishCard.className = 'wish-card';
@@ -515,13 +548,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 wishesList.prepend(wishCard);
             }
 
-            alert('ขอบพระคุณสำหรับคำตอบรับและคำอวยพรค่ะ 💌');
-            rsvpForm.reset();
+            setTimeout(() => {
+                if (rsvpForm) rsvpForm.style.display = 'none';
+                if (rsvpSuccessCard) rsvpSuccessCard.style.display = 'block';
+                if (rsvpSubmitBtn) {
+                    rsvpSubmitBtn.disabled = false;
+                    rsvpSubmitBtn.textContent = 'ส่งคำตอบรับ & อวยพร 💌';
+                }
+                rsvpForm.reset();
+            }, 600);
+        });
+    }
+
+    if (rsvpResetBtn && rsvpForm && rsvpSuccessCard) {
+        rsvpResetBtn.addEventListener('click', () => {
+            rsvpSuccessCard.style.display = 'none';
+            rsvpForm.style.display = 'block';
         });
     }
 
     function escapeHtml(str) {
-        return str.replace(/[&<>"']/g, function(m) {
+        return String(str).replace(/[&<>"']/g, function(m) {
             return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
         });
     }
