@@ -23,7 +23,10 @@
 <body>
     <!-- Audio Elements (Cat Meow & Background Music) 🐱🔊🎵 -->
     <audio id="meow-sound" src="meow.mp3" preload="auto" onerror="this.src='images/meow.mp3';"></audio>
-    <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
+    <audio id="bg-music" loop preload="auto" playsinline webkit-playsinline>
+        <source src="music.mp3" type="audio/mpeg">
+        <source src="music.mp4" type="audio/mp4">
+    </audio>
     
     <div id="ytmusic" style="position:fixed; top:-9999px; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;"></div>
 
@@ -228,9 +231,6 @@
                     </div>
                 </div>
 
-                <div class="hero-date-badge fade-in">
-                    <time datetime="2026-12-12">วันเสาร์ที่ 12 ธันวาคม พ.ศ. 2569</time>
-                </div>
             </div>
         </header>
 
@@ -353,7 +353,7 @@
                     <span class="swatch-label">Warm Cream</span>
                 </div>
             </div>
-            <p class="dresscode-note fade-in">แล้วแต่สะดวกของแขกผู้มีเกียรติ</p>
+            <p class="dresscode-note fade-in">แต่งกายตามโทนสี ที่สะดวกได้เลย 💖</p>
         </section>
 
         <!-- RSVP & Wishes Section -->

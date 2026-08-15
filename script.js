@@ -1,30 +1,28 @@
 // ── Global Open Card & Open Invitation Functions ──
 window.openInvitation = window.openWeddingCard = window.executeOpenCard = function() {
     try {
-        // 1. สั่งเล่นเพลง MP3 ทันที (Direct & Safe Play)
-        var audio = document.getElementById('bg-music') || document.getElementById('wedding-music');
+        // 1. สั่งเล่นเพลงทันทีจากการสัมผัส (ห้ามใส่ currentTime = 0 ก่อน play)
+        var audio = document.getElementById('bg-music');
         if (audio) {
-            var promise = audio.play();
-            if (promise !== undefined) {
-                promise.then(function() {
+            var playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(function() {
                     var btn = document.getElementById('musicToggleBtn');
                     if (btn) btn.classList.add('active');
                 }).catch(function(err) {
-                    console.log('Audio autoplay blocked:', err);
+                    console.log('Local audio play error:', err);
+                    if (window.ytPlayer && typeof window.ytPlayer.playVideo === 'function') {
+                        try {
+                            window.ytPlayer.unMute();
+                            window.ytPlayer.setVolume(100);
+                            window.ytPlayer.playVideo();
+                        } catch (e) {}
+                    }
                 });
             }
         }
 
-        // 2. สั่งเล่น YouTube (ถ้ามีและพร้อมใช้งาน)
-        if (window.ytPlayer && typeof window.ytPlayer.playVideo === 'function') {
-            try {
-                window.ytPlayer.unMute();
-                window.ytPlayer.setVolume(100);
-                window.ytPlayer.playVideo();
-            } catch (e) {}
-        }
-
-        // 3. ปิดหน้าปกซองจดหมาย และเปิดการ์ด
+        // 2. ปิดหน้าปกซองจดหมาย และแสดงเนื้อหาการ์ด
         var overlay = document.getElementById('cover') || document.getElementById('cover-overlay') || document.querySelector('.cover');
         var card = document.getElementById('card') || document.querySelector('.card');
         
@@ -39,17 +37,37 @@ window.openInvitation = window.openWeddingCard = window.executeOpenCard = functi
         }
         document.body.style.overflow = 'auto';
 
-        // 4. แสดงผล Animation
+        // 3. เริ่มแสดง Effect กลีบดอกไม้และ Animation
         var els = document.querySelectorAll('.fade-in');
         if (els) {
             els.forEach(function(el) {
                 if (el) el.classList.add('visible');
             });
         }
-
         if (typeof window.startPetals === 'function') window.startPetals();
+
     } catch (err) {
         console.log('openWeddingCard error:', err);
+    }
+};
+
+window.tryStartMusic = function() {
+    var audio = document.getElementById('bg-music');
+    var btn = document.getElementById('musicToggleBtn');
+    if (audio) {
+        audio.play().then(function() {
+            if (btn) btn.classList.add('active');
+        }).catch(function() {});
+    }
+};
+
+window.stopMusic = function() {
+    var audio = document.getElementById('bg-music');
+    var btn = document.getElementById('musicToggleBtn');
+    if (audio) audio.pause();
+    if (btn) btn.classList.remove('active');
+    if (window.ytPlayer && typeof window.ytPlayer.pauseVideo === 'function') {
+        try { window.ytPlayer.pauseVideo(); } catch (e) {}
     }
 };
 
@@ -445,41 +463,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.ytPlayer = ytPlayer;
-
-    window.tryStartMusic = function() {
-        isPlayingMusic = true;
-        if (musicToggleBtn) musicToggleBtn.classList.add('active');
-
-        const bgMusic = document.getElementById('bg-music') || document.getElementById('wedding-music');
-        if (bgMusic) {
-            try {
-                bgMusic.currentTime = 0;
-                bgMusic.play().catch(() => {});
-            } catch (err) {}
-        }
-
-        if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-            try {
-                ytPlayer.unMute();
-                ytPlayer.setVolume(100);
-                ytPlayer.playVideo();
-            } catch (e) {}
-        }
-    };
-
-    window.stopMusic = function() {
-        isPlayingMusic = false;
-        if (musicToggleBtn) musicToggleBtn.classList.remove('active');
-
-        const bgMusic = document.getElementById('bg-music') || document.getElementById('wedding-music');
-        if (bgMusic) {
-            try { bgMusic.pause(); } catch (err) {}
-        }
-
-        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
-            try { ytPlayer.pauseVideo(); } catch (e) {}
-        }
-    };
 
     if (musicToggleBtn) {
         musicToggleBtn.addEventListener('click', () => {
