@@ -1108,7 +1108,10 @@ body {
 .success-desc {
     font-family: var(--font-thai);
     font-size: 0.9rem;
-    .hz-timeline-wrap {
+    color: var(--ink-mute);
+}
+
+.hz-timeline-wrap {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
