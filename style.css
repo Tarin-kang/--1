@@ -968,11 +968,17 @@ body {
     border-radius: var(--radius-sm);
 }
 
-/* ── 8. Footer ── */
+/* ── 8. Footer (แถบด้านล่างสุด) ── */
 .footer {
-    padding: 4rem 1.5rem;
+    padding: 2.5rem 1.5rem;
     text-align: center;
-    border-top: 1px solid var(--border-light);
+}
+
+.bottom-footer {
+    background-color: rgba(255, 255, 255, 0.75);
+    border-top: 1px solid rgba(183, 196, 183, 0.4);
+    padding: 12px 0;
+    width: 100%;
 }
 
 .footer-names {
