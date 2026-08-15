@@ -1108,34 +1108,42 @@ body {
 .success-desc {
     font-family: var(--font-thai);
     font-size: 0.9rem;
-    color: var(--ink-mute);
-.hz-timeline-wrap {
+    .hz-timeline-wrap {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 2.2rem 1.2rem 1.8rem;
+    padding: 2.2rem 1rem 1.8rem;
     box-shadow: var(--shadow-soft);
     margin-top: 1.5rem;
     position: relative;
 }
 
-.hz-timeline-nodes {
+.hz-timeline-track {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    align-items: flex-end;
-    margin-bottom: 0.8rem;
     position: relative;
-    z-index: 2;
+    padding-bottom: 0.5rem;
 }
 
-.hz-node {
-    text-align: center;
-    padding: 0 0.2rem;
+.hz-line-bg {
+    position: absolute;
+    bottom: 10px;
+    left: 14%;
+    right: 14%;
+    height: 2px;
+    background: #f7b2a3;
+    z-index: 1;
+}
+
+.hz-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    text-align: center;
+    padding: 0 0.2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .node-icon {
@@ -1160,25 +1168,14 @@ body {
     margin-top: 0.25rem;
 }
 
-/* Continuous Axis Line with 3 aligned dots */
-.hz-timeline-line {
-    height: 2px;
-    background: #f7b2a3;
-    position: relative;
-    margin: 0.8rem 0 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-}
-
-.hz-timeline-line .dot {
-    width: 14px;
-    height: 14px;
+.node-dot {
+    width: 16px;
+    height: 16px;
     background: #e57c68;
     border-radius: 50%;
     border: 3px solid var(--bg-card);
     box-shadow: 0 0 0 2px #f7b2a3;
-    justify-self: center;
+    margin-top: 0.8rem;
 }
 
 /* Bottom Info Grid */
