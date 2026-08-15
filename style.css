@@ -48,11 +48,11 @@ html {
 
 body {
     font-family: var(--font-body);
-    background-color: #f4f7f4;
+    background-color: #f2f6f2;
     background-image: 
-        radial-gradient(circle at 10% 20%, rgba(122, 154, 131, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 90% 80%, rgba(75, 104, 84, 0.12) 0%, transparent 45%),
-        url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%237a9a83' fill-opacity='0.16'%3E%3Cpath d='M35 20c-8 0-15 10-12 20 3 10 15 15 22 10 8-5 5-20-10-30zm0 3c10 8 13 18 8 22-5 4-15-1-18-9-1-7 5-13 10-13zM105 90c-8 0-15 10-12 20 3 10 15 15 22 10 8-5 5-20-10-30zm0 3c10 8 13 18 8 22-5 4-15-1-18-9-1-7 5-13 10-13z'/%3E%3Cpath d='M70 50c-15-5-25 3-28 13-3 10 5 20 18 20 13 0 20-13 18-23-3-5-4-9-8-10zm-1 4c4 1 5 5 6 9-1 8-8 16-16 16-9 0-14-8-13-15 1-8 9-13 23-10z'/%3E%3C/g%3E%3C/svg%3E");
+        radial-gradient(circle at 10% 20%, rgba(110, 143, 119, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(61, 86, 68, 0.2) 0%, transparent 45%),
+        url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%236e8f77' fill-opacity='0.45'%3E%3Cpath d='M35 20c-8 0-15 10-12 20 3 10 15 15 22 10 8-5 5-20-10-30zm0 3c10 8 13 18 8 22-5 4-15-1-18-9-1-7 5-13 10-13zM105 90c-8 0-15 10-12 20 3 10 15 15 22 10 8-5 5-20-10-30zm0 3c10 8 13 18 8 22-5 4-15-1-18-9-1-7 5-13 10-13z'/%3E%3Cpath d='M70 50c-15-5-25 3-28 13-3 10 5 20 18 20 13 0 20-13 18-23-3-5-4-9-8-10zm-1 4c4 1 5 5 6 9-1 8-8 16-16 16-9 0-14-8-13-15 1-8 9-13 23-10z'/%3E%3C/g%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: auto, auto, 150px 150px;
     background-attachment: fixed;
@@ -193,10 +193,10 @@ body {
     position: fixed;
     inset: 0;
     z-index: 2000;
-    background-color: #f4f7f4;
+    background-color: #f2f6f2;
     background-image: 
-        radial-gradient(circle at 50% 30%, rgba(249, 251, 249, 0.95) 0%, rgba(230, 239, 232, 0.9) 60%, rgba(196, 215, 201, 0.85) 100%),
-        url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%237a9a83' fill-opacity='0.18'%3E%3Cpath d='M35 20c-8 0-15 10-12 20 3 10 15 15 22 10 8-5 5-20-10-30zm0 3c10 8 13 18 8 22-5 4-15-1-18-9-1-7 5-13 10-13zM105 90c-8 0-15 10-12 20 3 10 15 15 22 10 8-5 5-20-10-30zm0 3c10 8 13 18 8 22-5 4-15-1-18-9-1-7 5-13 10-13z'/%3E%3Cpath d='M70 50c-15-5-25 3-28 13-3 10 5 20 18 20 13 0 20-13 18-23-3-5-4-9-8-10zm-1 4c4 1 5 5 6 9-1 8-8 16-16 16-9 0-14-8-13-15 1-8 9-13 23-10z'/%3E%3C/g%3E%3C/svg%3E");
+        radial-gradient(circle at 50% 30%, rgba(249, 251, 249, 0.9) 0%, rgba(225, 238, 228, 0.85) 60%, rgba(185, 210, 192, 0.8) 100%),
+        url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%236e8f77' fill-opacity='0.45'%3E%3Cpath d='M35 20c-8 0-15 10-12 20 3 10 15 15 22 10 8-5 5-20-10-30zm0 3c10 8 13 18 8 22-5 4-15-1-18-9-1-7 5-13 10-13zM105 90c-8 0-15 10-12 20 3 10 15 15 22 10 8-5 5-20-10-30zm0 3c10 8 13 18 8 22-5 4-15-1-18-9-1-7 5-13 10-13z'/%3E%3Cpath d='M70 50c-15-5-25 3-28 13-3 10 5 20 18 20 13 0 20-13 18-23-3-5-4-9-8-10zm-1 4c4 1 5 5 6 9-1 8-8 16-16 16-9 0-14-8-13-15 1-8 9-13 23-10z'/%3E%3C/g%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: auto, 150px 150px;
     display: flex;
@@ -248,6 +248,16 @@ body {
     color: var(--accent-dark);
     margin-bottom: 0.75rem;
     text-transform: uppercase;
+}
+
+.cover-couple-names-script {
+    font-family: 'Alex Brush', cursive;
+    font-size: clamp(2.4rem, 7.5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--accent-dark);
+    margin: 0.2rem 0 0.8rem;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
 }
 
 .cover-couple-names {
