@@ -420,24 +420,30 @@ body {
     text-align: center;
 }
 
+/* ── ปรับชื่อบ่าวสาวให้อ่านง่าย ชัดเจน ตัวหนาขึ้น ── */
 .hero-names .name-script {
     display: block;
     font-family: 'Alex Brush', cursive;
-    font-size: clamp(3rem, 9vw, 4.5rem);
-    font-weight: 400;
-    color: #B38F4D;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
-    line-height: 1.25;
+    font-size: clamp(3.4rem, 10vw, 5rem) !important;
+    font-weight: 700 !important;
+    color: #a67c52 !important;
+    line-height: 1.2 !important;
+    text-shadow: 
+        0 2px 4px rgba(255, 255, 255, 0.9),
+        0 0 12px rgba(255, 255, 255, 0.8) !important;
+    letter-spacing: 0.02em;
 }
 
 .hero-names .amp-script {
     display: block;
     font-family: 'Alex Brush', cursive;
-    font-size: clamp(2.2rem, 6.5vw, 3.2rem);
-    font-weight: 400;
-    color: #A67C52;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
-    margin: 0.1rem 0;
+    font-size: clamp(2.4rem, 7vw, 3.6rem) !important;
+    font-weight: 700 !important;
+    color: #b38f4d !important;
+    margin: 0.1rem 0 !important;
+    text-shadow: 
+        0 2px 4px rgba(255, 255, 255, 0.9),
+        0 0 10px rgba(255, 255, 255, 0.8) !important;
 }
 
 .hero-names .name-th {
@@ -1010,12 +1016,12 @@ body {
     }
 
     .hero-names .name-script {
-        font-size: clamp(2.4rem, 7vw, 3.2rem);
-        line-height: 1.2;
+        font-size: clamp(2.8rem, 8.5vw, 3.8rem) !important;
+        font-weight: 700 !important;
     }
+    
     .hero-names .amp-script {
-        font-size: clamp(1.8rem, 5vw, 2.4rem);
-        margin: 0.1rem 0;
+        font-size: clamp(2rem, 6.5vw, 2.8rem) !important;
     }
 
     .countdown-section {
